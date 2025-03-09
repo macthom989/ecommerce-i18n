@@ -1,9 +1,9 @@
-import type React from "react"
-import { Inter } from "next/font/google"
-import { NextIntlClientProvider } from "next-intl"
+import type React from 'react'
+import { Inter } from 'next/font/google'
+import { NextIntlClientProvider } from 'next-intl'
 
-import "./globals.css"
-import {  getMessages } from 'next-intl/server'
+import './globals.css'
+import { getMessages } from 'next-intl/server'
 import { getUserLocale } from '@/services/locale'
 import { Metadata } from 'next'
 
@@ -14,15 +14,7 @@ export const metadata: Metadata = {
   title: "Ecommerce Shop",
   description: "Demo",
 };
-// export async function generateMetadata() {
-//   const locale = await getLocale()
-//   const messages = await getMessages({ locale: locale })
-//
-//   return {
-//     title: messages.metadata?.title,
-//     description: messages.metadata?.description,
-//   }
-// }
+
 
 export default async function RootLayout({
                                            children,

@@ -189,7 +189,6 @@ export function Header() {
           <span className="hidden sm:inline-block">CHAWK</span>
         </Link>
 
-        {/* Desktop Navigation with shadcn/ui NavigationMenu */}
         <NavigationMenu className="hidden md:block">
           <NavigationMenuList>
             {navItems.map((item) => {
@@ -241,7 +240,6 @@ export function Header() {
           </NavigationMenuList>
         </NavigationMenu>
 
-        {/* Mobile Navigation */}
         <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
           <SheetTrigger asChild className="md:hidden">
             <Button variant="ghost" size="icon" className="mr-2">
