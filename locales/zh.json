@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "title": "Chawkbazar - Modern E-commerce Platform",
+    "description": "Shop the latest fashion trends for men and women"
+  },
+  "navigation": {
+    "home": "Home",
+    "men": "Men Wear",
+    "women": "Women Wear",
+    "search": "Search",
+    "shops": "Shops",
+    "pages": "Pages",
+    "signIn": "Sign In"
+  },
+  "home": {
+    "title": "Home",
+    "description": "Description",
+    "featuredProducts": "Featured Products",
+    "menCollection": "Men's Collection",
+    "womenCollection": "Women Collection",
+    "sports": "Sports",
+    "newArrivals": "New Arrivals",
+    "exclusive": "Exclusive"
+  },
+  "product": {
+    "addToCart": "Add to Cart",
+    "category": "{category}"
+  }
+}
+
