@@ -22,10 +22,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang={locale} suppressHydrationWarning>
       <body className={inter.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          {/*<ThemeProvider attribute="class" defaultTheme="light">*/}
           {children}
-          {/*<Toaster />*/}
-          {/*</ThemeProvider>*/}
         </NextIntlClientProvider>
       </body>
     </html>
