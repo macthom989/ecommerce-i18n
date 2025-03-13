@@ -15,7 +15,7 @@ interface BannerItem {
     mobile: BannerImage;
     desktop: BannerImage;
   };
-  type: 'small' | 'medium';
+  type: string;
 }
 interface BannerProps {
   data: BannerItem[];

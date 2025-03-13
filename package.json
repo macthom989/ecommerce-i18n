@@ -12,7 +12,7 @@
   "type": "module",
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": [
-      "next lint",
+      "eslint --fix",
       "prettier --write"
     ],
     "*.scss": [
