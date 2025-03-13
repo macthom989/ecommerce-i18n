@@ -6,8 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --fix",
-    "prepare": "husky"
+    "lint": "next lint --fix"
   },
   "type": "module",
   "lint-staged": {
