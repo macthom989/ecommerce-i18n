@@ -1,0 +1,38 @@
+{
+  // Tự động định dạng file khi lưu
+  "editor.formatOnSave": true,
+
+  // Đặt Prettier làm trình định dạng mặc định
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // Thiết lập trình định dạng riêng cho các loại tệp cụ thể
+  "[sass]": {
+    "editor.defaultFormatter": "syler.sass-indented"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // Tự động sửa lỗi ESLint khi lưu file
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+
+  // Hiển thị trạng thái ESLint trong thanh trạng thái
+  "eslint.alwaysShowStatus": true,
+
+  // Xác định các loại file mà ESLint sẽ kiểm tra
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+
+  // Giảm thông báo khi có quá nhiều file thay đổi trong Git
+  "git.ignoreLimitWarning": true
+}
