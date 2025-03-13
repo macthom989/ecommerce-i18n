@@ -1,12 +1,15 @@
 import { useTranslations } from 'next-intl';
 import { Frame, Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 export function Footer() {
   const t = useTranslations('navigation');
 
+  const iconSize = { width: 20, height: 20 };
+
   return (
-    <footer className="bg-muted py-12">
+    <footer className="bg-muted py-12" style={{ contentVisibility: 'auto' }}>
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div>
@@ -19,19 +22,19 @@ export function Footer() {
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                <Facebook className="h-5 w-5" />
+                <Facebook style={iconSize} />
                 <span className="sr-only">Facebook</span>
               </a>
               <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                <Twitter className="h-5 w-5" />
+                <Twitter style={iconSize} />
                 <span className="sr-only">Twitter</span>
               </a>
               <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                <Instagram className="h-5 w-5" />
+                <Instagram style={iconSize} />
                 <span className="sr-only">Instagram</span>
               </a>
               <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                <Youtube className="h-5 w-5" />
+                <Youtube style={iconSize} />
                 <span className="sr-only">Youtube</span>
               </a>
             </div>
@@ -98,7 +101,7 @@ export function Footer() {
               <input
                 type="email"
                 placeholder="Your email address"
-                className="flex-1 rounded-l-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
+                className="flex-1 min-w-[250px] rounded-l-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
                 required
               />
               <button
@@ -116,5 +119,13 @@ export function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+export function FooterWrapper() {
+  return (
+    <Suspense fallback={<div>Loading footer...</div>}>
+      <Footer />
+    </Suspense>
   );
 }
