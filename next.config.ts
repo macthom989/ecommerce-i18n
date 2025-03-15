@@ -5,8 +5,13 @@ const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
   /* config options here */
+  images: {
+    domains: [],
+    unoptimized: false,
+  },
   experimental: {
     optimizeCss: true,
+
     serverActions: {
       bodySizeLimit: '2mb',
     },

@@ -6,6 +6,8 @@ import './globals.css';
 import { getMessages } from 'next-intl/server';
 import { getUserLocale } from '@/services/locale';
 import { Metadata } from 'next';
+import { ManagedUIContext } from '@/contexts/ui.context';
+import Layout from '@/components/common/layout/main';
 
 const inter = Inter({ subsets: ['latin', 'vietnamese'] });
 
@@ -22,7 +24,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang={locale} suppressHydrationWarning>
       <body className={inter.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
+          <ManagedUIContext>
+            <Layout>{children}</Layout>
+          </ManagedUIContext>
         </NextIntlClientProvider>
       </body>
     </html>

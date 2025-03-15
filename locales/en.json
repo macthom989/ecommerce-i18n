@@ -1,37 +1,10 @@
 {
-  "metadata": {
-    "title": "Chawkbazar - Modern E-commerce Platform",
-    "description": "Shop the latest fashion trends for men and women"
-  },
-  "navigation": {
-    "home": "Home",
-    "men": "Men Wear",
-    "women": "Women Wear",
-    "search": "Search",
-    "shops": "Shops",
-    "pages": "Pages",
-    "signIn": "Sign In"
-  },
-  "home": {
-    "title": "Home",
-    "description": "Description",
-    "featuredProducts": "Featured Products",
-    "menCollection": "Men's Collection",
-    "womenCollection": "Women Collection",
-    "sports": "Sports",
-    "newArrivals": "New Arrivals",
-    "exclusive": "Exclusive"
-  },
-  "product": {
-    "addToCart": "Add to Cart",
-    "category": "{category}"
-  },
   "common": {
     "error-heading": "Looks like you are lost",
     "error-sub-heading": "We can't find the page you're looking for",
     "support-heading": "Talk To A Real Person",
     "support-sub-heading": "Are you on the fence? Have a question? Need a recommendation? Member Services is always here to help. Send us a message.",
-    "app-heading": "The ChawkBazar App",
+    "app-heading": "The HvCore App",
     "app-sub-heading": "<span> Share Your <strong>Ideas</strong> &amp; Shop Endless <strong>Inspiration</strong> </span>",
     "collection-title-one": "New Spring Knits",
     "collection-description-one": "Endlessly versatile new styles that say yes to spring. The season’s looking bright.",
@@ -185,7 +158,7 @@
     "text-summer-collection": "Summer Collection",
     "text-subscribe-now": "subscribe now",
     "text-newsletter-title": "And Get Offer On New Collection",
-    "text-newsletter-subtitle": "Do subscribe the ChawkBazar to receive updates on new arrivals, special offers & our promotions",
+    "text-newsletter-subtitle": "Do subscribe the HvCore to receive updates on new arrivals, special offers & our promotions",
     "text-collection-list": "Collection List",
     "text-collections": "Collections",
     "text-accept-cookies": "Accept cookies",

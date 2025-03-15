@@ -1,6 +1,4 @@
 import BannerBlock from '@/components/banner/banner-block';
-import { Footer } from '@/components/footer';
-import { Header } from '@/components/header';
 
 export default async function Home() {
   const homeThreeMasonryBanner = [
@@ -113,11 +111,5 @@ export default async function Home() {
       type: 'medium',
     },
   ];
-  return (
-    <>
-      <Header />
-      <BannerBlock data={homeThreeMasonryBanner} />
-      <Footer />
-    </>
-  );
+  return <BannerBlock data={homeThreeMasonryBanner} />;
 }
