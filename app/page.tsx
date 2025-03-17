@@ -1,6 +1,7 @@
 import BannerBlock from '@/components/banner/banner-block';
 import { Footer } from '@/components/footer';
-import { Header } from '@/components/header';
+import Header from '@/components/header/header';
+import { ManagedUIContext } from '@/contexts/ui.context';
 
 export default async function Home() {
   const homeThreeMasonryBanner = [
@@ -118,6 +119,7 @@ export default async function Home() {
       <Header />
       <BannerBlock data={homeThreeMasonryBanner} />
       <Footer />
-    </>
+
+      </>
   );
 }

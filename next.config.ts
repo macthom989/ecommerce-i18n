@@ -14,6 +14,15 @@ const nextConfig: NextConfig = {
   // Optimize for performance
   poweredByHeader: false,
   compress: true,
+
+  // images: {
+  //   localPatterns: [
+  //     {
+  //       pathname: '@/public/assets/images/**',
+  //       search: '',
+  //     },
+  //   ],
+  // }, // Reference: https://nextjs.org/docs/app/building-your-application/optimizing/images#local-images
 };
 
 export default withNextIntl(nextConfig);
