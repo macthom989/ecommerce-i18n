@@ -20,7 +20,7 @@ export interface State {
 
 const initialState: State = {
   userAvatar: '',
-  isAuthorized: !!getToken(),
+  isAuthorized: false,
   displaySidebar: false,
   displayFilter: false,
   displayModal: false,
@@ -111,7 +111,11 @@ interface UIProviderProps {
 }
 
 export const UIProvider: React.FC<UIProviderProps> = ({ children }) => {
-  const [state, dispatch] = React.useReducer(uiReducer, initialState);
+  console.log('UIProvider is rendering!');
+  const [state, dispatch] = React.useReducer(uiReducer, {
+    ...initialState,
+    isAuthorized: !!getToken(),
+  });
 
   const authorize = () => dispatch({ type: 'SET_AUTHORIZED' });
   const unauthorize = () => dispatch({ type: 'SET_UNAUTHORIZED' });
@@ -166,8 +170,11 @@ export const useUI = () => {
   return context;
 };
 
-export const ManagedUIContext: React.FC<UIProviderProps> = ({ children }) => (
-  <CartProvider>
-    <UIProvider>{children}</UIProvider>
-  </CartProvider>
-);
+export const ManagedUIContext: React.FC<UIProviderProps> = ({ children }) => {
+  console.log('ManagedUIProvider is rendering!');
+  return (
+    <CartProvider>
+      <UIProvider>{children}</UIProvider>
+    </CartProvider>
+  );
+};
