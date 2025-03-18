@@ -1,10 +1,11 @@
 'use client';
-import Image from 'next/legacy/image';
+
+import { useSsrCompatible } from '@utils/use-ssr-compatible';
+import { useWindowSize } from '@utils/use-window-size';
 import cn from 'classnames';
+import Link from '@components/ui/link';
+import Image from 'next/legacy/image';
 import { LinkProps } from 'next/link';
-import { useSsrCompatible } from '@/utils/use-ssr-compatible';
-import { useWindowSize } from '@/utils/use-window-size';
-import Link from '@/components/ui/link';
 
 interface BannerProps {
   banner: any;
@@ -21,14 +22,14 @@ function getImage(deviceWidth: number, imgObj: any) {
 }
 
 export default function BannerCard({
-  banner,
-  className,
-  variant = 'rounded',
-  effectActive = false,
-  classNameInner,
-  href,
-  disableBorderRadius = false,
-}: BannerProps) {
+                                     banner,
+                                     className,
+                                     variant = 'rounded',
+                                     effectActive = false,
+                                     classNameInner,
+                                     href,
+                                     disableBorderRadius = false,
+                                   }: BannerProps) {
   const { width } = useSsrCompatible(useWindowSize(), {
     width: 0,
     height: 0,
@@ -52,7 +53,8 @@ export default function BannerCard({
           priority={true}
         />
         {effectActive && (
-          <div className="absolute top-0 ltr:-left-[100%] rtl:-right-[100%] h-full w-1/2 z-5 block transform ltr:-skew-x-12 rtl:skew-x-12 bg-gradient-to-r from-transparent to-white opacity-40 ltr:group-hover:animate-shine rtl:group-hover:animate-shineRTL" />
+          <div
+            className="absolute top-0 ltr:-left-[100%] rtl:-right-[100%] h-full w-1/2 z-5 block transform ltr:-skew-x-12 rtl:skew-x-12 bg-gradient-to-r from-transparent to-white opacity-40 ltr:group-hover:animate-shine rtl:group-hover:animate-shineRTL" />
         )}
       </Link>
     </div>

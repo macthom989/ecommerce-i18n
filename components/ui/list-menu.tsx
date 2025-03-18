@@ -1,22 +1,22 @@
-import { useTranslations } from "next-intl";
-import Image from "next/image";
-import { IoIosArrowForward } from "react-icons/io";
-import Link from "./link";
-import MegaMenu from "@/components/ui/mega-menu";
-import { cn } from "@/lib/utils";
+import { useTranslations } from 'next-intl';
+import Image from 'next/image';
+import { IoIosArrowForward } from 'react-icons/io';
+import Link from './link';
+import MegaMenu from '@/components/ui/mega-menu';
+import { cn } from '@/lib/utils';
 
 const ListMenu = ({
-  dept,
-  data,
-  hasSubMenu,
-  hasMegaMenu,
-  hasBrands,
-  hasBanners,
-  menuIndex,
-}: any) => {
-  const t  = useTranslations("menu");
+                    dept,
+                    data,
+                    hasSubMenu,
+                    hasMegaMenu,
+                    hasBrands,
+                    hasBanners,
+                    menuIndex,
+                  }: any) => {
+  const t = useTranslations('menu');
   return (
-    <li className={cn(!hasMegaMenu ? "group relative" : "")}>
+    <li className={cn(!hasMegaMenu ? 'group relative ' : '')}>
       <Link
         href={data.path}
         className="flex items-center py-2 ltr:pl-5 rtl:pr-5 ltr:xl:pl-7 rtl:xl:pr-7 ltr:pr-3 rtl:pl-3 ltr:xl:pr-3.5 rtl:xl:pl-3.5 hover:text-heading hover:bg-gray-300"
@@ -35,7 +35,8 @@ const ListMenu = ({
         <SubMenu dept={dept} data={data.subMenu} menuIndex={menuIndex} />
       )}
       {(hasMegaMenu || hasBrands || hasBanners) && (
-        <div className="absolute flex bg-white categoryMegaMenu shadow-header w-[630px] xl:w-[1000px] 2xl:w-[1200px] ltr:left-full rtl:right-full">
+        <div
+          className="absolute flex bg-white categoryMegaMenu shadow-header w-[630px] xl:w-[1000px] 2xl:w-[1200px] ltr:left-full rtl:right-full">
           <div className="flex-shrink-0">
             <MegaMenu columns={hasMegaMenu} />
           </div>
@@ -74,7 +75,8 @@ const ListMenu = ({
 const SubMenu: React.FC<any> = ({ dept, data, menuIndex }) => {
   dept = dept + 1;
   return (
-    <ul className="absolute z-0 invisible w-56 py-3 bg-gray-200 opacity-0 subMenuChild shadow-subMenu ltr:right-full rtl:left-full ltr:2xl:right-auto rtl:2xl:left-auto ltr:2xl:left-full rtl:2xl:right-full top-4">
+    <ul
+      className="absolute z-0 invisible w-56 py-3 bg-gray-200 opacity-0 subMenuChild shadow-subMenu ltr:right-full rtl:left-full ltr:2xl:right-auto rtl:2xl:left-auto ltr:2xl:left-full rtl:2xl:right-full top-4">
       {data?.map((menu: any, index: number) => {
         const menuName: string = `sidebar-submenu-${dept}-${menuIndex}-${index}`;
 

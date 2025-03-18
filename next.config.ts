@@ -4,7 +4,7 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  /* configs options here */
   experimental: {
     optimizeCss: true,
     serverActions: {
@@ -15,6 +15,10 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
 
+  webpack: (config) => {
+    config.resolve.alias['react-icons$'] = 'react-icons/fa/index.mjs';
+    return config;
+  },
   // images: {
   //   localPatterns: [
   //     {

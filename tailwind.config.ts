@@ -1,9 +1,10 @@
-/** @type {import('tailwindcss').Config} */
-export default {
+import type { Config } from 'tailwindcss';
+
+const config = {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     screens: {
@@ -78,7 +79,7 @@ export default {
         },
       },
       backgroundImage: {
-        'app-pattern': "url('/assets/images/app-pattern.png')",
+        'app-pattern': 'url(\'/assets/images/app-pattern.png\')',
       },
     },
     boxShadow: {
@@ -96,15 +97,16 @@ export default {
       avatar: '0px 15px 30px rgba(0, 0, 0, 0.16)',
     },
     fontFamily: {
-      body: ["'Open Sans', sans-serif"],
-      satisfy: ["'Satisfy', cursive"],
-      segoe: ["'Segoe UI', sans-serif"],
+      body: ['\'Open Sans\', sans-serif'],
+      satisfy: ['\'Satisfy\', cursive'],
+      segoe: ['\'Segoe UI\', sans-serif'],
     },
   },
   plugins: [
     require('@tailwindcss/forms')({
       strategy: 'class',
     }),
-    require("tailwindcss-animate"),
   ],
-} 
+} satisfies Config;
+
+export default config;

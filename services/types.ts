@@ -135,3 +135,6 @@ export type Shop = {
   created_at: string;
   updated_at: string;
 };
+
+export type SVGIconProps = React.SVGAttributes<SVGElement>;
+export type AnchorProps = React.HTMLAttributes<HTMLAnchorElement>

@@ -2,12 +2,13 @@ import Image from 'next/image';
 import { IoHomeSharp } from 'react-icons/io5';
 import Text from '@components/ui/text';
 import Link from '@components/ui/link';
-import { useTranslation } from 'next-i18next';
+import { useTranslations } from 'next-intl';
 
 const ErrorInformation: React.FC = () => {
-  const { t } = useTranslation('common');
+  const t = useTranslations('common');
   return (
-    <div className="border-t border-b border-gray-300 text-center px-16 py-16 sm:py-20 lg:py-24 xl:py-32 flex items-center justify-center">
+    <div
+      className="border-t border-b border-gray-300 text-center px-16 py-16 sm:py-20 lg:py-24 xl:py-32 flex items-center justify-center">
       <div>
         <Image
           src="/assets/images/404.svg"

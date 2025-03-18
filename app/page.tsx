@@ -1,13 +1,12 @@
 import BannerBlock from '@/components/banner/banner-block';
-import { Footer } from '@/components/footer';
 import Header from '@/components/header/header';
-import { ManagedUIContext } from '@/contexts/ui.context';
+import Footer from '@components/footer/footer';
 
 export default async function Home() {
   const homeThreeMasonryBanner = [
     {
       id: 1,
-      title: "Men's Collection",
+      title: 'Men\'s Collection',
       slug: 'mens-collection',
       image: {
         mobile: {
@@ -115,11 +114,18 @@ export default async function Home() {
     },
   ];
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <BannerBlock data={homeThreeMasonryBanner} />
+      <main
+        className="relative flex-grow"
+        style={{
+          minHeight: '-webkit-fill-available',
+          WebkitOverflowScrolling: 'touch',
+        }}
+      >
+        <BannerBlock data={homeThreeMasonryBanner} />
+      </main>
       <Footer />
-
-      </>
+    </div>
   );
 }
