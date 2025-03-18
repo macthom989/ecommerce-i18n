@@ -3,7 +3,7 @@ import { getToken } from './get-token';
 
 const http = axios.create({
   baseURL: process.env.NEXT_PUBLIC_REST_API_ENDPOINT,
-  timeout: 30000,
+  // timeout: 3000,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ http.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 export default http;

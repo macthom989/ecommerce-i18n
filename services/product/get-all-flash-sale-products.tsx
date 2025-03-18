@@ -1,7 +1,9 @@
-import { QueryOptionsType } from "@framework/types";
-import http from "@framework/utils/http";
-import { API_ENDPOINTS } from "@framework/utils/api-endpoints";
-import { useQuery } from "@tanstack/react-query";
+'use client';
+
+import { QueryOptionsType } from '@services/types';
+import http from '@services/utils/axiosInstance';
+import { API_ENDPOINTS } from '@services/utils/api-endpoints';
+import { useQuery } from '@tanstack/react-query';
 
 export const fetchFlashSaleProducts = async () => {
   const { data } = await http.get(API_ENDPOINTS.FLASH_SALE_PRODUCTS);
@@ -16,11 +18,11 @@ const fetchAncientFlashSaleProducts = async () => {
 export const useFlashSaleProductsQuery = (options: QueryOptionsType) => {
   return useQuery<any, Error>({
     queryKey:
-      options.demoVariant === "ancient"
+      options.demoVariant === 'ancient'
         ? [API_ENDPOINTS.FLASH_SALE_PRODUCTS_ANCIENT, options]
         : [API_ENDPOINTS.FLASH_SALE_PRODUCTS, options],
     queryFn:
-      options.demoVariant === "ancient"
+      options.demoVariant === 'ancient'
         ? fetchAncientFlashSaleProducts
         : fetchFlashSaleProducts,
   });
