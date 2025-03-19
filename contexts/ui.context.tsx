@@ -1,10 +1,10 @@
 'use client';
-
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { CartProvider } from './cart/cart.context';
 import { getToken } from '@/services/utils/get-token';
 
 export interface State {
+  userAvatar: string;
   isAuthorized: boolean;
   displaySidebar: boolean;
   displayFilter: boolean;
@@ -19,7 +19,8 @@ export interface State {
 }
 
 const initialState = {
-  isAuthorized: !!getToken(),
+  userAvatar: '',
+  isAuthorized: false,
   displaySidebar: false,
   displayFilter: false,
   displayModal: false,
@@ -108,129 +109,61 @@ export const UIContext = React.createContext<State | any>(initialState);
 
 UIContext.displayName = 'UIContext';
 
-function uiReducer(state: State, action: Action) {
+function uiReducer(state: State, action: Action): State {
   switch (action.type) {
-    case 'SET_AUTHORIZED': {
-      return {
-        ...state,
-        isAuthorized: true,
-      };
-    }
-    case 'SET_UNAUTHORIZED': {
-      return {
-        ...state,
-        isAuthorized: false,
-      };
-    }
-    case 'OPEN_SIDEBAR': {
-      return {
-        ...state,
-        displaySidebar: true,
-      };
-    }
-    case 'CLOSE_SIDEBAR': {
-      return {
-        ...state,
-        displaySidebar: false,
-        drawerView: null,
-      };
-    }
-    case 'OPEN_CART': {
-      return {
-        ...state,
-        displayCart: true,
-      };
-    }
-    case 'CLOSE_CART': {
-      return {
-        ...state,
-        displayCart: false,
-      };
-    }
-    case 'OPEN_SEARCH': {
-      return {
-        ...state,
-        displaySearch: true,
-      };
-    }
-    case 'CLOSE_SEARCH': {
-      return {
-        ...state,
-        displaySearch: false,
-      };
-    }
-    case 'OPEN_FILTER': {
-      return {
-        ...state,
-        displayFilter: true,
-      };
-    }
-    case 'CLOSE_FILTER': {
-      return {
-        ...state,
-        displayFilter: false,
-      };
-    }
-    case 'OPEN_SHOP': {
-      return {
-        ...state,
-        displayShop: true,
-      };
-    }
-    case 'CLOSE_SHOP': {
-      return {
-        ...state,
-        displayShop: false,
-      };
-    }
-    case 'OPEN_MODAL': {
-      return {
-        ...state,
-        displayModal: true,
-        displaySidebar: false,
-      };
-    }
-    case 'CLOSE_MODAL': {
-      return {
-        ...state,
-        displayModal: false,
-      };
-    }
-    case 'SET_MODAL_VIEW': {
-      return {
-        ...state,
-        modalView: action.view,
-      };
-    }
-    case 'SET_DRAWER_VIEW': {
-      return {
-        ...state,
-        drawerView: action.view,
-      };
-    }
-    case 'SET_MODAL_DATA': {
-      return {
-        ...state,
-        modalData: action.data,
-      };
-    }
-    case 'SET_TOAST_TEXT': {
-      return {
-        ...state,
-        toastText: action.text,
-      };
-    }
-    case 'SET_USER_AVATAR': {
-      return {
-        ...state,
-        userAvatar: action.value,
-      };
-    }
+    case 'SET_AUTHORIZED':
+      return { ...state, isAuthorized: true };
+    case 'SET_UNAUTHORIZED':
+      return { ...state, isAuthorized: false };
+    case 'OPEN_SIDEBAR':
+      return { ...state, displaySidebar: true };
+    case 'CLOSE_SIDEBAR':
+      return { ...state, displaySidebar: false, drawerView: null };
+    case 'OPEN_CART':
+      return { ...state, displayCart: true };
+    case 'CLOSE_CART':
+      return { ...state, displayCart: false };
+    case 'OPEN_SEARCH':
+      return { ...state, displaySearch: true };
+    case 'CLOSE_SEARCH':
+      return { ...state, displaySearch: false };
+    case 'OPEN_FILTER':
+      return { ...state, displayFilter: true };
+    case 'CLOSE_FILTER':
+      return { ...state, displayFilter: false };
+    case 'OPEN_SHOP':
+      return { ...state, displayShop: true };
+    case 'CLOSE_SHOP':
+      return { ...state, displayShop: false };
+    case 'OPEN_MODAL':
+      return { ...state, displayModal: true, displaySidebar: false };
+    case 'CLOSE_MODAL':
+      return { ...state, displayModal: false };
+    case 'SET_MODAL_VIEW':
+      return { ...state, modalView: action.view };
+    case 'SET_DRAWER_VIEW':
+      return { ...state, drawerView: action.view };
+    case 'SET_MODAL_DATA':
+      return { ...state, modalData: action.data };
+    case 'SET_TOAST_TEXT':
+      return { ...state, toastText: action.text };
+    case 'SET_USER_AVATAR':
+      return { ...state, userAvatar: action.value };
+    default:
+      return state;
   }
 }
 
-export const UIProvider = (props: { children: React.ReactNode }) => {
-  const [state, dispatch] = React.useReducer(uiReducer, initialState);
+interface UIProviderProps {
+  children: ReactNode;
+}
+
+export const UIProvider: React.FC<UIProviderProps> = ({ children }) => {
+  console.log('UIProvider is rendering!');
+  const [state, dispatch] = React.useReducer(uiReducer, {
+    ...initialState,
+    isAuthorized: !!getToken(),
+  });
 
   const authorize = () => dispatch({ type: 'SET_AUTHORIZED' });
   const unauthorize = () => dispatch({ type: 'SET_UNAUTHORIZED' });
@@ -261,16 +194,10 @@ export const UIProvider = (props: { children: React.ReactNode }) => {
   const closeModal = () => dispatch({ type: 'CLOSE_MODAL' });
   const openSearch = () => dispatch({ type: 'OPEN_SEARCH' });
   const closeSearch = () => dispatch({ type: 'CLOSE_SEARCH' });
-
-  const setUserAvatar = (_value: string) =>
-    dispatch({ type: 'SET_USER_AVATAR', value: _value });
-
-  const setModalView = (view: MODAL_VIEWS) =>
-    dispatch({ type: 'SET_MODAL_VIEW', view });
-  const setDrawerView = (view: DRAWER_VIEWS) =>
-    dispatch({ type: 'SET_DRAWER_VIEW', view });
-  const setModalData = (data: any) =>
-    dispatch({ type: 'SET_MODAL_DATA', data });
+  const setUserAvatar = (value: string) => dispatch({ type: 'SET_USER_AVATAR', value });
+  const setModalView = (view: MODAL_VIEWS) => dispatch({ type: 'SET_MODAL_VIEW', view });
+  const setDrawerView = (view: DRAWER_VIEWS) => dispatch({ type: 'SET_DRAWER_VIEW', view });
+  const setModalData = (data: any) => dispatch({ type: 'SET_MODAL_DATA', data });
 
   const value = React.useMemo(
     () => ({
@@ -293,28 +220,30 @@ export const UIProvider = (props: { children: React.ReactNode }) => {
       closeModal,
       openSearch,
       closeSearch,
+      setUserAvatar,
       setModalView,
       setDrawerView,
-      setUserAvatar,
       setModalData,
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [state],
   );
 
-  return <UIContext.Provider value={value} {...props}>{props.children}</UIContext.Provider>;
+  return <UIContext.Provider value={value}>{children}</UIContext.Provider>;
 };
 
 export const useUI = () => {
   const context = React.useContext(UIContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error(`useUI must be used within a UIProvider`);
   }
   return context;
 };
 
-export const ManagedUIContext = ({ children }: { children: React.ReactNode }) => (
-  <CartProvider>
-    <UIProvider>{children}</UIProvider>
-  </CartProvider>
-);
+export const ManagedUIContext: React.FC<UIProviderProps> = ({ children }) => {
+  console.log('ManagedUIProvider is rendering!');
+  return (
+    <CartProvider>
+      <UIProvider>{children}</UIProvider>
+    </CartProvider>
+  );
+};

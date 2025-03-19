@@ -14,7 +14,7 @@ import { toast } from 'react-toastify';
 import { useWindowSize } from '@utils/use-window-size';
 import Carousel from '@components/carousel/carousel';
 import { SwiperSlide } from 'swiper/react';
-import ProductMetaReview from '@components/product/product-meta-review';
+// import ProductMetaReview from '@components/product/product-meta-review';
 import { useSsrCompatible } from '@utils/use-ssr-compatible';
 
 const productGalleryCarouselResponsive = {
@@ -226,7 +226,7 @@ const ProductSingleDetails: React.FC = () => {
           </ul>
         </div>
 
-        <ProductMetaReview data={data} />
+        {/*<ProductMetaReview data={data} />*/}
       </div>
     </div>
   );

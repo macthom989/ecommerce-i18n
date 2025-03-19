@@ -65,3 +65,57 @@
 .panel-motion-right-leave-active {
   transform: translateX(100%) !important;
 }
+
+.drawer-search {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 30;
+  width: 100%;
+  max-width: 930px;
+  padding: 16px; /* tương đương px-4 */
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 50px);
+  transition:
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out,
+    visibility 0.3s;
+}
+
+.drawer-search.open {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.35);
+  z-index: 21;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity 0.35s ease-in-out,
+    visibility 0.35s ease-in-out;
+}
+
+.overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Hỗ trợ layout LTR & RTL */
+[dir='rtl'] .overlay {
+  right: 0;
+  left: auto;
+}
