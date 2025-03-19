@@ -6,7 +6,7 @@ export default async function Home() {
   const homeThreeMasonryBanner = [
     {
       id: 1,
-      title: 'Men\'s Collection',
+      title: "Men's Collection",
       slug: 'mens-collection',
       image: {
         mobile: {

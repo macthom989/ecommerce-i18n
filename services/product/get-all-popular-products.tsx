@@ -1,6 +1,6 @@
-import { QueryOptionsType, Product } from '@framework/types';
-import http from '@framework/utils/http';
-import { API_ENDPOINTS } from '@framework/utils/api-endpoints';
+import { Product, QueryOptionsType } from '@services/types';
+import http from '@services/utils/axiosInstance';
+import { API_ENDPOINTS } from '@services/utils/api-endpoints';
 import { useQuery } from '@tanstack/react-query';
 
 export const fetchNewArrivalProducts = async () => {
@@ -11,6 +11,6 @@ export const fetchNewArrivalProducts = async () => {
 export const usePopularProductsQuery = (options: QueryOptionsType) => {
   return useQuery<Product[], Error>({
     queryKey: [API_ENDPOINTS.POPULAR_PRODUCTS, options],
-    queryFn: fetchNewArrivalProducts
+    queryFn: fetchNewArrivalProducts,
   });
 };

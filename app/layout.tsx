@@ -24,7 +24,6 @@ import { TanStackQueryProvider } from '@contexts/tanstack-query-provider';
 
 const inter = Inter({ subsets: ['latin', 'vietnamese'] });
 
-// Metadata replaces NextSEO in the App Router
 export const metadata: Metadata = {
   title: 'ChawkBazar React - React Next E-commerce Template',
   description: 'Fastest E-commerce template built with React, NextJS, TypeScript, @tanstack/react-query and Tailwind CSS.',
@@ -49,12 +48,6 @@ export const metadata: Metadata = {
     ],
   },
 };
-
-// function handleExitComplete() {
-//   if (typeof window !== 'undefined') {
-//     window.scrollTo({ top: 0 });
-//   }
-// }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const locale = await getUserLocale();

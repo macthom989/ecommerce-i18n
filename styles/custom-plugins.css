@@ -26,7 +26,7 @@
 }
 
 .react-tabs__tab--selected {
-  @apply font-semibold rounded-md bg-gray-100;
+  @apply font-semibold  rounded-md bg-gray-100 !important;
 }
 
 .react-stars {
@@ -60,7 +60,7 @@
 
 /* Drawer */
 .rc-drawer .rc-drawer-content-wrapper {
-  @apply w-full sm:w-450px;
+  @apply w-full sm:!w-450px;
 }
 .drawer-search {
   transform: translate(-50%, 50px);
