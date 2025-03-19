@@ -1,9 +1,19 @@
 import type { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
+import withPWA from 'next-pwa';
 
 const withNextIntl = createNextIntlPlugin();
 
-const nextConfig: NextConfig = {
+const pwaConfig = {
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === 'development',
+  buildExcludes: [/middleware-manifest\.json$/],
+  maximumFileSizeToCacheInBytes: 3000000,
+};
+
+const baseConfig: NextConfig = {
   /* config options here */
   images: {
     domains: [],
@@ -20,10 +30,16 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
 
-  webpack: (config) => {
+  webpack: (config: any) => {
     config.resolve.alias['react-icons$'] = 'react-icons/fa/index.mjs';
     return config;
   },
 };
+
+// Apply plugins
+const nextConfig = withPWA({
+  ...baseConfig,
+  pwa: pwaConfig,
+});
 
 export default withNextIntl(nextConfig);
