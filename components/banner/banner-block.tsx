@@ -1,5 +1,6 @@
 import { ROUTES } from '@/utils/routes/index';
-import BannerCard from '../common/banner-card';
+
+import BannerCard from '@components/banner/banner-card';
 
 interface BannerImage {
   url: string;
@@ -17,6 +18,7 @@ interface BannerItem {
   };
   type: string;
 }
+
 interface BannerProps {
   data: BannerItem[];
   className?: string;
