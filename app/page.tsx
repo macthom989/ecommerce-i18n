@@ -1,8 +1,6 @@
 'use client';
 
 import BannerBlock from '@/components/banner/banner-block';
-import Header from '@/components/header/header';
-import Footer from '@components/footer/footer';
 import { homeThreeBanner, homeThreeMasonryBanner } from '@configs/banner';
 import Container from '@components/ui/container';
 import BannerSliderBlock from '@blocks/banner-slider-block';
@@ -24,7 +22,6 @@ import CategoryBlock from '@blocks/category-block';
 export default function Page() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
       <main
         className="relative flex-grow"
         style={{
@@ -38,14 +35,8 @@ export default function Page() {
         </Container>
         <BannerSliderBlock />
         <Container>
-          <CategoryBlock
-            sectionHeading="text-shop-by-category"
-            type="rounded"
-          />
-          <ProductsFeatured
-            sectionHeading="text-featured-products"
-            limit={5}
-          />
+          <CategoryBlock sectionHeading="text-shop-by-category" type="rounded" />
+          <ProductsFeatured sectionHeading="text-featured-products" limit={5} />
           <BannerCard
             key={`banner--key${homeThreeBanner[0].id}`}
             banner={homeThreeBanner[0]}
@@ -60,10 +51,7 @@ export default function Page() {
             href={`${ROUTES.COLLECTIONS}/${homeThreeBanner[1].slug}`}
             className="mb-12 lg:mb-14 xl:mb-16 pb-0.5 lg:pb-1 xl:pb-0"
           />
-          <BannerWithProducts
-            sectionHeading="text-on-selling-products"
-            categorySlug="/search"
-          />
+          <BannerWithProducts sectionHeading="text-on-selling-products" categorySlug="/search" />
           <ExclusiveBlock />
           <NewArrivalsProductFeed />
           <DownloadApps />
@@ -73,7 +61,6 @@ export default function Page() {
         </Container>
         <Divider className="mb-0" />
       </main>
-      <Footer />
     </div>
   );
 }

@@ -17,6 +17,7 @@ const eslintConfig = [
       '@typescript-eslint/no-unused-vars': ['off', { vars: 'all', args: 'after-used', ignoreRestSiblings: true }],
       '@typescript-eslint/ban-ts-comment': 'off',
       '@typescript-eslint/no-empty-object-type': 'off',
+      'no-console': ['error', { allow: ['warn', 'error'] }]
     },
   },
 ];

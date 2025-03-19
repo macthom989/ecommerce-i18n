@@ -20,6 +20,8 @@ import { ManagedUIContext } from '@/contexts/ui.context';
 import { getDirection } from '@utils/get-direction';
 import { ToastContainer } from 'react-toastify';
 import TanStackQueryProvider from '@contexts/tanstack-query-provider';
+import ManagedDrawer from '@/components/common/drawer/managed-drawer';
+import Layout from '@/components/common/layout/main';
 
 const inter = Inter({ subsets: ['latin', 'vietnamese'] });
 
@@ -83,10 +85,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <TanStackQueryProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
             <ManagedUIContext>
-              {children}
+              <Layout>{children}</Layout>
               <ToastContainer toastClassName="!text-white" />
-              {/*<ManagedModal />*/}
-              {/*<ManagedDrawer />*/}
+              {/* <ManagedModal /> */}
+              <ManagedDrawer />
             </ManagedUIContext>
           </NextIntlClientProvider>
         </TanStackQueryProvider>
