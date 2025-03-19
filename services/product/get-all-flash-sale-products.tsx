@@ -1,3 +1,5 @@
+'use client';
+
 import { QueryOptionsType } from '@services/types';
 import http from '@services/utils/axiosInstance';
 import { API_ENDPOINTS } from '@services/utils/api-endpoints';

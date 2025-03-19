@@ -24,6 +24,9 @@
       "@components/*": [
         "./components/*"
       ],
+      "@blocks/*": [
+        "./components/blocks/*"
+      ],
       "@utils/*": [
         "./utils/*"
       ],

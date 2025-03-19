@@ -1,118 +1,27 @@
+'use client';
+
 import BannerBlock from '@/components/banner/banner-block';
 import Header from '@/components/header/header';
 import Footer from '@components/footer/footer';
+import { homeThreeBanner, homeThreeMasonryBanner } from '@configs/banner';
+import Container from '@components/ui/container';
+import BannerSliderBlock from '@blocks/banner-slider-block';
+import BrandGridBlock from '@blocks/brand-grid-block';
+import ProductsFlashSaleBlock from '@blocks/product-flash-sale-block';
+import Divider from '@components/ui/divider';
+import Subscription from '@components/ui/subscription';
+import Instagram from '@components/ui/instagram';
+import Support from '@components/ui/support';
+import DownloadApps from '@components/ui/download-apps';
+import NewArrivalsProductFeed from '@components/product/feeds/new-arrivals-product-feed';
+import ExclusiveBlock from '@blocks/exclusive-block';
+import BannerWithProducts from '@blocks/banner-with-products-block';
+import { ROUTES } from '@utils/routes';
+import BannerCard from '@components/banner/banner-card';
+import ProductsFeatured from '@blocks/products-featured-block';
+import CategoryBlock from '@blocks/category-block';
 
-export default async function Home() {
-  const homeThreeMasonryBanner = [
-    {
-      id: 1,
-      title: "Men's Collection",
-      slug: 'mens-collection',
-      image: {
-        mobile: {
-          url: '/assets/images/banner/masonry/banner-mobile-1.jpg',
-          width: 470,
-          height: 232,
-        },
-        desktop: {
-          url: '/assets/images/banner/masonry/banner-1.jpg',
-          width: 1078,
-          height: 425,
-        },
-      },
-      type: 'medium',
-    },
-    {
-      id: 2,
-      title: 'New Sports',
-      slug: 'new-sports',
-      image: {
-        mobile: {
-          url: '/assets/images/banner/masonry/banner-mobile-2.jpg',
-          width: 232,
-          height: 232,
-        },
-        desktop: {
-          url: '/assets/images/banner/masonry/banner-2.jpg',
-          width: 425,
-          height: 425,
-        },
-      },
-      type: 'small',
-    },
-    {
-      id: 3,
-      title: 'Dress Women',
-      slug: 'dress-women',
-      image: {
-        mobile: {
-          url: '/assets/images/banner/masonry/banner-mobile-3.jpg',
-          width: 232,
-          height: 232,
-        },
-        desktop: {
-          url: '/assets/images/banner/masonry/banner-3.jpg',
-          width: 425,
-          height: 425,
-        },
-      },
-      type: 'small',
-    },
-    {
-      id: 4,
-      title: 'Exclusive Sunglasses',
-      slug: 'exclusive-sunglasses',
-      image: {
-        mobile: {
-          url: '/assets/images/banner/masonry/banner-mobile-4.jpg',
-          width: 232,
-          height: 232,
-        },
-        desktop: {
-          url: '/assets/images/banner/masonry/banner-4.jpg',
-          width: 425,
-          height: 425,
-        },
-      },
-      type: 'small',
-    },
-    {
-      id: 5,
-      title: 'Product Coupons',
-      slug: 'product-coupons',
-      image: {
-        mobile: {
-          url: '/assets/images/banner/masonry/banner-mobile-5.jpg',
-          width: 232,
-          height: 232,
-        },
-        desktop: {
-          url: '/assets/images/banner/masonry/banner-5.jpg',
-          width: 425,
-          height: 425,
-        },
-      },
-      type: 'small',
-    },
-    {
-      id: 6,
-      title: 'New Backpack',
-      slug: 'new-backpack',
-      image: {
-        mobile: {
-          url: '/assets/images/banner/masonry/banner-mobile-6.jpg',
-          width: 470,
-          height: 232,
-        },
-        desktop: {
-          url: '/assets/images/banner/masonry/banner-6.jpg',
-          width: 1078,
-          height: 425,
-        },
-      },
-      type: 'medium',
-    },
-  ];
+export default function Page() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
@@ -124,6 +33,45 @@ export default async function Home() {
         }}
       >
         <BannerBlock data={homeThreeMasonryBanner} />
+        <Container>
+          <ProductsFlashSaleBlock date={'2025-12-01T01:02:03'} />
+        </Container>
+        <BannerSliderBlock />
+        <Container>
+          <CategoryBlock
+            sectionHeading="text-shop-by-category"
+            type="rounded"
+          />
+          <ProductsFeatured
+            sectionHeading="text-featured-products"
+            limit={5}
+          />
+          <BannerCard
+            key={`banner--key${homeThreeBanner[0].id}`}
+            banner={homeThreeBanner[0]}
+            href={`${ROUTES.COLLECTIONS}/${homeThreeBanner[0].slug}`}
+            className="mb-12 lg:mb-14 xl:mb-16 pb-0.5 lg:pb-1 xl:pb-0"
+          />
+
+          <BrandGridBlock sectionHeading="text-top-brands" />
+          <BannerCard
+            key={`banner--key${homeThreeBanner[1].id}`}
+            banner={homeThreeBanner[1]}
+            href={`${ROUTES.COLLECTIONS}/${homeThreeBanner[1].slug}`}
+            className="mb-12 lg:mb-14 xl:mb-16 pb-0.5 lg:pb-1 xl:pb-0"
+          />
+          <BannerWithProducts
+            sectionHeading="text-on-selling-products"
+            categorySlug="/search"
+          />
+          <ExclusiveBlock />
+          <NewArrivalsProductFeed />
+          <DownloadApps />
+          <Support />
+          <Instagram />
+          <Subscription className="px-5 py-12 bg-opacity-0 sm:px-16 xl:px-0 md:py-14 xl:py-16" />
+        </Container>
+        <Divider className="mb-0" />
       </main>
       <Footer />
     </div>

@@ -20,7 +20,7 @@ import { Metadata } from 'next';
 import { ManagedUIContext } from '@/contexts/ui.context';
 import { getDirection } from '@utils/get-direction';
 import { ToastContainer } from 'react-toastify';
-import { TanStackQueryProvider } from '@contexts/tanstack-query-provider';
+import TanStackQueryProvider from '@contexts/tanstack-query-provider';
 
 const inter = Inter({ subsets: ['latin', 'vietnamese'] });
 
