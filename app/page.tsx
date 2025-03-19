@@ -1,4 +1,6 @@
 import BannerBlock from '@/components/banner/banner-block';
+import Header from '@/components/header/header';
+import Footer from '@components/footer/footer';
 
 export default async function Home() {
   const homeThreeMasonryBanner = [
@@ -111,5 +113,19 @@ export default async function Home() {
       type: 'medium',
     },
   ];
-  return <BannerBlock data={homeThreeMasonryBanner} />;
+  return (
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      <main
+        className="relative flex-grow"
+        style={{
+          minHeight: '-webkit-fill-available',
+          WebkitOverflowScrolling: 'touch',
+        }}
+      >
+        <BannerBlock data={homeThreeMasonryBanner} />
+      </main>
+      <Footer />
+    </div>
+  );
 }

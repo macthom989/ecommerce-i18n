@@ -1,5 +1,13 @@
-export const EyeOff: React.FC<React.SVGAttributes<object>> = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
+import { SVGIconProps } from '@services/types';
+
+export const EyeOff: React.FC<SVGIconProps> = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    {...props}
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"

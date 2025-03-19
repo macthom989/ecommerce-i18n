@@ -1,7 +1,7 @@
 'use client';
-import { getToken } from '@/utils/get-token';
 import React, { ReactNode } from 'react';
 import { CartProvider } from './cart/cart.context';
+import { getToken } from '@/services/utils/get-token';
 
 export interface State {
   userAvatar: string;
@@ -18,7 +18,7 @@ export interface State {
   toastText: string;
 }
 
-const initialState: State = {
+const initialState = {
   userAvatar: '',
   isAuthorized: false,
   displaySidebar: false,
@@ -34,31 +34,79 @@ const initialState: State = {
 };
 
 type Action =
-  | { type: 'SET_AUTHORIZED' }
-  | { type: 'SET_UNAUTHORIZED' }
-  | { type: 'OPEN_SIDEBAR' }
-  | { type: 'CLOSE_SIDEBAR' }
-  | { type: 'OPEN_CART' }
-  | { type: 'CLOSE_CART' }
-  | { type: 'OPEN_SEARCH' }
-  | { type: 'CLOSE_SEARCH' }
-  | { type: 'SET_TOAST_TEXT'; text: ToastText }
-  | { type: 'OPEN_FILTER' }
-  | { type: 'CLOSE_FILTER' }
-  | { type: 'OPEN_SHOP' }
-  | { type: 'CLOSE_SHOP' }
-  | { type: 'OPEN_MODAL' }
-  | { type: 'CLOSE_MODAL' }
-  | { type: 'SET_MODAL_VIEW'; view: MODAL_VIEWS }
-  | { type: 'SET_DRAWER_VIEW'; view: DRAWER_VIEWS }
-  | { type: 'SET_MODAL_DATA'; data: any }
-  | { type: 'SET_USER_AVATAR'; value: string };
+  | {
+  type: 'SET_AUTHORIZED';
+}
+  | {
+  type: 'SET_UNAUTHORIZED';
+}
+  | {
+  type: 'OPEN_SIDEBAR';
+}
+  | {
+  type: 'CLOSE_SIDEBAR';
+}
+  | {
+  type: 'OPEN_CART';
+}
+  | {
+  type: 'CLOSE_CART';
+}
+  | {
+  type: 'OPEN_SEARCH';
+}
+  | {
+  type: 'CLOSE_SEARCH';
+}
+  | {
+  type: 'SET_TOAST_TEXT';
+  text: ToastText;
+}
+  | {
+  type: 'OPEN_FILTER';
+}
+  | {
+  type: 'CLOSE_FILTER';
+}
+  | {
+  type: 'OPEN_SHOP';
+}
+  | {
+  type: 'CLOSE_SHOP';
+}
+  | {
+  type: 'OPEN_MODAL';
+}
+  | {
+  type: 'CLOSE_MODAL';
+}
+  | {
+  type: 'SET_MODAL_VIEW';
+  view: MODAL_VIEWS;
+}
+  | {
+  type: 'SET_DRAWER_VIEW';
+  view: DRAWER_VIEWS;
+}
+  | {
+  type: 'SET_MODAL_DATA';
+  data: any;
+}
+  | {
+  type: 'SET_USER_AVATAR';
+  value: string;
+};
 
-type MODAL_VIEWS = 'SIGN_UP_VIEW' | 'LOGIN_VIEW' | 'FORGET_PASSWORD' | 'PRODUCT_VIEW';
+type MODAL_VIEWS =
+  | 'SIGN_UP_VIEW'
+  | 'LOGIN_VIEW'
+  | 'FORGET_PASSWORD'
+  | 'PRODUCT_VIEW';
 type DRAWER_VIEWS = 'CART_SIDEBAR' | 'MOBILE_MENU';
 type ToastText = string;
 
 export const UIContext = React.createContext<State | any>(initialState);
+
 UIContext.displayName = 'UIContext';
 
 function uiReducer(state: State, action: Action): State {
@@ -121,12 +169,27 @@ export const UIProvider: React.FC<UIProviderProps> = ({ children }) => {
   const unauthorize = () => dispatch({ type: 'SET_UNAUTHORIZED' });
   const openSidebar = () => dispatch({ type: 'OPEN_SIDEBAR' });
   const closeSidebar = () => dispatch({ type: 'CLOSE_SIDEBAR' });
+  const toggleSidebar = () =>
+    state.displaySidebar
+      ? dispatch({ type: 'CLOSE_SIDEBAR' })
+      : dispatch({ type: 'OPEN_SIDEBAR' });
+  const closeSidebarIfPresent = () =>
+    state.displaySidebar && dispatch({ type: 'CLOSE_CART' });
   const openCart = () => dispatch({ type: 'OPEN_CART' });
   const closeCart = () => dispatch({ type: 'CLOSE_CART' });
+  const toggleCart = () =>
+    state.displaySidebar
+      ? dispatch({ type: 'CLOSE_CART' })
+      : dispatch({ type: 'OPEN_CART' });
+  const closeCartIfPresent = () =>
+    state.displaySidebar && dispatch({ type: 'CLOSE_CART' });
+
   const openFilter = () => dispatch({ type: 'OPEN_FILTER' });
   const closeFilter = () => dispatch({ type: 'CLOSE_FILTER' });
+
   const openShop = () => dispatch({ type: 'OPEN_SHOP' });
   const closeShop = () => dispatch({ type: 'CLOSE_SHOP' });
+
   const openModal = () => dispatch({ type: 'OPEN_MODAL' });
   const closeModal = () => dispatch({ type: 'CLOSE_MODAL' });
   const openSearch = () => dispatch({ type: 'OPEN_SEARCH' });
@@ -143,8 +206,12 @@ export const UIProvider: React.FC<UIProviderProps> = ({ children }) => {
       unauthorize,
       openSidebar,
       closeSidebar,
+      toggleSidebar,
+      closeSidebarIfPresent,
       openCart,
       closeCart,
+      toggleCart,
+      closeCartIfPresent,
       openFilter,
       closeFilter,
       openShop,
@@ -165,8 +232,10 @@ export const UIProvider: React.FC<UIProviderProps> = ({ children }) => {
 };
 
 export const useUI = () => {
-  const context = React?.useContext(UIContext);
-  if (!context) throw new Error(`useUI must be used within a UIProvider`);
+  const context = React.useContext(UIContext);
+  if (!context) {
+    throw new Error(`useUI must be used within a UIProvider`);
+  }
   return context;
 };
 

@@ -1,7 +1,20 @@
-const FilterIcon = ({ color = 'currentColor', width = '18px', height = '14px' }) => {
+const FilterIcon = ({
+  color = "currentColor",
+  width = "18px",
+  height = "14px",
+}) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 18 14">
-      <g id="Group_36196" data-name="Group 36196" transform="translate(-925 -1122.489)">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={width}
+      height={height}
+      viewBox="0 0 18 14"
+    >
+      <g
+        id="Group_36196"
+        data-name="Group 36196"
+        transform="translate(-925 -1122.489)"
+      >
         <path
           id="Path_22590"
           data-name="Path 22590"

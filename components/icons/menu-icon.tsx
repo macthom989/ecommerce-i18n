@@ -1,6 +1,14 @@
-const MenuIcon: React.FC<React.SVGAttributes<object>> = (props) => {
+import { SVGIconProps } from '@services/types';
+
+const MenuIcon: React.FC<SVGIconProps> = (props) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="14" viewBox="0 0 25.567 18" {...props}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="22"
+      height="14"
+      viewBox="0 0 25.567 18"
+      {...props}
+    >
       <g transform="translate(-776 -462)">
         <rect
           id="Rectangle_941"

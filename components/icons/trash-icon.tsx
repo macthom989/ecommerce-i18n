@@ -1,6 +1,15 @@
-const TrashIcon = ({ color = 'currentColor', width = '12px', height = '12px' }) => {
+const TrashIcon = ({
+  color = "currentColor",
+  width = "12px",
+  height = "12px",
+}) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 11.344 12">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={width}
+      height={height}
+      viewBox="0 0 11.344 12"
+    >
       <g transform="translate(-13.989)">
         <g data-name="Group 5372" transform="translate(15.399 2.327)">
           <g data-name="Group 5371">

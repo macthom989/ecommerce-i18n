@@ -1,6 +1,12 @@
-export function UserLineIcon(props: React.SVGAttributes<object>) {
+import { SVGIconProps } from '@services/types';
+
+export function UserLineIcon(props: SVGIconProps) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.044 20.355" {...props}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 17.044 20.355"
+      {...props}
+    >
       <g transform="translate(0.179 0.176)">
         <path
           d="M91.849,9.634a4.661,4.661,0,0,0,3.406-1.411,4.661,4.661,0,0,0,1.411-3.406,4.662,4.662,0,0,0-1.411-3.406,4.816,4.816,0,0,0-6.812,0,4.661,4.661,0,0,0-1.411,3.406,4.661,4.661,0,0,0,1.411,3.406,4.663,4.663,0,0,0,3.406,1.411ZM89.272,2.24a3.644,3.644,0,0,1,5.154,0,3.483,3.483,0,0,1,1.068,2.577,3.482,3.482,0,0,1-1.068,2.577,3.643,3.643,0,0,1-5.154,0A3.482,3.482,0,0,1,88.2,4.817,3.482,3.482,0,0,1,89.272,2.24Zm0,0"
