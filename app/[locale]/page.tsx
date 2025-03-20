@@ -22,7 +22,7 @@ import CategoryBlock from '@blocks/category-block';
 export default function Page() {
   return (
     <div className="flex flex-col min-h-screen">
-      <main
+      <div
         className="relative flex-grow"
         style={{
           minHeight: '-webkit-fill-available',
@@ -60,7 +60,7 @@ export default function Page() {
           <Subscription className="px-5 py-12 bg-opacity-0 sm:px-16 xl:px-0 md:py-14 xl:py-16" />
         </Container>
         <Divider className="mb-0" />
-      </main>
+      </div>
     </div>
   );
 }

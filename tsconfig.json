@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -17,16 +21,39 @@
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": true,
     "paths": {
-      "@/*": ["./*"],
-      "@components/*": ["./components/*"],
-      "@blocks/*": ["./components/blocks/*"],
-      "@utils/*": ["./utils/*"],
-      "@services/*": ["./services/*"],
-      "@lib/*": ["./lib/*"],
-      "@i18n/*": ["./i18n/*"],
-      "@styles/*": ["./styles/*"],
-      "@configs/*": ["./configs/*"],
-      "@contexts/*": ["./contexts/*"]
+      "@/*": [
+        "./*"
+      ],
+      "@components/*": [
+        "./components/*"
+      ],
+      "@blocks/*": [
+        "./components/blocks/*"
+      ],
+      "@utils/*": [
+        "./utils/*"
+      ],
+      "@services/*": [
+        "./services/*"
+      ],
+      "@lib/*": [
+        "./lib/*"
+      ],
+      "@i18n/*": [
+        "./i18n/*"
+      ],
+      "@styles/*": [
+        "./styles/*"
+      ],
+      "@configs/*": [
+        "./configs/*"
+      ],
+      "@contexts/*": [
+        "./contexts/*"
+      ],
+      "@api/*": [
+        "./public/api/*"
+      ]
     },
     "plugins": [
       {
@@ -34,6 +61,13 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
