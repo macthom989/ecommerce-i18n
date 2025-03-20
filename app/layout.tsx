@@ -1,8 +1,6 @@
 import type React from 'react';
 import { Inter } from 'next/font/google';
-import { NextIntlClientProvider } from 'next-intl';
 
-// Load Open Sans and satisfy typeface font
 import '@fontsource/open-sans';
 import '@fontsource/open-sans/600.css';
 import '@fontsource/open-sans/700.css';
@@ -14,24 +12,36 @@ import '@styles/rc-drawer.css';
 import '@styles/swiper-carousel.css';
 import '@styles/scrollbar.css';
 
-import { getMessages } from 'next-intl/server';
-import { getUserLocale } from '@/services/locale';
 import { Metadata } from 'next';
-import { ManagedUIContext } from '@/contexts/ui.context';
+import { getUserLocale } from '@/services/locale';
 import { getDirection } from '@utils/get-direction';
-import { ToastContainer } from 'react-toastify';
-import TanStackQueryProvider from '@contexts/tanstack-query-provider';
 
 const inter = Inter({ subsets: ['latin', 'vietnamese'] });
 
 export const metadata: Metadata = {
-  title: 'ChawkBazar React - React Next E-commerce Template',
-  description: 'Fastest E-commerce template built with React, NextJS, TypeScript, @tanstack/react-query and Tailwind CSS.',
+  title: 'Hv Core - React Next E-commerce Template',
+  description:
+    'Fastest E-commerce template built with React, NextJS, TypeScript, @tanstack/react-query and Tailwind CSS.',
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Hv Core',
+  },
+  formatDetection: {
+    telephone: false,
+  },
+  icons: {
+    icon: '/icons/manifest-icon-192.png',
+    shortcut: '/icons/manifest-icon-192.png',
+    apple: '/icons/apple-icon-180.png',
+  },
   openGraph: {
-    title: 'ChawkBazar React - React Next E-commerce Template',
-    description: 'Fastest E-commerce template built with React, NextJS, TypeScript, @tanstack/react-query and Tailwind CSS.',
-    url: 'https://chawkbazar.vercel.app',
-    siteName: 'ChawkBazar',
+    title: 'Hv Core React - React Next E-commerce Template',
+    description:
+      'Fastest E-commerce template built with React, NextJS, TypeScript, @tanstack/react-query and Tailwind CSS.',
+    url: 'https://theme-nextjs-hvcore.vercel.app',
+    siteName: 'Hv Core - Ecommerce',
     images: [
       {
         url: '/assets/images/og-image-01.png',
@@ -49,28 +59,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const locale = await getUserLocale();
-  const dir = getDirection(locale);
-  const messages = await getMessages({ locale: locale });
+export const viewport = {
+  themeColor: '#ffffff',
+};
 
-  return (
-    <html lang={locale} dir={dir} suppressHydrationWarning>
-    <body className={inter.className}>
-    {/*<AnimatePresence mode="wait" onExitComplete={handleExitComplete}>*/}
-    <TanStackQueryProvider>
-      <NextIntlClientProvider locale={locale} messages={messages}>
-        <ManagedUIContext>
-          {children}
-          <ToastContainer toastClassName="!text-white" />
-          {/*<ManagedModal />*/}
-          {/*<ManagedDrawer />*/}
-        </ManagedUIContext>
-      </NextIntlClientProvider>
-    </TanStackQueryProvider>
-    {/*</AnimatePresence>*/}
-    </body>
-
-    </html>
-  );
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return children;
 }

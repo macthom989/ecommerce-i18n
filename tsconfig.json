@@ -17,6 +17,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
+    "allowUnreachableCode": true,
     "paths": {
       "@/*": [
         "./*"
@@ -47,6 +50,9 @@
       ],
       "@contexts/*": [
         "./contexts/*"
+      ],
+      "@api/*": [
+        "./public/api/*"
       ]
     },
     "plugins": [
