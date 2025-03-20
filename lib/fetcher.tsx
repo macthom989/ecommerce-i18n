@@ -18,7 +18,7 @@ type Resp<T> = {
 } & any;
 
 const fetcher = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: process.env.NEXT_PUBLIC_REST_API_ENDPOINT,
   withCredentials: false,
 });
 
@@ -73,7 +73,7 @@ fetcher.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        const dataToken = await axios.post(`${import.meta.env.VITE_API_URL}${endpoint.REFRESHTOKEN}`, {
+        const dataToken = await axios.post(`${process.env.NEXT_PUBLIC_REST_API_ENDPOINT}${endpoint.REFRESHTOKEN}`, {
           refreshToken,
         });
         const newAccessToken = dataToken?.data?.data?.token;
