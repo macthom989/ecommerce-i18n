@@ -1,7 +1,5 @@
 import axios, { AxiosResponse, Method } from 'axios';
-import endpoint from '../const/endpoint';
 import ls, { lsKeys } from './local-storage';
-import { baseUrlSite } from '../const/base-url';
 
 type ConfigKey = Record<string, any>;
 
@@ -97,7 +95,6 @@ fetcher.interceptors.response.use(
       } catch (error) {
         ls.remove(lsKeys.TOKEN);
         ls.remove(lsKeys.REFRESH_TOKEN);
-        window.location.replace(baseUrlSite.login);
       } finally {
         isRefreshing = false;
       }
@@ -105,7 +102,6 @@ fetcher.interceptors.response.use(
     if (isUnauthorized && !refreshToken) {
       ls.remove(lsKeys.TOKEN);
       ls.remove(lsKeys.REFRESH_TOKEN);
-      window.location.replace(baseUrlSite.login);
     }
 
     return Promise.reject(error);

@@ -3,4 +3,5 @@ const endpoint = {
   PRODUCTS: '/products',
   CATEGORIES: '/categories',
   CATEGORIES_ID: '/categories/:id',
+  REFRESHTOKEN: '/refresh-token',
 };
