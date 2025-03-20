@@ -1,4 +1,4 @@
-import { ROUTES } from '@/utils/routes/index';
+import { ROUTES } from '@utils/routes';
 
 import BannerCard from '@components/banner/banner-card';
 
@@ -8,7 +8,7 @@ interface BannerImage {
   height: number;
 }
 
-interface BannerItem {
+export interface BannerItem {
   id: number;
   title: string;
   slug: string;
@@ -27,7 +27,7 @@ interface BannerProps {
 const BannerBlock: React.FC<BannerProps> = ({ data, className = 'mb-12 md:mb-14 xl:mb-16 px-2.5' }) => {
   return (
     <div className={`${className} grid grid-cols-2 sm:grid-cols-9 gap-2 md:gap-2.5 max-w-[1920px] mx-auto`}>
-      {data.map((banner: any) => (
+      {data.map((banner: BannerItem) => (
         <BannerCard
           key={`banner--key${banner.id}`}
           banner={banner}

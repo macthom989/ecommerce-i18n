@@ -3,21 +3,25 @@
 import BannerBlock from '@/components/banner/banner-block';
 import { homeThreeBanner, homeThreeMasonryBanner } from '@configs/banner';
 import Container from '@components/ui/container';
-import BannerSliderBlock from '@blocks/banner-slider-block';
-import BrandGridBlock from '@blocks/brand-grid-block';
+
 import ProductsFlashSaleBlock from '@blocks/product-flash-sale-block';
 import Divider from '@components/ui/divider';
-import Subscription from '@components/ui/subscription';
 import Instagram from '@components/ui/instagram';
 import Support from '@components/ui/support';
 import DownloadApps from '@components/ui/download-apps';
 import NewArrivalsProductFeed from '@components/product/feeds/new-arrivals-product-feed';
-import ExclusiveBlock from '@blocks/exclusive-block';
-import BannerWithProducts from '@blocks/banner-with-products-block';
 import { ROUTES } from '@utils/routes';
 import BannerCard from '@components/banner/banner-card';
-import ProductsFeatured from '@blocks/products-featured-block';
-import CategoryBlock from '@blocks/category-block';
+
+import dynamic from 'next/dynamic';
+import Subscription from '@components/ui/subscription';
+
+const ProductsFeatured = dynamic(() => import('@blocks/products-featured-block'), { ssr: false });
+const BannerSliderBlock = dynamic(() => import('@blocks/banner-slider-block'), { ssr: false });
+const BrandGridBlock = dynamic(() => import('@blocks/brand-grid-block'), { ssr: false });
+const CategoryBlock = dynamic(() => import('@blocks/category-block'), { ssr: false });
+const ExclusiveBlock = dynamic(() => import('@blocks/exclusive-block'), { ssr: false });
+const BannerWithProducts = dynamic(() => import('@blocks/banner-with-products-block'), { ssr: false });
 
 export default function Page() {
   return (
