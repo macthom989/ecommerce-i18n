@@ -84,7 +84,11 @@ const BottomNavigation: React.FC = () => {
         styles={{ wrapper: contentWrapperCSS }}
         {...motionProps}
       >
-        <MobileMenu />
+        <div className="rc-drawer-content-wrapper">
+          <div className="rc-drawer-content">
+            <MobileMenu />
+          </div>
+        </div>
       </Drawer>
     </>
   );

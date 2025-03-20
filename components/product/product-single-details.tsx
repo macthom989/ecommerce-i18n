@@ -47,10 +47,7 @@ const ProductSingleDetails: React.FC = () => {
   const variations = getVariations(data?.variations);
 
   const isSelected = !isEmpty(variations)
-    ? !isEmpty(attributes) &&
-    Object.keys(variations).every((variation) =>
-      attributes.hasOwnProperty(variation),
-    )
+    ? !isEmpty(attributes) && Object.keys(variations).every((variation) => attributes.hasOwnProperty(variation))
     : true;
 
   function addToCart() {
@@ -72,7 +69,6 @@ const ProductSingleDetails: React.FC = () => {
       pauseOnHover: true,
       draggable: true,
     });
-    console.log(item, 'item');
   }
 
   function handleAttribute(attribute: any) {
@@ -98,10 +94,7 @@ const ProductSingleDetails: React.FC = () => {
               <div className="col-span-1 transition duration-150 ease-in hover:opacity-90">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={
-                    item?.original ??
-                    '/assets/placeholder/products/product-gallery.svg'
-                  }
+                  src={item?.original ?? '/assets/placeholder/products/product-gallery.svg'}
                   alt={`${data?.name}--${index}`}
                   className="object-cover w-full"
                 />
@@ -112,16 +105,10 @@ const ProductSingleDetails: React.FC = () => {
       ) : (
         <div className="col-span-5 grid grid-cols-2 gap-2.5">
           {data?.gallery?.map((item, index: number) => (
-            <div
-              key={index}
-              className="col-span-1 transition duration-150 ease-in hover:opacity-90"
-            >
+            <div key={index} className="col-span-1 transition duration-150 ease-in hover:opacity-90">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={
-                  item?.original ??
-                  '/assets/placeholder/products/product-gallery.svg'
-                }
+                src={item?.original ?? '/assets/placeholder/products/product-gallery.svg'}
                 alt={`${data?.name}--${index}`}
                 className="object-cover w-full"
               />
@@ -135,17 +122,13 @@ const ProductSingleDetails: React.FC = () => {
           <h2 className="text-heading text-lg md:text-xl lg:text-2xl 2xl:text-3xl font-bold hover:text-black mb-3.5">
             {data?.name}
           </h2>
-          <p className="text-body text-sm lg:text-base leading-6 lg:leading-8">
-            {data?.description}
-          </p>
+          <p className="text-body text-sm lg:text-base leading-6 lg:leading-8">{data?.description}</p>
           <div className="flex items-center mt-5">
-            <div
-              className="text-heading font-bold text-base md:text-xl lg:text-2xl 2xl:text-4xl ltr:pr-2 rtl:pl-2 ltr:md:pr-0 rtl:md:pl-0 ltr:lg:pr-2 rtl:lg:pl-2 ltr:2xl:pr-0 rtl:2xl:pl-0">
+            <div className="text-heading font-bold text-base md:text-xl lg:text-2xl 2xl:text-4xl ltr:pr-2 rtl:pl-2 ltr:md:pr-0 rtl:md:pl-0 ltr:lg:pr-2 rtl:lg:pl-2 ltr:2xl:pr-0 rtl:2xl:pl-0">
               {price}
             </div>
             {discount && (
-              <span
-                className="line-through font-segoe text-gray-400 text-sm md:text-base lg:text-lg xl:text-xl ltr:pl-2 rtl:pr-2">
+              <span className="line-through font-segoe text-gray-400 text-sm md:text-base lg:text-lg xl:text-xl ltr:pl-2 rtl:pr-2">
                 {basePrice}
               </span>
             )}
@@ -165,22 +148,17 @@ const ProductSingleDetails: React.FC = () => {
             );
           })}
         </div>
-        <div
-          className="flex items-center gap-x-4 ltr:md:pr-32 rtl:md:pl-32 ltr:lg:pr-12 rtl:lg:pl-12 ltr:2xl:pr-32 rtl:2xl:pl-32 ltr:3xl:pr-48 rtl:3xl:pl-48  border-b border-gray-300 py-8">
+        <div className="flex items-center gap-x-4 ltr:md:pr-32 rtl:md:pl-32 ltr:lg:pr-12 rtl:lg:pl-12 ltr:2xl:pr-32 rtl:2xl:pl-32 ltr:3xl:pr-48 rtl:3xl:pl-48  border-b border-gray-300 py-8">
           <Counter
             quantity={quantity}
             onIncrement={() => setQuantity((prev) => prev + 1)}
-            onDecrement={() =>
-              setQuantity((prev) => (prev !== 1 ? prev - 1 : 1))
-            }
+            onDecrement={() => setQuantity((prev) => (prev !== 1 ? prev - 1 : 1))}
             disableDecrement={quantity === 1}
           />
           <Button
             onClick={addToCart}
             variant="slim"
-            className={`w-full md:w-6/12 xl:w-full ${
-              !isSelected && 'bg-gray-400 hover:bg-gray-400'
-            }`}
+            className={`w-full md:w-6/12 xl:w-full ${!isSelected && 'bg-gray-400 hover:bg-gray-400'}`}
             disabled={!isSelected}
             loading={addToCartLoader}
           >
@@ -190,27 +168,18 @@ const ProductSingleDetails: React.FC = () => {
         <div className="py-6">
           <ul className="text-sm space-y-5 pb-1">
             <li>
-              <span className="font-semibold text-heading inline-block ltr:pr-2 rtl:pl-2">
-                SKU:
-              </span>
+              <span className="font-semibold text-heading inline-block ltr:pr-2 rtl:pl-2">SKU:</span>
               {data?.sku}
             </li>
             <li>
-              <span className="font-semibold text-heading inline-block ltr:pr-2 rtl:pl-2">
-                Category:
-              </span>
-              <Link
-                href="/"
-                className="transition hover:underline hover:text-heading"
-              >
+              <span className="font-semibold text-heading inline-block ltr:pr-2 rtl:pl-2">Category:</span>
+              <Link href="/" className="transition hover:underline hover:text-heading">
                 {data?.category?.name}
               </Link>
             </li>
             {data?.tags && Array.isArray(data.tags) && (
               <li className="productTags">
-                <span className="font-semibold text-heading inline-block ltr:pr-2 rtl:pl-2">
-                  Tags:
-                </span>
+                <span className="font-semibold text-heading inline-block ltr:pr-2 rtl:pl-2">Tags:</span>
                 {data.tags.map((tag) => (
                   <Link
                     key={tag.id}

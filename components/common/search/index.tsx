@@ -49,8 +49,6 @@ export default function Search() {
     };
   }, [displaySearch]);
 
-  console.log(displaySearch);
-
   return (
     <div ref={ref}>
       <div

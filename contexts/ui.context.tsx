@@ -35,73 +35,69 @@ const initialState = {
 
 type Action =
   | {
-  type: 'SET_AUTHORIZED';
-}
+      type: 'SET_AUTHORIZED';
+    }
   | {
-  type: 'SET_UNAUTHORIZED';
-}
+      type: 'SET_UNAUTHORIZED';
+    }
   | {
-  type: 'OPEN_SIDEBAR';
-}
+      type: 'OPEN_SIDEBAR';
+    }
   | {
-  type: 'CLOSE_SIDEBAR';
-}
+      type: 'CLOSE_SIDEBAR';
+    }
   | {
-  type: 'OPEN_CART';
-}
+      type: 'OPEN_CART';
+    }
   | {
-  type: 'CLOSE_CART';
-}
+      type: 'CLOSE_CART';
+    }
   | {
-  type: 'OPEN_SEARCH';
-}
+      type: 'OPEN_SEARCH';
+    }
   | {
-  type: 'CLOSE_SEARCH';
-}
+      type: 'CLOSE_SEARCH';
+    }
   | {
-  type: 'SET_TOAST_TEXT';
-  text: ToastText;
-}
+      type: 'SET_TOAST_TEXT';
+      text: ToastText;
+    }
   | {
-  type: 'OPEN_FILTER';
-}
+      type: 'OPEN_FILTER';
+    }
   | {
-  type: 'CLOSE_FILTER';
-}
+      type: 'CLOSE_FILTER';
+    }
   | {
-  type: 'OPEN_SHOP';
-}
+      type: 'OPEN_SHOP';
+    }
   | {
-  type: 'CLOSE_SHOP';
-}
+      type: 'CLOSE_SHOP';
+    }
   | {
-  type: 'OPEN_MODAL';
-}
+      type: 'OPEN_MODAL';
+    }
   | {
-  type: 'CLOSE_MODAL';
-}
+      type: 'CLOSE_MODAL';
+    }
   | {
-  type: 'SET_MODAL_VIEW';
-  view: MODAL_VIEWS;
-}
+      type: 'SET_MODAL_VIEW';
+      view: MODAL_VIEWS;
+    }
   | {
-  type: 'SET_DRAWER_VIEW';
-  view: DRAWER_VIEWS;
-}
+      type: 'SET_DRAWER_VIEW';
+      view: DRAWER_VIEWS;
+    }
   | {
-  type: 'SET_MODAL_DATA';
-  data: any;
-}
+      type: 'SET_MODAL_DATA';
+      data: any;
+    }
   | {
-  type: 'SET_USER_AVATAR';
-  value: string;
-};
+      type: 'SET_USER_AVATAR';
+      value: string;
+    };
 
-type MODAL_VIEWS =
-  | 'SIGN_UP_VIEW'
-  | 'LOGIN_VIEW'
-  | 'FORGET_PASSWORD'
-  | 'PRODUCT_VIEW';
+type MODAL_VIEWS = 'SIGN_UP_VIEW' | 'LOGIN_VIEW' | 'FORGET_PASSWORD' | 'PRODUCT_VIEW';
 type DRAWER_VIEWS = 'CART_SIDEBAR' | 'MOBILE_MENU';
 type ToastText = string;
 
@@ -159,7 +155,6 @@ interface UIProviderProps {
 }
 
 export const UIProvider: React.FC<UIProviderProps> = ({ children }) => {
-  console.log('UIProvider is rendering!');
   const [state, dispatch] = React.useReducer(uiReducer, {
     ...initialState,
     isAuthorized: !!getToken(),
@@ -170,19 +165,12 @@ export const UIProvider: React.FC<UIProviderProps> = ({ children }) => {
   const openSidebar = () => dispatch({ type: 'OPEN_SIDEBAR' });
   const closeSidebar = () => dispatch({ type: 'CLOSE_SIDEBAR' });
   const toggleSidebar = () =>
-    state.displaySidebar
-      ? dispatch({ type: 'CLOSE_SIDEBAR' })
-      : dispatch({ type: 'OPEN_SIDEBAR' });
-  const closeSidebarIfPresent = () =>
-    state.displaySidebar && dispatch({ type: 'CLOSE_CART' });
+    state.displaySidebar ? dispatch({ type: 'CLOSE_SIDEBAR' }) : dispatch({ type: 'OPEN_SIDEBAR' });
+  const closeSidebarIfPresent = () => state.displaySidebar && dispatch({ type: 'CLOSE_CART' });
   const openCart = () => dispatch({ type: 'OPEN_CART' });
   const closeCart = () => dispatch({ type: 'CLOSE_CART' });
-  const toggleCart = () =>
-    state.displaySidebar
-      ? dispatch({ type: 'CLOSE_CART' })
-      : dispatch({ type: 'OPEN_CART' });
-  const closeCartIfPresent = () =>
-    state.displaySidebar && dispatch({ type: 'CLOSE_CART' });
+  const toggleCart = () => (state.displaySidebar ? dispatch({ type: 'CLOSE_CART' }) : dispatch({ type: 'OPEN_CART' }));
+  const closeCartIfPresent = () => state.displaySidebar && dispatch({ type: 'CLOSE_CART' });
 
   const openFilter = () => dispatch({ type: 'OPEN_FILTER' });
   const closeFilter = () => dispatch({ type: 'CLOSE_FILTER' });
@@ -240,7 +228,6 @@ export const useUI = () => {
 };
 
 export const ManagedUIContext: React.FC<UIProviderProps> = ({ children }) => {
-  console.log('ManagedUIProvider is rendering!');
   return (
     <CartProvider>
       <UIProvider>{children}</UIProvider>
