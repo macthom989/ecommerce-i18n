@@ -29,7 +29,9 @@ const baseConfig: NextConfig = {
   // Optimize for performance
   poweredByHeader: false,
   compress: true,
-
+  devIndicators: {
+    buildActivity: false,
+  },
   webpack: (config: any) => {
     config.resolve.alias['react-icons$'] = 'react-icons/fa/index.mjs';
     return config;

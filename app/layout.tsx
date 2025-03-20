@@ -1,6 +1,5 @@
 import type React from 'react';
 import { Inter } from 'next/font/google';
-import { NextIntlClientProvider } from 'next-intl';
 
 import '@fontsource/open-sans';
 import '@fontsource/open-sans/600.css';
@@ -13,15 +12,9 @@ import '@styles/rc-drawer.css';
 import '@styles/swiper-carousel.css';
 import '@styles/scrollbar.css';
 
-import { getMessages } from 'next-intl/server';
-import { getUserLocale } from '@/services/locale';
 import { Metadata } from 'next';
-import { ManagedUIContext } from '@/contexts/ui.context';
+import { getUserLocale } from '@/services/locale';
 import { getDirection } from '@utils/get-direction';
-import { ToastContainer } from 'react-toastify';
-import TanStackQueryProvider from '@contexts/tanstack-query-provider';
-import ManagedDrawer from '@/components/common/drawer/managed-drawer';
-import Layout from '@/components/common/layout/main';
 
 const inter = Inter({ subsets: ['latin', 'vietnamese'] });
 
@@ -70,30 +63,6 @@ export const viewport = {
   themeColor: '#ffffff',
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const locale = await getUserLocale();
-  const dir = getDirection(locale);
-  const messages = await getMessages({ locale: locale });
-
-  return (
-    <html lang={locale} dir={dir} suppressHydrationWarning>
-      <head>
-        <script src="/worker-register.js" defer></script>
-      </head>
-      <body className={inter.className}>
-        {/*<AnimatePresence mode="wait" onExitComplete={handleExitComplete}>*/}
-        <TanStackQueryProvider>
-          <NextIntlClientProvider locale={locale} messages={messages}>
-            <ManagedUIContext>
-              <Layout>{children}</Layout>
-              <ToastContainer toastClassName="!text-white" />
-              {/* <ManagedModal /> */}
-              <ManagedDrawer />
-            </ManagedUIContext>
-          </NextIntlClientProvider>
-        </TanStackQueryProvider>
-        {/*</AnimatePresence>*/}
-      </body>
-    </html>
-  );
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return children;
 }

@@ -6,6 +6,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import { siteSettings } from '@/settings/site-settings';
 import { useTranslations } from 'next-intl';
 import { HiOutlineSelector } from 'react-icons/hi';
+import { updateLocale } from '@/actions/locale';
+import { Locale } from '@/i18n/config';
 
 export default function LanguageSwitcher() {
   const { site_header } = siteSettings;
@@ -16,6 +18,7 @@ export default function LanguageSwitcher() {
   const pathname = usePathname();
 
   const [selectedItem, setSelectedItem] = useState(options[2]);
+  const [isChanging, setIsChanging] = useState(false);
 
   useEffect(() => {
     const locale = pathname.split('/')[1];
@@ -23,18 +26,37 @@ export default function LanguageSwitcher() {
     setSelectedItem(currentSelectedItem);
   }, [pathname, options]);
 
-  function handleItemClick(values: any) {
+  async function handleItemClick(values: any) {
+    if (isChanging) return;
+
+    setIsChanging(true);
     setSelectedItem(values);
-    router.push(`/${values.value}${pathname.slice(3)}`);
+
+    try {
+      // Update the cookie with the new locale
+      await updateLocale(values.value as Locale, pathname);
+
+      // Navigate to the new locale path
+      const newPath = `/${values.value}${pathname.slice(3)}`;
+      router.push(newPath);
+
+      // Force a full page refresh to update the HTML lang attribute
+      window.location.href = newPath;
+    } catch (error) {
+      console.error('Failed to update locale:', error);
+      router.push(`/${values.value}${pathname.slice(3)}`);
+    } finally {
+      setIsChanging(false);
+    }
   }
 
   return (
-    <Listbox value={selectedItem} onChange={handleItemClick}>
+    <Listbox value={selectedItem} onChange={handleItemClick} disabled={isChanging}>
       {({ open }) => (
         <div className="relative ltr:ml-2 rtl:mr-2 ltr:lg:ml-0 rtl:lg:mr-0 z-10 w-[140px] sm:w-[150px] lg:w-[130px] xl:w-[150px]">
           <ListboxButton className="border border-gray-300  text-heading text-[13px] xl:text-sm font-semibold  relative w-full py-2 ltr:pl-3 rtl:pr-3 ltr:pr-7 rtl:pl-7 ltr:text-left rtl:text-right bg-white rounded-lg shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 cursor-pointer">
             <span className="flex truncate items-center">
-              <span className="ltr:mr-1.5 rtl:ml-1.5">{selectedItem.icon}</span> {t(selectedItem.name)}
+              <span className="ltr:mr-1.5 rtl:ml-1.5">{selectedItem.icon}</span> {selectedItem.name}
             </span>
             <span className="absolute inset-y-0 ltr:right-0 rtl:left-0 flex items-center ltr:pr-1.5 rtl:pl-1.5 pointer-events-none">
               <HiOutlineSelector className="w-5 h-5 text-gray-400" aria-hidden="true" />
@@ -66,7 +88,7 @@ export default function LanguageSwitcher() {
                       <span
                         className={`${selected ? 'font-medium' : 'font-normal'} block truncate ltr:ml-1.5 rtl:mr-1.5`}
                       >
-                        {t(option.name)}
+                        {option.name}
                       </span>
                       {selected ? (
                         <span
