@@ -1,6 +1,6 @@
 import Card from '@components/ui/card';
 import SectionHeader from '@components/ui/section-header';
-import Carousel from '@components/carousel/carousel';
+import Carousel from '@components/carousel';
 import CardLoader from '@components/common/loaders/card-loader';
 import CardRoundedLoader from '@components/common/loaders/card-rounded-loader';
 import { useCategoriesQuery } from '@services/category/get-all-categories';
@@ -20,15 +20,15 @@ interface CategoriesProps {
 }
 
 const CategoryBlock: React.FC<CategoriesProps> = ({
-                                                    className = 'mb-10 md:mb-11 lg:mb-12 xl:mb-14 lg:pb-1 xl:pb-0',
-                                                    sectionHeading,
-                                                    type = 'circle',
-                                                    roundedItemCount,
-                                                    roundedSpaceBetween,
-                                                    imgSize,
-                                                    demoVariant,
-                                                    disableBorderRadius = false,
-                                                  }) => {
+  className = 'mb-10 md:mb-11 lg:mb-12 xl:mb-14 lg:pb-1 xl:pb-0',
+  sectionHeading,
+  type = 'circle',
+  roundedItemCount,
+  roundedSpaceBetween,
+  imgSize,
+  demoVariant,
+  disableBorderRadius = false,
+}) => {
   const breakpoints = {
     '1720': {
       slidesPerView: roundedItemCount === 5 ? 5 : 8,
@@ -103,32 +103,32 @@ const CategoryBlock: React.FC<CategoriesProps> = ({
         >
           {isLoading && !data
             ? Array.from({ length: roundedItemCount || 10 }).map((_, idx) => {
-              if (type === 'rounded') {
+                if (type === 'rounded') {
+                  return (
+                    <SwiperSlide key={`card-rounded-${idx}`}>
+                      <CardRoundedLoader uniqueKey={`card-rounded-${idx}`} />
+                    </SwiperSlide>
+                  );
+                }
                 return (
-                  <SwiperSlide key={`card-rounded-${idx}`}>
-                    <CardRoundedLoader uniqueKey={`card-rounded-${idx}`} />
+                  <SwiperSlide key={`card-circle-${idx}`}>
+                    <CardLoader uniqueKey={`card-circle-${idx}`} />
                   </SwiperSlide>
                 );
-              }
-              return (
-                <SwiperSlide key={`card-circle-${idx}`}>
-                  <CardLoader uniqueKey={`card-circle-${idx}`} />
-                </SwiperSlide>
-              );
-            })
+              })
             : data?.categories?.data?.map((category) => (
-              <SwiperSlide key={`category--key-${category.id}`}>
-                <Card
-                  imgSize={imgSize}
-                  item={category}
-                  href={`${ROUTES.CATEGORY}/${category.slug}`}
-                  variant={type}
-                  effectActive={true}
-                  size={type === 'rounded' ? 'medium' : 'small'}
-                  disableBorderRadius={disableBorderRadius}
-                />
-              </SwiperSlide>
-            ))}
+                <SwiperSlide key={`category--key-${category.id}`}>
+                  <Card
+                    imgSize={imgSize}
+                    item={category}
+                    href={`${ROUTES.CATEGORY}/${category.slug}`}
+                    variant={type}
+                    effectActive={true}
+                    size={type === 'rounded' ? 'medium' : 'small'}
+                    disableBorderRadius={disableBorderRadius}
+                  />
+                </SwiperSlide>
+              ))}
         </Carousel>
       )}
     </div>

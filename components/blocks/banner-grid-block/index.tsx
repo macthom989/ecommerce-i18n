@@ -1,5 +1,5 @@
 import BannerCard from '@components/banner/banner-card';
-import Carousel from '@components/carousel/carousel';
+import Carousel from '@components/carousel';
 import { SwiperSlide } from 'swiper/react';
 
 import { ROUTES } from '@utils/routes';
@@ -26,9 +26,7 @@ interface BannerProps {
   className?: string;
 }
 
-const BannerGridBlock: React.FC<BannerProps> = ({
-                                                  className = 'mb-12 lg:mb-14 xl:mb-16 lg:pb-1 xl:pb-0',
-                                                }) => {
+const BannerGridBlock: React.FC<BannerProps> = ({ className = 'mb-12 lg:mb-14 xl:mb-16 lg:pb-1 xl:pb-0' }) => {
   const { width } = useSsrCompatible(useWindowSize(), {
     width: 0,
     height: 0,
@@ -40,11 +38,7 @@ const BannerGridBlock: React.FC<BannerProps> = ({
           <Carousel breakpoints={breakpoints}>
             {bannerGrid?.map((banner: any) => (
               <SwiperSlide key={`banner--key${banner.id}`}>
-                <BannerCard
-                  banner={banner}
-                  href={`${ROUTES.COLLECTIONS}/${banner.slug}`}
-                  className="h-full"
-                />
+                <BannerCard banner={banner} href={`${ROUTES.COLLECTIONS}/${banner.slug}`} className="h-full" />
               </SwiperSlide>
             ))}
           </Carousel>

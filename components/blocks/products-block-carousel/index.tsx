@@ -1,4 +1,4 @@
-import Carousel from '@components/carousel/carousel';
+import Carousel from '@components/carousel';
 import { SwiperSlide } from 'swiper/react';
 import { Product } from '@services/types';
 import ProductCard from '@components/product/product-card';
@@ -12,14 +12,7 @@ interface ProductsBlockProps {
   loading: boolean;
   error?: string;
   uniqueKey?: string;
-  type?:
-    | 'rounded'
-    | 'circle'
-    | 'gridTrendy'
-    | 'grid'
-    | 'gridSlim'
-    | 'list'
-    | 'listSmall';
+  type?: 'rounded' | 'circle' | 'gridTrendy' | 'grid' | 'gridSlim' | 'list' | 'listSmall';
   imgWidth?: number | string;
   imgHeight?: number | string;
 }
@@ -52,13 +45,13 @@ const breakpoints = {
 };
 
 const ProductsBlockCarousel: React.FC<ProductsBlockProps> = ({
-                                                               sectionHeading,
-                                                               className = 'mb-10 md:mb-12 xl:mb-14 md:pb-1 xl:pb-0',
-                                                               type,
-                                                               products,
-                                                               imgWidth,
-                                                               imgHeight,
-                                                             }) => {
+  sectionHeading,
+  className = 'mb-10 md:mb-12 xl:mb-14 md:pb-1 xl:pb-0',
+  type,
+  products,
+  imgWidth,
+  imgHeight,
+}) => {
   return (
     <div className={`heightFull relative ${className}`}>
       <SectionHeader sectionHeading={sectionHeading} />
@@ -70,31 +63,26 @@ const ProductsBlockCarousel: React.FC<ProductsBlockProps> = ({
         className=""
         {...(type === 'gridTrendy'
           ? {
-            buttonGroupClassName: '!w-auto !top-0 ltr:!right-6 rtl:!left-6',
-            type: 'list',
-            buttonSize: 'small',
-            isFraction: true,
-            paginationFractionId: 'productsPaginationFraction',
-            pagination: {
-              el: '#productsPaginationFraction',
-              type: 'fraction',
-              formatFractionCurrent: function(number: number) {
-                return number;
+              buttonGroupClassName: '!w-auto !top-0 ltr:!right-6 rtl:!left-6',
+              type: 'list',
+              buttonSize: 'small',
+              isFraction: true,
+              paginationFractionId: 'productsPaginationFraction',
+              pagination: {
+                el: '#productsPaginationFraction',
+                type: 'fraction',
+                formatFractionCurrent: function (number: number) {
+                  return number;
+                },
               },
-            },
-          }
+            }
           : {
-            buttonGroupClassName: 'hidden',
-          })}
+              buttonGroupClassName: 'hidden',
+            })}
       >
         {products?.map((product, id) => (
           <SwiperSlide key={`testimonial--key-${id}`} className="pt-2">
-            <ProductCard
-              product={product}
-              variant={type}
-              imgWidth={imgWidth}
-              imgHeight={imgHeight}
-            />
+            <ProductCard product={product} variant={type} imgWidth={imgWidth} imgHeight={imgHeight} />
           </SwiperSlide>
         ))}
       </Carousel>

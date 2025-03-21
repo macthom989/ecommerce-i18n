@@ -25,9 +25,9 @@ const defaultValues = {
 };
 
 const Subscription: React.FC<Props> = ({
-                                         className = 'px-5 sm:px-8 md:px-16 2xl:px-24',
-                                         disableBorderRadius = false,
-                                       }) => {
+  className = 'px-5 sm:px-8 md:px-16 2xl:px-24',
+  disableBorderRadius = false,
+}) => {
   const {
     register,
     handleSubmit,
@@ -67,11 +67,11 @@ const Subscription: React.FC<Props> = ({
             className="w-full"
             inputClassName="px-4 lg:px-7 h-12 lg:h-14 text-center ltr:sm:text-left rtl:sm:text-right bg-white"
             {...register('subscription_email', {
-              required: 'forms:email-required',
+              required: 'forms.email-required',
               pattern: {
                 value:
                   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                message: 'forms:email-error',
+                message: 'forms.email-error',
               },
             })}
             errorKey={errors.subscription_email?.message}

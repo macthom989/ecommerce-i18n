@@ -8,6 +8,7 @@ import TanStackQueryProvider from '@contexts/tanstack-query-provider';
 import ManagedDrawer from '@/components/common/drawer/managed-drawer';
 import Layout from '@/components/common/layout/main';
 import { locales } from '@/i18n/config';
+import ManagedModal from '@components/common/modal/managed-modal';
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -20,20 +21,21 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   const dir = getDirection(locale as string);
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
-    <head>
-      <script src="/worker-register.js" defer></script>
-    </head>
-    <body>
-    <TanStackQueryProvider>
-      <NextIntlClientProvider locale={locale} messages={messages}>
-        <ManagedUIContext>
-          <Layout>{children}</Layout>
-          <ToastContainer toastClassName="!text-white" />
-          <ManagedDrawer />
-        </ManagedUIContext>
-      </NextIntlClientProvider>
-    </TanStackQueryProvider>
-    </body>
+      <head>
+        <script src="/worker-register.js" defer></script>
+      </head>
+      <body>
+        <TanStackQueryProvider>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <ManagedUIContext>
+              <Layout>{children}</Layout>
+              <ToastContainer toastClassName="!text-white" />
+              <ManagedModal />
+              <ManagedDrawer />
+            </ManagedUIContext>
+          </NextIntlClientProvider>
+        </TanStackQueryProvider>
+      </body>
     </html>
   );
 }
