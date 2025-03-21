@@ -2,10 +2,10 @@ import BannerCard from '@components/banner/banner-card';
 import Carousel from '@components/carousel/carousel';
 import { SwiperSlide } from 'swiper/react';
 
-import { useWindowSize } from '@utils/use-window-size';
 import { ROUTES } from '@utils/routes';
-import { useSsrCompatible } from '@utils/use-ssr-compatible';
 import { bannerGrid } from '@configs/banner';
+import { useSsrCompatible } from '@utils/use-ssr-compatible';
+import { useWindowSize } from '@utils/use-window-size';
 
 const breakpoints = {
   '1025': {
@@ -29,8 +29,10 @@ interface BannerProps {
 const BannerGridBlock: React.FC<BannerProps> = ({
                                                   className = 'mb-12 lg:mb-14 xl:mb-16 lg:pb-1 xl:pb-0',
                                                 }) => {
-  const { width } = useSsrCompatible(useWindowSize(), { width: 0, height: 0 });
-
+  const { width } = useSsrCompatible(useWindowSize(), {
+    width: 0,
+    height: 0,
+  });
   return (
     <div className={`${className}`}>
       {width < 768 ? (

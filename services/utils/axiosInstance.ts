@@ -8,6 +8,7 @@ const http = axios.create({
     Accept: 'application/json',
     'Content-Type': 'application/json',
   },
+
 });
 
 // Change request data/error here

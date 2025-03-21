@@ -4,11 +4,13 @@ import withPWA from 'next-pwa';
 
 const withNextIntl = createNextIntlPlugin();
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 const pwaConfig = {
   dest: 'public',
   register: true,
   skipWaiting: true,
-  disable: process.env.NODE_ENV === 'development',
+  disable: isDevelopment,
   buildExcludes: [/middleware-manifest\.json$/],
   maximumFileSizeToCacheInBytes: 3000000,
 };
@@ -35,6 +37,10 @@ const baseConfig: NextConfig = {
   webpack: (config: any) => {
     config.resolve.alias['react-icons$'] = 'react-icons/fa/index.mjs';
     return config;
+  },
+  env: {
+    NEXT_PUBLIC_REST_API_ENDPOINT: process.env.NEXT_PUBLIC_REST_API_ENDPOINT,
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
   },
 };
 
