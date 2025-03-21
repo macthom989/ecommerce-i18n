@@ -1,9 +1,9 @@
-import Link from '@components/ui/link';
 import { FaChevronDown } from 'react-icons/fa';
-import MegaMenu from '@components/ui/mega-menu';
 import classNames from 'classnames';
-import ListMenu from '@components/ui/list-menu';
 import { useTranslations } from 'next-intl';
+import MegaMenu from '@components/ui/mega-menu';
+import Link from 'next/link';
+import ListMenu from '@components/ui/list-menu';
 
 interface MenuProps {
   data: any;
@@ -31,7 +31,8 @@ const HeaderMenu: React.FC<MenuProps> = ({ data, className }) => {
           {item?.columns && Array.isArray(item.columns) && <MegaMenu columns={item.columns} />}
 
           {item?.subMenu && Array.isArray(item.subMenu) && (
-            <div className="absolute invisible bg-gray-200 opacity-0 group-hover:visible subMenu shadow-header ltr:left-0 rtl:right-0 group-hover:opacity-100">
+            <div
+              className="absolute invisible bg-gray-200 opacity-0 group-hover:visible subMenu shadow-header ltr:left-0 rtl:right-0 group-hover:opacity-100">
               <ul className="py-5 text-sm text-body">
                 {item.subMenu.map((menu: any, index: number) => {
                   const dept: number = 1;

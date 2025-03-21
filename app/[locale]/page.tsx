@@ -4,11 +4,11 @@ import BannerBlock from '@/components/banner/banner-block';
 import { homeThreeBanner, homeThreeMasonryBanner } from '@configs/banner';
 import Container from '@components/ui/container';
 
-import ProductsFlashSaleBlock from '@blocks/product-flash-sale-block';
+import ProductsFlashSaleBlock from '@blocks/products-flash-sale-block';
 import Divider from '@components/ui/divider';
 import Instagram from '@components/ui/instagram';
 import Support from '@components/ui/support';
-import DownloadApps from '@components/ui/download-apps';
+import DownloadApps from '@components/ui/download-app';
 import NewArrivalsProductFeed from '@components/product/feeds/new-arrivals-product-feed';
 import { ROUTES } from '@utils/routes';
 import BannerCard from '@components/banner/banner-card';

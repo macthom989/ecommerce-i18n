@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { IoHomeSharp } from 'react-icons/io5';
-import Text from '@components/ui/text';
-import Link from '@components/ui/link';
+import Text from '../common/text';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 const ErrorInformation: React.FC = () => {
   const t = useTranslations('common');
