@@ -2,7 +2,8 @@ import React from 'react';
 import cn from 'classnames';
 import { IoCloseOutline } from 'react-icons/io5';
 import { useTranslations } from 'next-intl';
-import SearchIcon from '@/components/icons/search-icon';
+import SearchIcon from '@components/icons/search-icon';
+
 type SearchProps = {
   className?: string;
   onSubmit: (e: React.SyntheticEvent) => void;
@@ -25,7 +26,8 @@ const SearchBox = React.forwardRef<HTMLInputElement, SearchProps>(({ className, 
       onSubmit={onSubmit}
     >
       <label htmlFor="search" className="flex items-center py-0.5">
-        <span className="flex items-center justify-center flex-shrink-0 w-12 h-full cursor-pointer md:w-14 focus:outline-none">
+        <span
+          className="flex items-center justify-center flex-shrink-0 w-12 h-full cursor-pointer md:w-14 focus:outline-none">
           <SearchIcon color="text-heading" className="w-4 h-4" />
         </span>
         <input

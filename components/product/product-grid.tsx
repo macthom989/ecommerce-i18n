@@ -1,17 +1,16 @@
 import ProductCard from '@components/product/product-card';
-import Button from '@components/ui/button';
-import type { FC } from 'react';
 import { useProductsQuery } from '@services/product/get-all-products';
 import { useRouter } from 'next/router';
-import ProductFeedLoader from '@components/ui/loaders/product-feed-loader';
+import ProductFeedLoader from '@components/common/loaders/product-feed-loader';
 import { Product } from '@services/types';
 import { useTranslations } from 'next-intl';
+import Button from '@components/common/button';
 
 interface ProductGridProps {
   className?: string;
 }
 
-export const ProductGrid: FC<ProductGridProps> = ({ className = '' }) => {
+export const ProductGrid: React.FC<ProductGridProps> = ({ className = '' }) => {
   const { query } = useRouter();
   const {
     isFetching: isLoading,

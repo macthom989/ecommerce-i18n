@@ -1,7 +1,7 @@
-import Link from '@components/ui/link';
 import Image from 'next/image';
 import { ROUTES } from '@utils/routes';
-import usePrice from '@/framework/product/use-price';
+import Link from 'next/link';
+import usePrice from '@services/product/use-price';
 
 type SearchProductProps = {
   item: any;
@@ -15,7 +15,8 @@ const SearchProduct: React.FC<SearchProductProps> = ({ item }) => {
   });
   return (
     <Link href={`${ROUTES.PRODUCT}/${item?.slug}`} className="flex items-center justify-start w-full h-auto group">
-      <div className="relative flex flex-shrink-0 w-24 h-24 overflow-hidden bg-gray-200 rounded-md cursor-pointer ltr:mr-4 rtl:ml-4">
+      <div
+        className="relative flex flex-shrink-0 w-24 h-24 overflow-hidden bg-gray-200 rounded-md cursor-pointer ltr:mr-4 rtl:ml-4">
         <Image
           src={item?.image?.original ?? '/assets/placeholder/search-product.svg'}
           width={96}

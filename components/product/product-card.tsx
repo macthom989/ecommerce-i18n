@@ -1,7 +1,7 @@
 import cn from 'classnames';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import type { FC } from 'react';
-import { useUI } from '@contexts/ui.context';
+import { useUI } from '@contexts/managed-ui-provider';
 import usePrice from '@services//product/use-price';
 import { Product } from '@services//types';
 // import ProductIcon1 from '../../../public/assets/images/products/icons/product-icon1.svg'
