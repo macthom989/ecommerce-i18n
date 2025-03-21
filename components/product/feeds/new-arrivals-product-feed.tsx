@@ -11,13 +11,13 @@ interface Props {
 }
 
 export default function NewArrivalsProductFeed({
-                                                 hideProductDescription = false,
-                                                 showCategory = false,
-                                                 showRating = false,
-                                                 demoVariant,
-                                                 disableBorderRadius = false,
-                                                 className = 'mb-9 md:mb-10 xl:mb-12',
-                                               }: Props) {
+  hideProductDescription = false,
+  showCategory = false,
+  showRating = false,
+  demoVariant,
+  disableBorderRadius = false,
+  className = 'mb-9 md:mb-10 xl:mb-12',
+}: Props) {
   const { data, isLoading, error } = useNewArrivalProductsQuery({
     limit: 10,
     demoVariant,

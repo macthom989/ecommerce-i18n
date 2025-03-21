@@ -1,5 +1,5 @@
 import ProductCard from '@components/product/product-card';
-import Carousel from '@components/carousel/carousel';
+import Carousel from '@components/carousel';
 import { SwiperSlide } from 'swiper/react';
 import ProductFlashSaleGridLoader from '@components/common/loaders/product-flash-sale-grid-loader';
 import ProductFlashSaleLoader from '@components/common/loaders/product-flash-sale-loader';
@@ -38,87 +38,65 @@ const breakpoints = {
 };
 
 const SellWithProgress: React.FC<Props> = ({
-                                             products,
-                                             loading,
-                                             error,
-                                             className = '',
-                                             productVariant = 'list',
-                                             imgWidth = 210,
-                                             imgHeight = 210,
-                                             carouselBreakpoint,
-                                           }) => {
+  products,
+  loading,
+  error,
+  className = '',
+  productVariant = 'list',
+  imgWidth = 210,
+  imgHeight = 210,
+  carouselBreakpoint,
+}) => {
   return (
     <div
       className={`flex flex-col border border-gray-300 rounded-lg pt-6 sm:pt-7 lg:pt-8 xl:pt-7 2xl:pt-9 px-4 md:px-5 lg:px-7 pb-6 lg:pb-7 ${
         productVariant !== 'gridSlim' && 'xl:px-5 2xl:px-7'
       } ${className}`}
     >
-      <SectionHeader
-        sectionHeading="text-flash-sale"
-        className="mb-4 md:mb-5 lg:mb-6 xl:mb-5 2xl:mb-6 3xl:mb-8"
-      />
+      <SectionHeader sectionHeading="text-flash-sale" className="mb-4 md:mb-5 lg:mb-6 xl:mb-5 2xl:mb-6 3xl:mb-8" />
 
       {error ? (
         <Index message={error} />
       ) : (
         <>
           {loading ? (
-            <div
-              className={`heightFull ${
-                productVariant === 'gridSlim' && '2xl:pt-1.5 3xl:pt-0'
-              }`}
-            >
+            <div className={`heightFull ${productVariant === 'gridSlim' && '2xl:pt-1.5 3xl:pt-0'}`}>
               <Carousel
-                breakpoints={
-                  carouselBreakpoint ? carouselBreakpoint : breakpoints
-                }
+                breakpoints={carouselBreakpoint ? carouselBreakpoint : breakpoints}
                 autoplay={{
                   delay: 3500,
                 }}
                 buttonSize="small"
                 buttonGroupClassName={cn('-top-12 md:-top-14', {
-                  '-top-12 md:-top-14 lg:-top-28 2xl:-top-32':
-                    productVariant === 'gridSlim',
+                  '-top-12 md:-top-14 lg:-top-28 2xl:-top-32': productVariant === 'gridSlim',
                 })}
                 className="-mx-0 md:-mx-2.5 xl:-mx-0"
               >
                 {productVariant === 'gridSlim'
                   ? Array.from({ length: 3 }).map((_, idx) => (
-                    <SwiperSlide key={`product-grid-${idx}`}>
-                      <ProductFlashSaleGridLoader
-                        uniqueKey={`product-grid-${idx}`}
-                      />
-                    </SwiperSlide>
-                  ))
+                      <SwiperSlide key={`product-grid-${idx}`}>
+                        <ProductFlashSaleGridLoader uniqueKey={`product-grid-${idx}`} />
+                      </SwiperSlide>
+                    ))
                   : Array.from({ length: 10 }).map((_, idx) => (
-                    <SwiperSlide key={`product-${idx}`}>
-                      <ProductFlashSaleLoader uniqueKey={`product-${idx}`} />
-                    </SwiperSlide>
-                  ))}
+                      <SwiperSlide key={`product-${idx}`}>
+                        <ProductFlashSaleLoader uniqueKey={`product-${idx}`} />
+                      </SwiperSlide>
+                    ))}
               </Carousel>
             </div>
           ) : (
             products?.length && (
-              <div
-                className={`heightFull ${
-                  productVariant === 'gridSlim' ? '2xl:pt-1.5 3xl:pt-0' : ''
-                }`}
-              >
+              <div className={`heightFull ${productVariant === 'gridSlim' ? '2xl:pt-1.5 3xl:pt-0' : ''}`}>
                 <Carousel
-                  breakpoints={
-                    carouselBreakpoint ? carouselBreakpoint : breakpoints
-                  }
+                  breakpoints={carouselBreakpoint ? carouselBreakpoint : breakpoints}
                   autoplay={{
                     delay: 3500,
                   }}
                   buttonSize="small"
-                  buttonGroupClassName={cn(
-                    '-mt-8 md:-mt-10 2xl:-mt-12 3xl:-mt-14',
-                    {
-                      'lg:-mt-28 2xl:-mt-32 3xl:-mt-32':
-                        productVariant === 'gridSlim',
-                    },
-                  )}
+                  buttonGroupClassName={cn('-mt-8 md:-mt-10 2xl:-mt-12 3xl:-mt-14', {
+                    'lg:-mt-28 2xl:-mt-32 3xl:-mt-32': productVariant === 'gridSlim',
+                  })}
                 >
                   {products.map((product) => (
                     <SwiperSlide key={`product--key${product.id}`}>
@@ -139,10 +117,7 @@ const SellWithProgress: React.FC<Props> = ({
                             }`}
                           />
                         </div>
-                        <ProgressCard
-                          soldProduct={product?.sold}
-                          totalProduct={product?.quantity}
-                        />
+                        <ProgressCard soldProduct={product?.sold} totalProduct={product?.quantity} />
                       </div>
                     </SwiperSlide>
                   ))}

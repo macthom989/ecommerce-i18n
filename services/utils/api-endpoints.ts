@@ -19,7 +19,7 @@ export const API_ENDPOINTS = {
   ON_SELLING_PRODUCTS: '/products_on_selling',
   PRODUCT: '/product.json',
   RELATED_PRODUCTS: '/related_products.json',
-  BEST_SELLER_PRODUCTS: '/products_best_seller.json',
+  BEST_SELLER_PRODUCTS: '/products_best_seller',
   NEW_ARRIVAL_PRODUCTS: '/products_new_arrival',
   POPULAR_PRODUCTS: '/products_popular.json',
   NEW_ARRIVAL_PRODUCTS_ANCIENT: '/products_new_arrival.json',
@@ -31,4 +31,3 @@ export const API_ENDPOINTS = {
   ORDERS: '/orders.json',
   ORDER: '/order.json',
 };
-  
