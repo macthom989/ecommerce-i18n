@@ -3,14 +3,14 @@ import { useRouter } from 'next/router';
 import isEmpty from 'lodash/isEmpty';
 import { ROUTES } from '@utils/routes';
 import { useUI } from '@contexts/ui.context';
-import Button from '@components/ui/button';
-import Counter from '@components/counter';
 import { useCart } from '@contexts/cart/cart.context';
 import { ProductAttributes } from '@components/product/product-attributes';
 import { generateCartItem } from '@utils/generate-cart-item';
 import usePrice from '@services/product/use-price';
 import { getVariations } from '@services/utils/get-variations';
 import { useTranslations } from 'next-intl';
+import Counter from '@components/common/counter';
+import Button from '@components/common/button';
 
 export default function ProductPopup() {
   const t = useTranslations('common');
@@ -73,7 +73,8 @@ export default function ProductPopup() {
   return (
     <div className="rounded-lg bg-white">
       <div className="flex flex-col lg:flex-row w-full md:w-[650px] lg:w-[960px] mx-auto overflow-hidden">
-        <div className="flex-shrink-0 flex items-center justify-center w-full lg:w-430px max-h-430px lg:max-h-full overflow-hidden bg-gray-300">
+        <div
+          className="flex-shrink-0 flex items-center justify-center w-full lg:w-430px max-h-430px lg:max-h-full overflow-hidden bg-gray-300">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={image?.original ?? '/assets/placeholder/products/product-thumbnail.svg'}

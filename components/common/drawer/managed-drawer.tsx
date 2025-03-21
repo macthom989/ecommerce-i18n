@@ -1,11 +1,11 @@
 'use client';
 
-import { Drawer } from '@components/common/drawer/drawer';
 import { usePathname } from 'next/navigation';
 import { getDirection } from '@utils/get-direction';
 import motionProps from '@components/common/drawer/motion';
 import { useUI } from '@/contexts/ui.context';
 import Cart from '@/components/cart';
+import { Drawer } from '@components/common/drawer/index';
 
 const ManagedDrawer = () => {
   const { displayCart, closeCart } = useUI();

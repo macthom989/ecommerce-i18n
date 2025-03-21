@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import Button from '@components/ui/button';
-import Counter from '@components/counter';
 import { useRouter } from 'next/router';
-import { useProductQuery } from '@services//product/get-product';
-import { getVariations } from '@services//utils/get-variations';
-import usePrice from '@services//product/use-price';
+import { useProductQuery } from '@services/product/get-product';
+import { getVariations } from '@services/utils/get-variations';
+import usePrice from '@services/product/use-price';
 import { useCart } from '@contexts/cart/cart.context';
 import { generateCartItem } from '@utils/generate-cart-item';
 import { ProductAttributes } from './product-attributes';
 import isEmpty from 'lodash/isEmpty';
-import Link from '@components/ui/link';
 import { toast } from 'react-toastify';
 import { useWindowSize } from '@utils/use-window-size';
 import Carousel from '@components/carousel/carousel';
 import { SwiperSlide } from 'swiper/react';
 // import ProductMetaReview from '@components/product/product-meta-review';
 import { useSsrCompatible } from '@utils/use-ssr-compatible';
+import Link from 'next/link';
+import Counter from '@components/common/counter';
+import Button from '@components/common/button';
 
 const productGalleryCarouselResponsive = {
   '768': {
@@ -124,11 +124,13 @@ const ProductSingleDetails: React.FC = () => {
           </h2>
           <p className="text-body text-sm lg:text-base leading-6 lg:leading-8">{data?.description}</p>
           <div className="flex items-center mt-5">
-            <div className="text-heading font-bold text-base md:text-xl lg:text-2xl 2xl:text-4xl ltr:pr-2 rtl:pl-2 ltr:md:pr-0 rtl:md:pl-0 ltr:lg:pr-2 rtl:lg:pl-2 ltr:2xl:pr-0 rtl:2xl:pl-0">
+            <div
+              className="text-heading font-bold text-base md:text-xl lg:text-2xl 2xl:text-4xl ltr:pr-2 rtl:pl-2 ltr:md:pr-0 rtl:md:pl-0 ltr:lg:pr-2 rtl:lg:pl-2 ltr:2xl:pr-0 rtl:2xl:pl-0">
               {price}
             </div>
             {discount && (
-              <span className="line-through font-segoe text-gray-400 text-sm md:text-base lg:text-lg xl:text-xl ltr:pl-2 rtl:pr-2">
+              <span
+                className="line-through font-segoe text-gray-400 text-sm md:text-base lg:text-lg xl:text-xl ltr:pl-2 rtl:pr-2">
                 {basePrice}
               </span>
             )}
@@ -148,7 +150,8 @@ const ProductSingleDetails: React.FC = () => {
             );
           })}
         </div>
-        <div className="flex items-center gap-x-4 ltr:md:pr-32 rtl:md:pl-32 ltr:lg:pr-12 rtl:lg:pl-12 ltr:2xl:pr-32 rtl:2xl:pl-32 ltr:3xl:pr-48 rtl:3xl:pl-48  border-b border-gray-300 py-8">
+        <div
+          className="flex items-center gap-x-4 ltr:md:pr-32 rtl:md:pl-32 ltr:lg:pr-12 rtl:lg:pl-12 ltr:2xl:pr-32 rtl:2xl:pl-32 ltr:3xl:pr-48 rtl:3xl:pl-48  border-b border-gray-300 py-8">
           <Counter
             quantity={quantity}
             onIncrement={() => setQuantity((prev) => prev + 1)}

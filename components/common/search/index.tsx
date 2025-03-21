@@ -1,13 +1,12 @@
 'use client';
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import cn from 'classnames';
 import SearchBox from '@components/common/search-box';
-// import { useSearchQuery } from "@framework/product/use-search";
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
+import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import SearchProduct from '@components/common/search-product';
-import Scrollbar from '../scrollbar';
-import SearchResultLoader from '../loaders/search-result-loader';
-import { useUI } from '@/contexts/ui.context';
+import { useUI } from '@contexts/ui.context';
+import SearchResultLoader from '@components/common/loaders/search-result-loader';
+import Scrollbar from '@components/common/scrollbar';
 
 export default function Search() {
   const { displaySearch, closeSearch } = useUI();
@@ -20,9 +19,11 @@ export default function Search() {
   function handleSearch(e: React.SyntheticEvent) {
     e.preventDefault();
   }
+
   function handleAutoSearch(e: React.FormEvent<HTMLInputElement>) {
     setSearchText(e.currentTarget.value);
   }
+
   function clear() {
     setSearchText('');
   }

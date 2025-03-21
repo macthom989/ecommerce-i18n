@@ -1,14 +1,14 @@
-import Link from '@components/ui/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { fadeInOut } from '@utils/motion/fade-in-out';
+import { fadeInOut } from '@/services/utils/motion/fade-in-out';
 import { IoIosCloseCircle } from 'react-icons/io';
-import Counter from '@components/common/counter';
-import { ROUTES } from '@utils/routes';
-import { generateCartItemName } from '@utils/generate-cart-item-name';
-import usePrice from '@/framework/product/use-price';
-import { useTranslations } from 'next-intl';
 import { useCart } from '@/contexts/cart/cart.context';
+import usePrice from '@/services/product/use-price';
+import { ROUTES } from '@utils/routes';
+import { generateCartItemName } from '@/utils/generate-cart-item-name';
+import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import Counter from '@components/common/counter';
 
 type CartItemProps = {
   item: any;
@@ -36,7 +36,8 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
       className={`group w-full h-auto flex justify-start items-center bg-white py-4 md:py-7 border-b border-gray-100 relative last:border-b-0`}
       title={item?.name}
     >
-      <div className="relative flex flex-shrink-0 w-24 h-24 overflow-hidden bg-gray-200 rounded-md cursor-pointer md:w-28 md:h-28 ltr:mr-4 rtl:ml-4">
+      <div
+        className="relative flex flex-shrink-0 w-24 h-24 overflow-hidden bg-gray-200 rounded-md cursor-pointer md:w-28 md:h-28 ltr:mr-4 rtl:ml-4">
         <Image
           src={item?.image ?? '/assets/placeholder/cart-item.svg'}
           width={112}
@@ -50,15 +51,18 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
           onClick={() => clearItemFromCart(item.id)}
           role="button"
         >
-          <IoIosCloseCircle className="relative text-2xl text-white transition duration-300 ease-in-out transform md:scale-0 md:opacity-0 md:group-hover:scale-100 md:group-hover:opacity-100" />
+          <IoIosCloseCircle
+            className="relative text-2xl text-white transition duration-300 ease-in-out transform md:scale-0 md:opacity-0 md:group-hover:scale-100 md:group-hover:opacity-100" />
         </div>
       </div>
 
       <div className="flex flex-col w-full overflow-hidden">
-        <Link href={`${ROUTES.PRODUCT}/${item?.slug}`} className="truncate text-sm text-heading mb-1.5 -mt-1">
+        <Link
+          href={`${ROUTES.PRODUCT}/${item?.slug}`}
+          className="truncate text-sm text-heading mb-1.5 -mt-1"
+        >
           {generateCartItemName(item.name, item.attributes)}
         </Link>
-        {/* @ts-ignore */}
         <span className="text-sm text-gray-400 mb-2.5">
           {t('text-unit-price')} : &nbsp; {price}
         </span>
@@ -70,7 +74,9 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
             onDecrement={() => removeItemFromCart(item.id)}
             variant="dark"
           />
-          <span className="text-sm font-semibold leading-5 md:text-base text-heading">{totalPrice}</span>
+          <span className="text-sm font-semibold leading-5 md:text-base text-heading">
+            {totalPrice}
+          </span>
         </div>
       </div>
     </motion.div>

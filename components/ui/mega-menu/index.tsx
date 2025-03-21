@@ -1,6 +1,6 @@
 import React from 'react';
-import Link from '@components/ui/link';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 interface MenuItem {
   id: number | string;
@@ -8,6 +8,7 @@ interface MenuItem {
   label: string;
   columnItemItems?: MenuItem[];
 }
+
 type MegaMenuProps = {
   columns: {
     id: number | string;
@@ -15,13 +16,17 @@ type MegaMenuProps = {
   }[];
 };
 
-const MegaMenu: React.FC<MegaMenuProps> = ({ columns }) => {
+const Index: React.FC<MegaMenuProps> = ({ columns }) => {
   const t = useTranslations('menu');
   return (
-    <div className="absolute bg-gray-200 megaMenu shadow-header ltr:-left-28 rtl:-right-28 ltr:xl:left-0 rtl:xl:right-0">
+    <div
+      className="absolute bg-gray-200 megaMenu shadow-header ltr:-left-28 rtl:-right-28 ltr:xl:left-0 rtl:xl:right-0">
       <div className="grid grid-cols-5">
         {columns?.map((column) => (
-          <ul className="pt-6 even:bg-gray-150 pb-7 2xl:pb-8 2xl:pt-7" key={column.id}>
+          <ul
+            className="pt-6 even:bg-gray-150 pb-7 2xl:pb-8 2xl:pt-7"
+            key={column.id}
+          >
             {column?.columnItems?.map((columnItem) => (
               <React.Fragment key={columnItem.id}>
                 <li className="mb-1.5">
@@ -36,7 +41,9 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ columns }) => {
                   <li
                     key={item.id}
                     className={
-                      columnItem?.columnItemItems?.length === item.id ? 'border-b border-gray-300 pb-3.5 mb-3' : ''
+                      columnItem?.columnItemItems?.length === item.id
+                        ? 'border-b border-gray-300 pb-3.5 mb-3'
+                        : ''
                     }
                   >
                     <Link
@@ -56,4 +63,4 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ columns }) => {
   );
 };
 
-export default MegaMenu;
+export default Index;

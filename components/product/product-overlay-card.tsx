@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useUI } from '@contexts/ui.context';
 import usePrice from '@services/product/use-price';
 import { Product } from '@services/types';
-import Text from '@components/ui/text';
+import Text from '../common/text';
 import cn from 'classnames';
 
 interface ProductProps {

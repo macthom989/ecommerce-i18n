@@ -4,9 +4,11 @@ import Search from '@components/common/search';
 import { useAcceptCookies } from '@utils/use-accept-cookies';
 // import { Button } from '@/components/ui/button';
 import { useTranslations } from 'next-intl';
-import Header from '../header';
-import Footer from '../footer/footer';
-import MobileNavigation from '../mobile-navigation/mobile-navigation';
+import Header from '@components/common/layout/header';
+import Footer from '@components/common/layout/footer';
+import CookieBar from '@components/common/cookie-bar';
+import Button from '@components/common/button';
+import MobileNavigation from '@components/common/layout/mobile-navigation';
 
 export default function Layout({ children }: React.PropsWithChildren<object>) {
   const { acceptedCookies, onAcceptCookies } = useAcceptCookies();
@@ -26,6 +28,15 @@ export default function Layout({ children }: React.PropsWithChildren<object>) {
       <Footer />
       <MobileNavigation />
       <Search />
+      <CookieBar
+        title={t('text-cookies-title')}
+        hide={acceptedCookies}
+        action={
+          <Button onClick={() => onAcceptCookies()} variant="slim">
+            {t('text-accept-cookies')}
+          </Button>
+        }
+      />
     </div>
   );
 }
