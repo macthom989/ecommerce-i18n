@@ -6,7 +6,7 @@ import { IoIosArrowDown } from 'react-icons/io';
 import Logo from '@components/ui/logo';
 import { IoClose, IoLogoFacebook, IoLogoInstagram, IoLogoTwitter, IoLogoYoutube } from 'react-icons/io5';
 import { useTranslations } from 'next-intl';
-import { useUI } from '@/contexts/ui.context';
+import { useUI } from '@contexts/managed-ui-provider';
 import Link from 'next/link';
 import { siteSettings } from '@configs/site-settings';
 

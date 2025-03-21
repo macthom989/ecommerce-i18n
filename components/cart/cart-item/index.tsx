@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { fadeInOut } from '@/services/utils/motion/fade-in-out';
 import { IoIosCloseCircle } from 'react-icons/io';
-import { useCart } from '@/contexts/cart/cart.context';
+import { useCart } from '@contexts/cart/cart-context';
 import usePrice from '@/services/product/use-price';
 import { ROUTES } from '@utils/routes';
 import { generateCartItemName } from '@/utils/generate-cart-item-name';

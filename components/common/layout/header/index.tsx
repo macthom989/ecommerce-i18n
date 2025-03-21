@@ -2,7 +2,7 @@
 import React, { useRef } from 'react';
 import SearchIcon from '@components/icons/search-icon';
 import { useAddActiveScroll } from '@utils/use-add-active-scroll';
-import { useUI } from '@/contexts/ui.context';
+import { useUI } from '@contexts/managed-ui-provider';
 import HeaderMenu from './header-menu';
 import Logo from '@/components/ui/logo';
 import { useTranslations } from 'next-intl';

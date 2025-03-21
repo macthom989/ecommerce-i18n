@@ -1,8 +1,8 @@
 'use client';
 import React from 'react';
-import { cartReducer, State, initialState } from './cart.reducer';
-import { Item, getItem } from './cart.utils';
 import { useLocalStorage } from '@utils/use-local-storage';
+import { cartReducer, initialState, State } from '@contexts/cart/cart-reducer';
+import { getItem, Item } from '@contexts/cart/cart-utils';
 
 interface CartProviderState extends State {
   addItemToCart: (item: Item, quantity: number) => void;
@@ -14,6 +14,7 @@ interface CartProviderState extends State {
   isInCart: (id: Item['id']) => boolean;
   // updateCartMetadata: (metadata: Metadata) => void;
 }
+
 export const cartContext = React.createContext<CartProviderState | undefined>(undefined);
 
 cartContext.displayName = 'CartContext';
@@ -29,6 +30,7 @@ export const useCart = () => {
 interface CartProviderProps {
   children: React.ReactNode;
 }
+
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [savedCart, saveCart] = useLocalStorage(`hvcore-cart`, JSON.stringify(initialState));
   const [state, dispatch] = React.useReducer(cartReducer, JSON.parse(savedCart!));

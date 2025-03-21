@@ -10,7 +10,7 @@ import { useLocale } from 'next-intl';
 import { ROUTES } from '@utils/routes';
 import { getDirection } from '@utils/get-direction';
 import motionProps from '@components/common/drawer/motion';
-import { useUI } from '@/contexts/ui.context';
+import { useUI } from '@contexts/managed-ui-provider';
 import Link from 'next/link';
 import { Drawer } from '@components/common/drawer';
 

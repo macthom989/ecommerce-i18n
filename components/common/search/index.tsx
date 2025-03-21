@@ -4,7 +4,7 @@ import cn from 'classnames';
 import SearchBox from '@components/common/search-box';
 import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import SearchProduct from '@components/common/search-product';
-import { useUI } from '@contexts/ui.context';
+import { useUI } from '@contexts/managed-ui-provider';
 import SearchResultLoader from '@components/common/loaders/search-result-loader';
 import Scrollbar from '@components/common/scrollbar';
 

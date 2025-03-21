@@ -1,8 +1,8 @@
 import Scrollbar from '@/components/common/scrollbar';
-import { useCart } from '@/contexts/cart/cart.context';
 import { motion } from 'framer-motion';
 import { fadeInOut } from '@/services/utils/motion/fade-in-out';
-import { useUI } from '@/contexts/ui.context';
+import { useUI } from '@contexts/managed-ui-provider';
+import { useCart } from '@contexts/cart/cart-context';
 import usePrice from '@/services/product/use-price';
 import { IoClose } from 'react-icons/io5';
 import CartItem from './cart-item';

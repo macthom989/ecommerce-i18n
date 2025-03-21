@@ -1,6 +1,6 @@
 import CartIcon from '@components/icons/cart-icon';
-import { useCart } from '@/contexts/cart/cart.context';
-import { useUI } from '@/contexts/ui.context';
+import { useUI } from '@contexts/managed-ui-provider';
+import { useCart } from '@contexts/cart/cart-context';
 
 export default function CartButton() {
   const { openCart } = useUI();

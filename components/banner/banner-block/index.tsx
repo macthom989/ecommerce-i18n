@@ -8,7 +8,7 @@ interface BannerImage {
   height: number;
 }
 
-interface BannerItem {
+export interface BannerItem {
   id: number;
   title: string;
   slug: string;

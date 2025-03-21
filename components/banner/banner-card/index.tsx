@@ -1,10 +1,11 @@
 'use client';
 
-import { useSsrCompatible } from '@utils/use-ssr-compatible';
-import { useWindowSize } from '@utils/use-window-size';
 import cn from 'classnames';
 import Link, { LinkProps } from 'next/link';
 import Image from 'next/image';
+import { BannerItem } from '@components/banner/banner-block';
+import { useWindowSize } from '@utils/use-window-size';
+import { useSsrCompatible } from '@utils/use-ssr-compatible';
 
 interface BannerProps {
   banner: any;
@@ -16,7 +17,7 @@ interface BannerProps {
   disableBorderRadius?: boolean;
 }
 
-function getImage(deviceWidth: number, imgObj: any) {
+function getImage(deviceWidth: number, imgObj: BannerItem['image']) {
   return deviceWidth < 480 ? imgObj.mobile : imgObj.desktop;
 }
 
@@ -49,7 +50,7 @@ export default function BannerCard({
           className={cn('bg-gray-300 object-cover', {
             'rounded-md': variant === 'rounded' && !disableBorderRadius,
           })}
-          priority={true}
+          loading="eager"
         />
         {effectActive && (
           <div
