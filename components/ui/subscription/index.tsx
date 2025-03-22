@@ -1,3 +1,4 @@
+'use client';
 import { useForm } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import Button from '@components/common/button';
@@ -25,9 +26,9 @@ const defaultValues = {
 };
 
 const Subscription: React.FC<Props> = ({
-                                         className = 'px-5 sm:px-8 md:px-16 2xl:px-24',
-                                         disableBorderRadius = false,
-                                       }) => {
+  className = 'px-5 sm:px-8 md:px-16 2xl:px-24',
+  disableBorderRadius = false,
+}) => {
   const {
     register,
     handleSubmit,
