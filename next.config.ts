@@ -18,7 +18,14 @@ const pwaConfig = {
 const baseConfig: NextConfig = {
   /* config options here */
   images: {
-    domains: [],
+    domains: ['moccasin-aardvark-454600.hostingersite.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'moccasin-aardvark-454600.hostingersite.com',
+        pathname: '/wp-content/uploads/**',
+      },
+    ],
     unoptimized: false,
   },
   experimental: {
