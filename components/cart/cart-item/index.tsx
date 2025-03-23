@@ -26,6 +26,9 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
     currencyCode: 'USD',
   });
 
+  const myLoader = ({ src }: { src: string }) => {
+    return src;
+  };
   return (
     <motion.div
       layout
@@ -36,13 +39,12 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
       className={`group w-full h-auto flex justify-start items-center bg-white py-4 md:py-7 border-b border-gray-100 relative last:border-b-0`}
       title={item?.name}
     >
-      <div
-        className="relative flex flex-shrink-0 w-24 h-24 overflow-hidden bg-gray-200 rounded-md cursor-pointer md:w-28 md:h-28 ltr:mr-4 rtl:ml-4">
-        <Image
+      <div className="relative flex flex-shrink-0 w-24 h-24 overflow-hidden bg-gray-200 rounded-md cursor-pointer md:w-28 md:h-28 ltr:mr-4 rtl:ml-4">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={item?.image ?? '/assets/placeholder/cart-item.svg'}
           width={112}
           height={112}
-          loading="eager"
           alt={item.name || 'Product Image'}
           className="object-cover bg-gray-300"
         />
@@ -51,16 +53,12 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
           onClick={() => clearItemFromCart(item.id)}
           role="button"
         >
-          <IoIosCloseCircle
-            className="relative text-2xl text-white transition duration-300 ease-in-out transform md:scale-0 md:opacity-0 md:group-hover:scale-100 md:group-hover:opacity-100" />
+          <IoIosCloseCircle className="relative text-2xl text-white transition duration-300 ease-in-out transform md:scale-0 md:opacity-0 md:group-hover:scale-100 md:group-hover:opacity-100" />
         </div>
       </div>
 
       <div className="flex flex-col w-full overflow-hidden">
-        <Link
-          href={`${ROUTES.PRODUCT}/${item?.slug}`}
-          className="truncate text-sm text-heading mb-1.5 -mt-1"
-        >
+        <Link href={`${ROUTES.PRODUCT}/${item?.slug}`} className="truncate text-sm text-heading mb-1.5 -mt-1">
           {generateCartItemName(item.name, item.attributes)}
         </Link>
         <span className="text-sm text-gray-400 mb-2.5">
@@ -74,9 +72,7 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
             onDecrement={() => removeItemFromCart(item.id)}
             variant="dark"
           />
-          <span className="text-sm font-semibold leading-5 md:text-base text-heading">
-            {totalPrice}
-          </span>
+          <span className="text-sm font-semibold leading-5 md:text-base text-heading">{totalPrice}</span>
         </div>
       </div>
     </motion.div>

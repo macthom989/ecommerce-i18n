@@ -4,10 +4,10 @@ interface Item {
   id: string | number;
   name: string;
   slug: string;
-  image: {
+  images: {
     thumbnail: string;
     [key: string]: unknown;
-  };
+  }[];
   price: number;
   sale_price?: number;
 
@@ -15,14 +15,13 @@ interface Item {
 }
 
 export function generateCartItem(item: Item, attributes: object) {
-  const { id, name, slug, image, price, sale_price } = item;
+  const { id, name, slug, images, price, sale_price } = item;
+  const image = images[0];
   return {
-    id: !isEmpty(attributes)
-      ? `${id}.${Object.values(attributes).join('.')}`
-      : id,
+    id: !isEmpty(attributes) ? `${id}.${Object.values(attributes).join('.')}` : id,
     name,
     slug,
-    image: image.thumbnail,
+    image: image.src,
     price: sale_price ? sale_price : price,
     attributes,
   };

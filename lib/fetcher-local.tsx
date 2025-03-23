@@ -1,7 +1,7 @@
 import axios, { AxiosResponse, Method } from 'axios';
 
 const fetcher = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  baseURL: process.env.NEXT_PUBLIC_URL,
   withCredentials: false,
 });
 
