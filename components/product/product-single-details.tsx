@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import Button from '@components/ui/button';
-import Counter from '@components/counter';
 import { useRouter } from 'next/router';
-import { useProductQuery } from '@services//product/get-product';
-import { getVariations } from '@services//utils/get-variations';
-import usePrice from '@services//product/use-price';
-import { useCart } from '@contexts/cart/cart.context';
+import { useProductQuery } from '@services/product/get-product';
+import { getVariations } from '@services/utils/get-variations';
+import usePrice from '@services/product/use-price';
+import { useCart } from '@contexts/cart/cart-context';
 import { generateCartItem } from '@utils/generate-cart-item';
 import { ProductAttributes } from './product-attributes';
 import isEmpty from 'lodash/isEmpty';
-import Link from '@components/ui/link';
 import { toast } from 'react-toastify';
 import { useWindowSize } from '@utils/use-window-size';
-import Carousel from '@components/carousel/carousel';
+import Carousel from '@components/carousel';
 import { SwiperSlide } from 'swiper/react';
 // import ProductMetaReview from '@components/product/product-meta-review';
 import { useSsrCompatible } from '@utils/use-ssr-compatible';
+import Link from 'next/link';
+import Counter from '@components/common/counter';
+import Button from '@components/common/button';
 
 const productGalleryCarouselResponsive = {
   '768': {

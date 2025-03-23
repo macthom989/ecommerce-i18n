@@ -1,4 +1,4 @@
-import Link from '@components/ui/link';
+import Link from 'next/link';
 
 interface Props {
   href: string;
@@ -8,12 +8,12 @@ interface Props {
 }
 
 export default function AuthMenu({
-  isAuthorized,
-  href,
-  className,
-  btnProps,
-  children,
-}: React.PropsWithChildren<Props>) {
+                                   isAuthorized,
+                                   href,
+                                   className,
+                                   btnProps,
+                                   children,
+                                 }: React.PropsWithChildren<Props>) {
   return isAuthorized ? (
     <Link href={href} className={className}>
       {children}

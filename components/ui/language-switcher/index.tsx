@@ -1,17 +1,15 @@
 'use client';
 
-import { useState, useEffect, Fragment } from 'react';
-import { Listbox, ListboxOptions, ListboxOption, ListboxButton, Transition } from '@headlessui/react';
+import { Fragment, useEffect, useState } from 'react';
+import { Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition } from '@headlessui/react';
 import { usePathname, useRouter } from 'next/navigation';
-import { siteSettings } from '@/settings/site-settings';
-import { useTranslations } from 'next-intl';
 import { HiOutlineSelector } from 'react-icons/hi';
 import { updateLocale } from '@/actions/locale';
 import { Locale } from '@/i18n/config';
+import { siteSettings } from '@configs/site-settings';
 
 export default function LanguageSwitcher() {
   const { site_header } = siteSettings;
-  const t = useTranslations('common');
   const options = site_header.languageMenu;
 
   const router = useRouter();
@@ -53,12 +51,15 @@ export default function LanguageSwitcher() {
   return (
     <Listbox value={selectedItem} onChange={handleItemClick} disabled={isChanging}>
       {({ open }) => (
-        <div className="relative ltr:ml-2 rtl:mr-2 ltr:lg:ml-0 rtl:lg:mr-0 z-10 w-[140px] sm:w-[150px] lg:w-[130px] xl:w-[150px]">
-          <ListboxButton className="border border-gray-300  text-heading text-[13px] xl:text-sm font-semibold  relative w-full py-2 ltr:pl-3 rtl:pr-3 ltr:pr-7 rtl:pl-7 ltr:text-left rtl:text-right bg-white rounded-lg shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 cursor-pointer">
+        <div
+          className="relative ltr:ml-2 rtl:mr-2 ltr:lg:ml-0 rtl:lg:mr-0 z-10 w-[140px] sm:w-[150px] lg:w-[130px] xl:w-[150px]">
+          <ListboxButton
+            className="border border-gray-300  text-heading text-[13px] xl:text-sm font-semibold  relative w-full py-2 ltr:pl-3 rtl:pr-3 ltr:pr-7 rtl:pl-7 ltr:text-left rtl:text-right bg-white rounded-lg shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 cursor-pointer">
             <span className="flex truncate items-center">
               <span className="ltr:mr-1.5 rtl:ml-1.5">{selectedItem.icon}</span> {selectedItem.name}
             </span>
-            <span className="absolute inset-y-0 ltr:right-0 rtl:left-0 flex items-center ltr:pr-1.5 rtl:pl-1.5 pointer-events-none">
+            <span
+              className="absolute inset-y-0 ltr:right-0 rtl:left-0 flex items-center ltr:pr-1.5 rtl:pl-1.5 pointer-events-none">
               <HiOutlineSelector className="w-5 h-5 text-gray-400" aria-hidden="true" />
             </span>
           </ListboxButton>

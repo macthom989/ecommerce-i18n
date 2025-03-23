@@ -1,14 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import Link from '@components/ui/link';
 import Scrollbar from '@components/common/scrollbar';
 import { IoIosArrowDown } from 'react-icons/io';
 import Logo from '@components/ui/logo';
-import { IoLogoInstagram, IoLogoTwitter, IoLogoFacebook, IoLogoYoutube, IoClose } from 'react-icons/io5';
+import { IoClose, IoLogoFacebook, IoLogoInstagram, IoLogoTwitter, IoLogoYoutube } from 'react-icons/io5';
 import { useTranslations } from 'next-intl';
-import { useUI } from '@/contexts/ui.context';
-import { siteSettings } from '@/settings/site-settings';
+import { useUI } from '@contexts/managed-ui-provider';
+import Link from 'next/link';
+import { siteSettings } from '@configs/site-settings';
 
 const social = [
   {
@@ -123,7 +123,8 @@ export default function MobileMenu() {
   return (
     <>
       <div className="flex flex-col justify-between w-full h-full">
-        <div className="w-full border-b border-gray-100 flex justify-between items-center relative ltr:pl-5 rtl:pr-5 ltr:md:pl-7 rtl:md:pr-7 flex-shrink-0 py-0.5">
+        <div
+          className="w-full border-b border-gray-100 flex justify-between items-center relative ltr:pl-5 rtl:pr-5 ltr:md:pl-7 rtl:md:pr-7 flex-shrink-0 py-0.5">
           <Logo />
 
           <button

@@ -1,16 +1,18 @@
+'use client';
+
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import isEmpty from 'lodash/isEmpty';
 import { ROUTES } from '@utils/routes';
-import { useUI } from '@contexts/ui.context';
-import Button from '@components/ui/button';
-import Counter from '@components/counter';
-import { useCart } from '@contexts/cart/cart.context';
+import { useUI } from '@contexts/managed-ui-provider';
+import { useCart } from '@contexts/cart/cart-context';
 import { ProductAttributes } from '@components/product/product-attributes';
 import { generateCartItem } from '@utils/generate-cart-item';
 import usePrice from '@services/product/use-price';
 import { getVariations } from '@services/utils/get-variations';
 import { useTranslations } from 'next-intl';
+import Counter from '@components/common/counter';
+import Button from '@components/common/button';
 
 export default function ProductPopup() {
   const t = useTranslations('common');
