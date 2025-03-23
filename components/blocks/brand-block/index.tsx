@@ -1,14 +1,14 @@
 'use client';
 
-import Card from '@components/ui/card';
-import SectionHeader from '@components/ui/section-header';
 import Carousel from '@components/ui/carousel/carousel';
 import { SwiperSlide } from 'swiper/react';
-import CardRoundedLoader from '@components/common/loaders/card-rounded-loader';
 import { useBrandsQuery } from '@services/brand/get-all-brands';
 import { ROUTES } from '@utils/routes';
 import Alert from '@components/ui/alert';
 import { Brand } from '@services/types';
+import SectionHeader from '@components/ui/section-header';
+import CardRoundedLoader from '@components/common/loaders/card-rounded-loader';
+import Card from '@components/ui/card';
 
 interface BrandProps {
   sectionHeading: string;

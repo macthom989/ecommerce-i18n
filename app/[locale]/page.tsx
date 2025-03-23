@@ -1,7 +1,7 @@
 'use client';
 
 import BannerBlock from '@/components/banner/banner-block';
-import { homeThreeBanner, homeThreeMasonryBanner } from '@configs/banner';
+import { homeThreeBanner } from '@configs/banner';
 import Container from '@components/ui/container';
 
 import ProductsFlashSaleBlock from '@blocks/products-flash-sale-block';

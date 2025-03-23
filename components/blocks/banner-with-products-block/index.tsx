@@ -1,3 +1,5 @@
+'use client';
+
 import BannerCard from '@components/banner/banner-card';
 import SectionHeader from '@components/ui/section-header';
 import ProductCard from '@components/product/product-card';
@@ -17,21 +19,18 @@ interface ProductsProps {
 }
 
 const BannerWithProducts: React.FC<ProductsProps> = ({
-                                                       sectionHeading,
-                                                       categorySlug,
-                                                       variant = 'default',
-                                                       className = 'mb-12 md:mb-14 xl:mb-16',
-                                                     }) => {
+  sectionHeading,
+  categorySlug,
+  variant = 'default',
+  className = 'mb-12 md:mb-14 xl:mb-16',
+}) => {
   const { data, isLoading, error } = useOnSellingProductsQuery({
     limit: 10,
   });
 
   return (
     <div className={className}>
-      <SectionHeader
-        sectionHeading={sectionHeading}
-        categorySlug={categorySlug}
-      />
+      <SectionHeader sectionHeading={sectionHeading} categorySlug={categorySlug} />
       {error ? (
         <Alert message={error?.message} />
       ) : (
@@ -58,20 +57,17 @@ const BannerWithProducts: React.FC<ProductsProps> = ({
           >
             {isLoading
               ? Array.from({ length: 9 }).map((_, idx) => (
-                <ProductCardListSmallLoader
-                  key={idx}
-                  uniqueKey={`on-selling-${idx}`}
-                />
-              ))
+                  <ProductCardListSmallLoader key={idx} uniqueKey={`on-selling-${idx}`} />
+                ))
               : data?.map((product: Product) => (
-                <ProductCard
-                  key={`product--key${product.id}`}
-                  product={product}
-                  imgWidth={176}
-                  imgHeight={176}
-                  variant="listSmall"
-                />
-              ))}
+                  <ProductCard
+                    key={`product--key${product.id}`}
+                    product={product}
+                    imgWidth={176}
+                    imgHeight={176}
+                    variant="listSmall"
+                  />
+                ))}
           </div>
         </div>
       )}
