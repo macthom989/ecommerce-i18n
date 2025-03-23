@@ -22,14 +22,14 @@ function getImage(deviceWidth: number, imgObj: BannerItem['image']) {
 }
 
 export default function BannerCard({
-                                     banner,
-                                     className,
-                                     variant = 'rounded',
-                                     effectActive = false,
-                                     classNameInner,
-                                     href,
-                                     disableBorderRadius = false,
-                                   }: BannerProps) {
+  banner,
+  className,
+  variant = 'rounded',
+  effectActive = false,
+  classNameInner,
+  href,
+  disableBorderRadius = false,
+}: BannerProps) {
   const { width } = useSsrCompatible(useWindowSize(), {
     width: 0,
     height: 0,
@@ -37,6 +37,10 @@ export default function BannerCard({
 
   const { title, image } = banner;
   const selectedImage = getImage(width, image);
+
+  const imageLoader = ({ src }: { src: string }) => {
+    return src.startsWith('http') ? src : `${selectedImage.url}`;
+  };
 
   return (
     <div className={cn('mx-auto', className)}>
@@ -47,14 +51,14 @@ export default function BannerCard({
           height={selectedImage.height}
           alt={title}
           quality={100}
-          className={cn('bg-gray-300 object-cover', {
+          className={cn(' bg-gray-300 object-cover', {
             'rounded-md': variant === 'rounded' && !disableBorderRadius,
           })}
+          loader={imageLoader}
           loading="eager"
         />
         {effectActive && (
-          <div
-            className="absolute top-0 ltr:-left-[100%] rtl:-right-[100%] h-full w-1/2 z-5 block transform ltr:-skew-x-12 rtl:skew-x-12 bg-gradient-to-r from-transparent to-white opacity-40 ltr:group-hover:animate-shine rtl:group-hover:animate-shineRTL" />
+          <div className="absolute top-0 ltr:-left-[100%] rtl:-right-[100%] h-full w-1/2 z-5 block transform ltr:-skew-x-12 rtl:skew-x-12 bg-gradient-to-r from-transparent to-white opacity-40 ltr:group-hover:animate-shine rtl:group-hover:animate-shineRTL" />
         )}
       </Link>
     </div>

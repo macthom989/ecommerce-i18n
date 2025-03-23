@@ -34,7 +34,7 @@ const ProductSingleDetails: React.FC<{ product: any }> = ({ product }) => {
 
   const { price, basePrice, discount } = usePrice({
     amount: product.sale_price ? Number(product.sale_price) : Number(product.price),
-    baseAmount: Number(product.price),
+    baseAmount: product.on_sale ? Number(product.regular_price) : Number(product.price),
     currencyCode: 'USD',
   });
 
@@ -144,10 +144,6 @@ const ProductSingleDetails: React.FC<{ product: any }> = ({ product }) => {
           <h2 className="text-heading text-lg md:text-xl lg:text-2xl 2xl:text-3xl font-bold hover:text-black mb-3.5">
             {product?.name}
           </h2>
-          <div
-            className="text-body text-sm lg:text-base leading-6 lg:leading-8"
-            dangerouslySetInnerHTML={{ __html: product?.description }}
-          />
           <div className="flex items-center mt-5">
             <div className="text-heading font-bold text-base md:text-xl lg:text-2xl 2xl:text-4xl ltr:pr-2 rtl:pl-2 ltr:md:pr-0 rtl:md:pl-0 ltr:lg:pr-2 rtl:lg:pl-2 ltr:2xl:pr-0 rtl:2xl:pl-0">
               {price}
@@ -157,19 +153,6 @@ const ProductSingleDetails: React.FC<{ product: any }> = ({ product }) => {
                 {basePrice}
               </span>
             )}
-          </div>
-          <div className="pb-3 border-b border-gray-300">
-            {Object.keys(variations).map((variation) => {
-              return (
-                <ProductAttributes
-                  key={variation}
-                  title={variation}
-                  attributes={variations[variation]}
-                  active={attributes[variation]}
-                  onClick={handleAttribute}
-                />
-              );
-            })}
           </div>
           <div className="flex items-center gap-x-4 ltr:md:pr-32 rtl:md:pl-32 ltr:lg:pr-12 rtl:lg:pl-12 ltr:2xl:pr-32 rtl:2xl:pl-32 ltr:3xl:pr-48 rtl:3xl:pl-48  border-b border-gray-300 py-8">
             <Counter
@@ -188,6 +171,24 @@ const ProductSingleDetails: React.FC<{ product: any }> = ({ product }) => {
               <span className="py-2 3xl:px-8">Add to cart</span>
             </Button>
           </div>
+          <div className="pb-3 border-b border-gray-300">
+            {Object.keys(variations).map((variation) => {
+              return (
+                <ProductAttributes
+                  key={variation}
+                  title={variation}
+                  attributes={variations[variation]}
+                  active={attributes[variation]}
+                  onClick={handleAttribute}
+                />
+              );
+            })}
+          </div>
+          <div
+            className="text-body text-sm lg:text-base leading-6 lg:leading-8"
+            dangerouslySetInnerHTML={{ __html: product?.description }}
+          />
+
           <div className="py-6">
             <ul className="text-sm space-y-5 pb-1">
               <li>

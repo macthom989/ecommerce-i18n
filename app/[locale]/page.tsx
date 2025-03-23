@@ -33,7 +33,7 @@ export default function Page() {
           WebkitOverflowScrolling: 'touch',
         }}
       >
-        <BannerBlock data={homeThreeMasonryBanner} />
+        <BannerBlock />
         <Container>
           <ProductsFlashSaleBlock date={'2025-12-01T01:02:03'} />
         </Container>

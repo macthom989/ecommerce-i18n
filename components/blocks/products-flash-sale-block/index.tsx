@@ -7,10 +7,7 @@ import { useFlashSaleProductsQuery } from '@services/product/get-all-flash-sale-
 import dynamic from 'next/dynamic';
 import Alert from '@components/ui/alert';
 
-const Countdown = dynamic(
-  () => import('react-countdown').then((mod) => mod.default),
-  { ssr: false },
-);
+const Countdown = dynamic(() => import('react-countdown').then((mod) => mod.default), { ssr: false });
 
 interface WrapperProps {
   sectionHeading?: string;
@@ -41,32 +38,24 @@ interface ProductsProps extends WrapperProps {
 }
 
 function ProductFlashSaleWrapper({
-                                   children,
-                                   className,
-                                   disableSectionBorder,
-                                   disableSectionPadding,
-                                   sectionHeading,
-                                   hideCountdown,
-                                   date,
-                                 }: React.PropsWithChildren<WrapperProps>) {
+  children,
+  className,
+  disableSectionBorder,
+  disableSectionPadding,
+  sectionHeading,
+  hideCountdown,
+  date,
+}: React.PropsWithChildren<WrapperProps>) {
   return (
     <>
       <div
-        className={`${className} ${
-          !disableSectionBorder && 'border border-gray-300'
-        } rounded-md ${
-          !disableSectionPadding &&
-          'pt-5 md:pt-6 lg:pt-7 pb-5 lg:pb-7 px-4 md:px-5 lg:px-7'
+        className={`${className} ${!disableSectionBorder && 'border border-gray-300'} rounded-md ${
+          !disableSectionPadding && 'pt-5 md:pt-6 lg:pt-7 pb-5 lg:pb-7 px-4 md:px-5 lg:px-7'
         }`}
       >
         <div className="flex justify-between items-center flex-wrap mb-5 md:mb-6">
-          <SectionHeader
-            sectionHeading={sectionHeading || ''}
-            className="mb-0"
-          />
-          {!hideCountdown && (
-            <Countdown date={date} intervalDelay={1000} renderer={renderer} />
-          )}
+          <SectionHeader sectionHeading={sectionHeading || ''} className="mb-0" />
+          {!hideCountdown && <Countdown date={date} intervalDelay={1000} renderer={renderer} />}
         </div>
         {children}
       </div>
@@ -84,29 +73,25 @@ const renderer = ({ days, hours, minutes, seconds, completed }: any) => {
     return (
       <div className="flex items-center gap-x-1.5 md:gap-x-2.5">
         <div className="text-heading text-10px md:text-xs text-center uppercase">
-          <span
-            className="bg-heading rounded-md text-white text-xs md:text-sm w-8 h-8 md:w-10 md:h-10 flex items-center justify-center mb-1">
+          <span className="bg-heading rounded-md text-white text-xs md:text-sm w-8 h-8 md:w-10 md:h-10 flex items-center justify-center mb-1">
             {days}
           </span>
           days
         </div>
         <div className="text-heading text-10px md:text-xs text-center uppercase">
-          <span
-            className="bg-heading rounded-md text-white text-xs md:text-sm w-8 h-8 md:w-10 md:h-10 flex items-center justify-center mb-1">
+          <span className="bg-heading rounded-md text-white text-xs md:text-sm w-8 h-8 md:w-10 md:h-10 flex items-center justify-center mb-1">
             {hours}
           </span>
           hours
         </div>
         <div className="text-heading text-10px md:text-xs text-center uppercase">
-          <span
-            className="bg-heading rounded-md text-white text-xs md:text-sm w-8 h-8 md:w-10 md:h-10 flex items-center justify-center mb-1">
+          <span className="bg-heading rounded-md text-white text-xs md:text-sm w-8 h-8 md:w-10 md:h-10 flex items-center justify-center mb-1">
             {minutes}
           </span>
           mins
         </div>
         <div className="text-heading text-10px md:text-xs text-center uppercase">
-          <span
-            className="bg-heading rounded-md text-white text-xs md:text-sm w-8 h-8 md:w-10 md:h-10 flex items-center justify-center mb-1">
+          <span className="bg-heading rounded-md text-white text-xs md:text-sm w-8 h-8 md:w-10 md:h-10 flex items-center justify-center mb-1">
             {seconds}
           </span>
           secs
@@ -117,20 +102,19 @@ const renderer = ({ days, hours, minutes, seconds, completed }: any) => {
 };
 
 const ProductsFlashSaleBlock: React.FC<ProductsProps> = ({
-                                                           sectionHeading = 'text-flash-sale',
-                                                           className = 'mb-12 md:mb-14 xl:mb-16',
-                                                           date = '2024-12-01T01:02:03',
-                                                           disableSectionPadding = false,
-                                                           disableSectionBorder = false,
-                                                           hideCountdown = false,
-                                                           itemVariant,
-                                                           limit,
-                                                           TwoXlCols = 5,
-                                                           demoVariant,
-                                                           disableBorderRadius = false,
-                                                           bgGray,
-                                                         }) => {
-
+  sectionHeading = 'text-flash-sale',
+  className = 'mb-12 md:mb-14 xl:mb-16',
+  date = '2024-12-01T01:02:03',
+  disableSectionPadding = false,
+  disableSectionBorder = false,
+  hideCountdown = false,
+  itemVariant,
+  limit,
+  TwoXlCols = 5,
+  demoVariant,
+  disableBorderRadius = false,
+  bgGray,
+}) => {
   const { data, isLoading, error } = useFlashSaleProductsQuery({
     limit: limit || 10,
     demoVariant,
@@ -184,17 +168,13 @@ const ProductsFlashSaleBlock: React.FC<ProductsProps> = ({
           demoVariant === 'ancient' ? 1 : 2
         } sm:grid-cols-${demoVariant === 'ancient' ? 1 : 2} md:grid-cols-${
           demoVariant === 'ancient' ? 2 : 3
-        } lg:grid-cols-${
-          demoVariant === 'ancient' ? 3 : 4
-        } 2xl:grid-cols-${TwoXlCols} gap-x-${
+        } lg:grid-cols-${demoVariant === 'ancient' ? 3 : 4} 2xl:grid-cols-${TwoXlCols} gap-x-${
           demoVariant === 'ancient' ? 2 : 3
         } md:gap-x-${demoVariant === 'ancient' ? 2 : 5} xl:gap-x-${
           demoVariant === 'ancient' ? 2 : 7
         } gap-y-${demoVariant === 'ancient' ? 2 : 4} lg:gap-y-${
           demoVariant === 'ancient' ? 2 : 5
-        } xl:gap-y-${demoVariant === 'ancient' ? 2 : 6} 2xl:gap-y-${
-          demoVariant === 'ancient' ? 2 : 8
-        }`}
+        } xl:gap-y-${demoVariant === 'ancient' ? 2 : 6} 2xl:gap-y-${demoVariant === 'ancient' ? 2 : 8}`}
       >
         {limit ? (
           <>

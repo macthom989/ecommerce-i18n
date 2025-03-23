@@ -3,7 +3,20 @@
 import React, { ReactNode } from 'react';
 import { getToken } from '@/services/utils/get-token';
 import { CartProvider } from '@contexts/cart/cart-context';
+import ls, { lsKeys } from '@/lib/local-storage';
 
+export interface Setting {
+  site_name: string;
+  name: string;
+  logo: {
+    id: number;
+    alt: string;
+    href: string;
+    width: number;
+    height: number;
+    url: string;
+  };
+}
 export interface State {
   userAvatar: string;
   isAuthorized: boolean;
@@ -17,8 +30,10 @@ export interface State {
   modalData: any;
   drawerView: string | null;
   toastText: string;
+  siteSettings: Setting;
 }
 
+const settings = ls.get(lsKeys.SITESETTINGS);
 const initialState = {
   userAvatar: '',
   isAuthorized: false,
@@ -32,71 +47,76 @@ const initialState = {
   drawerView: null,
   modalData: null,
   toastText: '',
+  siteSettings: settings || {},
 };
 
 type Action =
   | {
-  type: 'SET_AUTHORIZED';
-}
+      type: 'SET_AUTHORIZED';
+    }
   | {
-  type: 'SET_UNAUTHORIZED';
-}
+      type: 'SET_UNAUTHORIZED';
+    }
   | {
-  type: 'OPEN_SIDEBAR';
-}
+      type: 'OPEN_SIDEBAR';
+    }
   | {
-  type: 'CLOSE_SIDEBAR';
-}
+      type: 'CLOSE_SIDEBAR';
+    }
   | {
-  type: 'OPEN_CART';
-}
+      type: 'OPEN_CART';
+    }
   | {
-  type: 'CLOSE_CART';
-}
+      type: 'CLOSE_CART';
+    }
   | {
-  type: 'OPEN_SEARCH';
-}
+      type: 'OPEN_SEARCH';
+    }
   | {
-  type: 'CLOSE_SEARCH';
-}
+      type: 'CLOSE_SEARCH';
+    }
   | {
-  type: 'SET_TOAST_TEXT';
-  text: ToastText;
-}
+      type: 'SET_TOAST_TEXT';
+      text: ToastText;
+    }
   | {
-  type: 'OPEN_FILTER';
-}
+      type: 'OPEN_FILTER';
+    }
   | {
-  type: 'CLOSE_FILTER';
-}
+      type: 'CLOSE_FILTER';
+    }
   | {
-  type: 'OPEN_SHOP';
-}
+      type: 'OPEN_SHOP';
+    }
   | {
-  type: 'CLOSE_SHOP';
-}
+      type: 'CLOSE_SHOP';
+    }
   | {
-  type: 'OPEN_MODAL';
-}
+      type: 'OPEN_MODAL';
+    }
   | {
-  type: 'CLOSE_MODAL';
-}
+      type: 'CLOSE_MODAL';
+    }
   | {
-  type: 'SET_MODAL_VIEW';
-  view: MODAL_VIEWS;
-}
+      type: 'SET_MODAL_VIEW';
+      view: MODAL_VIEWS;
+    }
   | {
-  type: 'SET_DRAWER_VIEW';
-  view: DRAWER_VIEWS;
-}
+      type: 'SET_DRAWER_VIEW';
+      view: DRAWER_VIEWS;
+    }
   | {
-  type: 'SET_MODAL_DATA';
-  data: any;
-}
+      type: 'SET_MODAL_DATA';
+      data: any;
+    }
   | {
-  type: 'SET_USER_AVATAR';
-  value: string;
-};
+      type: 'SET_USER_AVATAR';
+      value: string;
+    }
+  | {
+      type: 'SET_SITE_SETTINGS';
+      settings: any;
+    };
 
 type MODAL_VIEWS = 'SIGN_UP_VIEW' | 'LOGIN_VIEW' | 'FORGET_PASSWORD' | 'PRODUCT_VIEW';
 type DRAWER_VIEWS = 'CART_SIDEBAR' | 'MOBILE_MENU';
@@ -146,6 +166,8 @@ function uiReducer(state: State, action: Action): State {
       return { ...state, toastText: action.text };
     case 'SET_USER_AVATAR':
       return { ...state, userAvatar: action.value };
+    case 'SET_SITE_SETTINGS':
+      return { ...state, siteSettings: action.settings };
     default:
       return state;
   }
@@ -187,6 +209,7 @@ export const UIProvider: React.FC<UIProviderProps> = ({ children }) => {
   const setModalView = (view: MODAL_VIEWS) => dispatch({ type: 'SET_MODAL_VIEW', view });
   const setDrawerView = (view: DRAWER_VIEWS) => dispatch({ type: 'SET_DRAWER_VIEW', view });
   const setModalData = (data: any) => dispatch({ type: 'SET_MODAL_DATA', data });
+  const setSiteSettings = (settings: any) => dispatch({ type: 'SET_SITE_SETTINGS', settings });
 
   const value = React.useMemo(
     () => ({
@@ -213,6 +236,7 @@ export const UIProvider: React.FC<UIProviderProps> = ({ children }) => {
       setModalView,
       setDrawerView,
       setModalData,
+      setSiteSettings,
     }),
     [state],
   );
