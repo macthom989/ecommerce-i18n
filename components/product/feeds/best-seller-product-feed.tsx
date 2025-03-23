@@ -1,3 +1,5 @@
+'use client';
+
 import ProductsBlock from '@blocks/products-block';
 import { useBestSellerProductsQuery } from '@services/product/get-all-best-seller-products';
 
