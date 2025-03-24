@@ -10,7 +10,7 @@ const HomeLoader = (props: any) => (
     className="w-full h-auto"
     {...props}
   >
-    <rect x="0" y="0" rx="0" ry="0" width="100%" height="60" />
+    <rect x="0" y="0" rx="0" ry="0" width="100%" height="120" />
 
     <rect x="0" y="80" rx="8" ry="8" width="100%" height="250" />
 

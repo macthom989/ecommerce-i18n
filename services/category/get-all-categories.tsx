@@ -2,11 +2,10 @@ import { CategoriesQueryOptionsType, Category } from '@services/types';
 import http from '@services/utils/axiosInstance';
 import { API_ENDPOINTS } from '@services/utils/api-endpoints';
 import { useQuery } from '@tanstack/react-query';
+import { fetchFn } from '@/lib/fetcher-local';
 
 export const fetchCategories = async () => {
-  const {
-    data: { data },
-  } = await http.get(API_ENDPOINTS.CATEGORIES);
+  const { data } = await fetchFn('GET', `/api/${API_ENDPOINTS.CATEGORIES}`);
   return {
     categories: {
       data: data as Category[],
@@ -15,9 +14,7 @@ export const fetchCategories = async () => {
 };
 
 const fetchAncientCategories = async () => {
-  const {
-    data: { data },
-  } = await http.get(API_ENDPOINTS.CATEGORIES_ANCIENT);
+  const { data } = await fetchFn('GET', `/wp-json/wc/v3/products/${API_ENDPOINTS.CATEGORIES}`);
   return {
     categories: {
       data: data as Category[],
@@ -28,9 +25,6 @@ const fetchAncientCategories = async () => {
 export const useCategoriesQuery = (options: CategoriesQueryOptionsType) => {
   return useQuery<{ categories: { data: Category[] } }, Error>({
     queryKey: [API_ENDPOINTS.CATEGORIES, options],
-    queryFn:
-      options.demoVariant === 'ancient'
-        ? fetchAncientCategories
-        : fetchCategories,
+    queryFn: options.demoVariant === 'ancient' ? fetchAncientCategories : fetchCategories,
   });
 };

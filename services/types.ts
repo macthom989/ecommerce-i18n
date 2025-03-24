@@ -85,7 +85,7 @@ export type Product = {
   price: number;
   quantity: number;
   sale_price?: number;
-  image: Attachment;
+  images: Attachment;
   sku?: string;
   gallery?: Attachment[];
   category?: Category;
@@ -93,6 +93,7 @@ export type Product = {
   tags?: Tag[];
   meta?: any[];
   description?: string;
+  short_description?: string;
   variations?: object;
   [key: string]: unknown;
   isNewArrival?: boolean;
@@ -137,4 +138,4 @@ export type Shop = {
 };
 
 export type SVGIconProps = React.SVGAttributes<SVGElement>;
-export type AnchorProps = React.HTMLAttributes<HTMLAnchorElement>
+export type AnchorProps = React.HTMLAttributes<HTMLAnchorElement>;

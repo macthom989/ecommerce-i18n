@@ -8,8 +8,7 @@ import TanStackQueryProvider from '@contexts/tanstack-query-provider';
 import ManagedDrawer from '@/components/common/drawer/managed-drawer';
 import Layout from '@/components/common/layout/main';
 import { locales } from '@/i18n/config';
-import Loading from './loading';
-import { Suspense } from 'react';
+import ManagedModal from '@/components/common/modal/managed-modal';
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -29,11 +28,10 @@ export default async function LocaleLayout({ children, params }: { children: Rea
         <TanStackQueryProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
             <ManagedUIContext>
-              <Suspense fallback={<Loading />}>
-                <Layout>{children}</Layout>
-              </Suspense>
+              <Layout>{children}</Layout>
               <ToastContainer toastClassName="!text-white" />
               <ManagedDrawer />
+              <ManagedModal />
             </ManagedUIContext>
           </NextIntlClientProvider>
         </TanStackQueryProvider>

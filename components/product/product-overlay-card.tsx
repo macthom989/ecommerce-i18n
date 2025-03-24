@@ -4,6 +4,7 @@ import usePrice from '@services/product/use-price';
 import { Product } from '@services/types';
 import Text from '@components/common/text';
 import cn from 'classnames';
+import { imageLoader } from '@/utils/image-loader';
 
 interface ProductProps {
   product: Product;
@@ -14,12 +15,12 @@ interface ProductProps {
 }
 
 const ProductOverlayCard: React.FC<ProductProps> = ({
-                                                      product,
-                                                      index,
-                                                      variant = 'left',
-                                                      imgLoading = 'lazy',
-                                                      disableBorderRadius = false,
-                                                    }) => {
+  product,
+  index,
+  variant = 'left',
+  imgLoading = 'lazy',
+  disableBorderRadius = false,
+}) => {
   let size = 260;
   let classes;
 
@@ -47,8 +48,8 @@ const ProductOverlayCard: React.FC<ProductProps> = ({
 
   const { openModal, setModalView, setModalData } = useUI();
   const { price, basePrice, discount } = usePrice({
-    amount: product.sale_price ? product.sale_price : product.price,
-    baseAmount: product.price,
+    amount: product.sale_price ? Number(product.sale_price) : Number(product.price),
+    baseAmount: product.on_sale ? Number(product.regular_price) : Number(product.price),
     currencyCode: 'USD',
   });
 
@@ -66,19 +67,14 @@ const ProductOverlayCard: React.FC<ProductProps> = ({
       } relative items-center justify-between overflow-hidden`}
     >
       <div
-        className={cn(
-          'flex justify-center items-center p-4 h-full 3xl:min-h-[330px]',
-          {
-            '!p-0': variant === 'modern',
-          },
-        )}
+        className={cn('flex justify-center items-center p-4 h-full 3xl:min-h-[330px]', {
+          '!p-0': variant === 'modern',
+        })}
         title={product?.name}
       >
         <Image
-          src={
-            product?.image?.original ??
-            '/assets/placeholder/products/product-featured.png'
-          }
+          loader={imageLoader}
+          src={product?.images[0]?.src ?? '/assets/placeholder/products/product-featured.png'}
           width={size}
           height={size}
           loading={imgLoading}
@@ -120,29 +116,22 @@ const ProductOverlayCard: React.FC<ProductProps> = ({
         title={product?.name}
       >
         <div className="overflow-hidden ltr:md:pr-2 rtl:md:pl-2 ltr:lg:pr-0 rtl:lg:pl-0 ltr:2xl:pr-2 rtl:2xl:pl-2">
-          <h2 className="mb-1 text-sm font-semibold truncate text-heading md:text-base xl:text-lg">
-            {product?.name}
-          </h2>
+          <h2 className="mb-1 text-sm font-semibold truncate text-heading md:text-base xl:text-lg">{product?.name}</h2>
 
           {variant !== 'modern' ? (
-            <p className="text-body text-xs xl:text-sm leading-normal xl:leading-relaxed truncate max-w-[250px]">
-              {product?.description}
-            </p>
+            <p
+              className="text-body text-xs xl:text-sm leading-normal xl:leading-relaxed truncate max-w-[250px]"
+              dangerouslySetInnerHTML={{ __html: product?.short_description }}
+            />
           ) : (
             <Text className="pb-0.5 truncate">35 Brands, 1000+ Products</Text>
           )}
         </div>
 
         {variant !== 'modern' && (
-          <div
-            className="flex-shrink-0 flex flex-row-reverse md:flex-col lg:flex-row-reverse 2xl:flex-col items-center md:items-end lg:items-start 2xl:items-end justify-end ltr:md:text-right rtl:md:text-left lg:ltr:text-left rtl:text-right ltr:xl:text-right rtl:xl:text-left mt-2 md:-mt-0.5 lg:mt-2 2xl:-mt-0.5">
-            {discount && (
-              <del className="text-sm md:text-base lg:text-sm xl:text-base 3xl:text-lg">
-                {basePrice}
-              </del>
-            )}
-            <div
-              className="text-heading font-segoe font-semibold text-base md:text-xl lg:text-base xl:text-xl 3xl:text-2xl 3xl:mt-0.5 ltr:pr-2 rtl:pl-2 ltr:md:pr-0 rtl:md:pl-0 ltr:lg:pr-2 rtl:lg:pl-2 ltr:2xl:pr-0 rtl:2xl:pl-0">
+          <div className="flex-shrink-0 flex flex-row-reverse md:flex-col lg:flex-row-reverse 2xl:flex-col items-center md:items-end lg:items-start 2xl:items-end justify-end ltr:md:text-right rtl:md:text-left lg:ltr:text-left rtl:text-right ltr:xl:text-right rtl:xl:text-left mt-2 md:-mt-0.5 lg:mt-2 2xl:-mt-0.5">
+            {discount && <del className="text-sm md:text-base lg:text-sm xl:text-base 3xl:text-lg">{basePrice}</del>}
+            <div className="text-heading font-segoe font-semibold text-base md:text-xl lg:text-base xl:text-xl 3xl:text-2xl 3xl:mt-0.5 ltr:pr-2 rtl:pl-2 ltr:md:pr-0 rtl:md:pl-0 ltr:lg:pr-2 rtl:lg:pl-2 ltr:2xl:pr-0 rtl:2xl:pl-0">
               {price}
             </div>
           </div>

@@ -178,7 +178,7 @@ const ProductsFlashSaleBlock: React.FC<ProductsProps> = ({
       >
         {limit ? (
           <>
-            {data?.productFlashSellGridTwo
+            {data
               ?.slice(0, limit)
               ?.map((product: any) => (
                 <ProductCard
@@ -195,7 +195,7 @@ const ProductsFlashSaleBlock: React.FC<ProductsProps> = ({
           </>
         ) : (
           <>
-            {data?.productFlashSellGridTwo?.map((product: any) => (
+            {data?.map((product: any) => (
               <ProductCard
                 key={`product--key${product.id}`}
                 product={product}

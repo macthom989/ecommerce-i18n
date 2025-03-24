@@ -3,6 +3,7 @@ import Text from '../../common/text';
 import { FaLink } from 'react-icons/fa';
 import Link, { LinkProps } from 'next/link';
 import { useTranslations } from 'next-intl';
+import { imageLoader } from '@/utils/image-loader';
 
 interface Props {
   item: any;
@@ -16,15 +17,15 @@ interface Props {
 }
 
 const Card: React.FC<Props> = ({
-                                 item,
-                                 variant = 'circle',
-                                 size = 'small',
-                                 effectActive = false,
-                                 href,
-                                 showName = true,
-                                 imgSize,
-                                 disableBorderRadius = false,
-                               }) => {
+  item,
+  variant = 'circle',
+  size = 'small',
+  effectActive = false,
+  href,
+  showName = true,
+  imgSize,
+  disableBorderRadius = false,
+}) => {
   const { name, image } = item ?? {};
   const imageSize: any = (imgSize === 'large' && 375) || (size === 'small' && 180) || (size === 'medium' && 198);
 
@@ -41,7 +42,8 @@ const Card: React.FC<Props> = ({
       >
         <div className="flex">
           <Image
-            src={image?.original ?? placeholderImage}
+            loader={imageLoader}
+            src={image?.src ?? placeholderImage}
             alt={name || t('text-card-thumbnail')}
             width={imageSize}
             height={imageSize}
@@ -57,8 +59,7 @@ const Card: React.FC<Props> = ({
               }`}
             />
             <div className="absolute top left h-full w-full flex items-center justify-center">
-              <FaLink
-                className="text-white text-base sm:text-xl lg:text-2xl xl:text-3xl transform opacity-0 scale-0 transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:scale-100" />
+              <FaLink className="text-white text-base sm:text-xl lg:text-2xl xl:text-3xl transform opacity-0 scale-0 transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:scale-100" />
             </div>
           </>
         )}

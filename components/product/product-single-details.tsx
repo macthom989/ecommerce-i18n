@@ -47,7 +47,7 @@ const ProductSingleDetails: React.FC<{ product: any }> = ({ product }) => {
       ...(attr.name === 'color' && { meta: colorMetaMap[option.toLowerCase()] || '#ccc' }),
       attribute: {
         id: 1,
-        name: attr.name.charAt(0).toUpperCase() + attr.name.slice(1), // Viết hoa chữ cái đầu
+        name: attr.name.charAt(0).toUpperCase() + attr.name.slice(1),
         slug: attr.slug,
       },
     })),

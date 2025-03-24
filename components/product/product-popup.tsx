@@ -1,5 +1,5 @@
+'use client';
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
 import isEmpty from 'lodash/isEmpty';
 import { ROUTES } from '@utils/routes';
 import { useUI } from '@contexts/managed-ui-provider';
@@ -11,6 +11,8 @@ import { getVariations } from '@services/utils/get-variations';
 import { useTranslations } from 'next-intl';
 import Counter from '@components/common/counter';
 import Button from '@components/common/button';
+import { useRouter } from 'next/navigation';
+import { colorMetaMap } from '@/contants/attributes';
 
 export default function ProductPopup() {
   const t = useTranslations('common');
@@ -30,8 +32,23 @@ export default function ProductPopup() {
     baseAmount: data.price,
     currencyCode: 'USD',
   });
-  const variations = getVariations(data.variations);
-  const { slug, image, name, description } = data;
+
+  let idCounter = 1;
+  const transformedData = data.attributes.flatMap((attr) =>
+    attr.options.map((option) => ({
+      id: idCounter++,
+      value: option,
+
+      ...(attr.name === 'color' && { meta: colorMetaMap[option.toLowerCase()] || '#ccc' }),
+      attribute: {
+        id: 1,
+        name: attr.name.charAt(0).toUpperCase() + attr.name.slice(1),
+        slug: attr.slug,
+      },
+    })),
+  );
+  const variations = getVariations(transformedData);
+  const { slug, images, name, short_description: description } = data;
 
   const isSelected = !isEmpty(variations)
     ? !isEmpty(attributes) && Object.keys(variations).every((variation) => attributes.hasOwnProperty(variation))
@@ -51,9 +68,7 @@ export default function ProductPopup() {
 
   function navigateToProductPage() {
     closeModal();
-    router.push(`${ROUTES.PRODUCT}/${slug}`, undefined, {
-      locale: router.locale,
-    });
+    router.push(`${ROUTES.PRODUCT}/${slug}`);
   }
 
   function handleAttribute(attribute: any) {
@@ -73,11 +88,10 @@ export default function ProductPopup() {
   return (
     <div className="rounded-lg bg-white">
       <div className="flex flex-col lg:flex-row w-full md:w-[650px] lg:w-[960px] mx-auto overflow-hidden">
-        <div
-          className="flex-shrink-0 flex items-center justify-center w-full lg:w-430px max-h-430px lg:max-h-full overflow-hidden bg-gray-300">
+        <div className="flex-shrink-0 flex items-center justify-center w-full lg:w-430px max-h-430px lg:max-h-full overflow-hidden bg-gray-300">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={image?.original ?? '/assets/placeholder/products/product-thumbnail.svg'}
+            src={images[0].src ?? '/assets/placeholder/products/product-thumbnail.svg'}
             alt={name}
             className="lg:object-cover lg:w-full lg:h-full"
           />
@@ -88,7 +102,10 @@ export default function ProductPopup() {
             <div className="mb-2 md:mb-2.5 block -mt-1.5" onClick={navigateToProductPage} role="button">
               <h2 className="text-heading text-lg md:text-xl lg:text-2xl font-semibold hover:text-black">{name}</h2>
             </div>
-            <p className="text-sm leading-6 md:text-body md:leading-7">{description}</p>
+            <p
+              className="text-sm leading-6 md:text-body md:leading-7"
+              dangerouslySetInnerHTML={{ __html: description }}
+            />
 
             <div className="flex items-center mt-3">
               <div className="text-heading font-semibold text-base md:text-xl lg:text-2xl">{price}</div>
