@@ -1,3 +1,5 @@
+import { BannerItem } from '@components/banner/banner-block';
+
 export const homeOneBanner = {
   id: 1,
   title: 'Holiday Offers',
@@ -565,7 +567,7 @@ export const promotionBannerThree = [
   },
 ];
 
-export const bannerDataOne = [
+export const bannerDataOne: BannerItem[] = [
   {
     id: 1,
     title: "Men's Collection",
@@ -622,7 +624,7 @@ export const bannerDataOne = [
   },
 ];
 
-export const bannerDataTwo = [
+export const bannerDataTwo: BannerItem[] = [
   {
     id: 1,
     title: 'Exclusive Sunglasses',

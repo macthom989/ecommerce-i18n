@@ -1,5 +1,6 @@
-import { ROUTES } from '@utils/routes';
+'use client';
 
+import { ROUTES } from '@utils/routes';
 import BannerCard from '@components/banner/banner-card';
 import { useUI } from '@/contexts/managed-ui-provider';
 
