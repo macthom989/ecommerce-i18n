@@ -3,7 +3,6 @@
 import BannerCard from '@components/banner/banner-card';
 import Carousel from '@components/carousel/carousel';
 import { SwiperSlide } from 'swiper/react';
-
 import { ROUTES } from '@utils/routes';
 import { bannerGrid } from '@configs/banner';
 import { useSsrCompatible } from '@utils/use-ssr-compatible';

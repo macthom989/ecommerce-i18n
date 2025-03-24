@@ -12,7 +12,6 @@ import { fetchFn } from '@/lib/fetcher-local';
 import { useUI } from '@/contexts/managed-ui-provider';
 import ls, { lsKeys } from '@/lib/local-storage';
 import { useQuery } from '@tanstack/react-query';
-import HomeLoader from '../../loaders/home-loader';
 
 export default function Layout({ children }: React.PropsWithChildren<object>) {
   const { acceptedCookies, onAcceptCookies } = useAcceptCookies();
@@ -29,13 +28,13 @@ export default function Layout({ children }: React.PropsWithChildren<object>) {
       setSiteSettings(data);
       ls.set(lsKeys.SITESETTINGS, JSON.stringify(data));
     }
-  }, [data, setSiteSettings]);
+  }, [JSON.stringify(data)]);
 
   if (error) {
     console.error('Error fetching site settings:', error);
   }
 
-  if (isLoading) return <HomeLoader />;
+  // if (isLoading) return <HomeLoader />;
 
   return (
     <div className="flex flex-col min-h-screen">

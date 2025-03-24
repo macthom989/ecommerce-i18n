@@ -1,3 +1,5 @@
+'use client';
+
 import ProductOverlayCard from '@components/product/product-overlay-card';
 import { useFeaturedProductsQuery } from '@services/product/get-all-featured-products';
 import { Product } from '@services/types';
@@ -18,15 +20,15 @@ interface ProductsProps {
 }
 
 const ProductsFeatured: React.FC<ProductsProps> = ({
-                                                     sectionHeading,
-                                                     categorySlug,
-                                                     className = 'mb-12 md:mb-14 xl:mb-16',
-                                                     variant = 'left',
-                                                     limit = 5,
-                                                     hideBanner = false,
-                                                     demoVariant,
-                                                     disableBorderRadius = false,
-                                                   }) => {
+  sectionHeading,
+  categorySlug,
+  className = 'mb-12 md:mb-14 xl:mb-16',
+  variant = 'left',
+  limit = 5,
+  hideBanner = false,
+  demoVariant,
+  disableBorderRadius = false,
+}) => {
   const { data, error } = useFeaturedProductsQuery({
     limit: limit,
     demoVariant,
@@ -34,10 +36,7 @@ const ProductsFeatured: React.FC<ProductsProps> = ({
 
   return (
     <div className={className}>
-      <SectionHeader
-        sectionHeading={sectionHeading}
-        categorySlug={categorySlug}
-      />
+      <SectionHeader sectionHeading={sectionHeading} categorySlug={categorySlug} />
       {error ? (
         <Alert message={error?.message} />
       ) : (
@@ -45,9 +44,7 @@ const ProductsFeatured: React.FC<ProductsProps> = ({
           className={cn(
             `grid grid-cols-4 grid-rows-2 gap-${
               demoVariant === 'ancient' ? 1 : 3
-            } md:gap-${demoVariant === 'ancient' ? 2 : 5} xl:gap-${
-              demoVariant === 'ancient' ? 1 : 7
-            }`,
+            } md:gap-${demoVariant === 'ancient' ? 2 : 5} xl:gap-${demoVariant === 'ancient' ? 1 : 7}`,
             {
               'lg:grid-cols-4': variant === 'modern',
             },
@@ -64,15 +61,17 @@ const ProductsFeatured: React.FC<ProductsProps> = ({
               />
             </div>
           )}
-          {data?.slice(0, limit).map((product: Product, idx: number) => (
-            <ProductOverlayCard
-              disableBorderRadius={disableBorderRadius}
-              key={`product--key${product.id}`}
-              product={product}
-              variant={variant}
-              index={idx}
-            />
-          ))}
+          {data
+            ?.slice(0, limit)
+            .map((product: Product, idx: number) => (
+              <ProductOverlayCard
+                disableBorderRadius={disableBorderRadius}
+                key={`product--key${product.id}`}
+                product={product}
+                variant={variant}
+                index={idx}
+              />
+            ))}
         </div>
       )}
     </div>
