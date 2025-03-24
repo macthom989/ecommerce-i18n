@@ -1,10 +1,20 @@
-import { fetchFn } from '@/lib/fetcher';
-import { NextResponse } from 'next/server';
+import { fetchFn } from '@/lib/fetcher-local';
+import { NextRequest, NextResponse } from 'next/server';
+import { Product } from '@services/types';
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   const idCategory = 22;
-  const products = `/wp-json/wc/v3/products?category=${idCategory}`;
-  const settingResponse = await fetchFn('GET', products);
-  const productsResponse = await settingResponse.data;
-  return NextResponse.json(productsResponse);
+  const endpoint = `/wp-json/wc/v3/products?category=${idCategory}`;
+
+  try {
+    const { success, data, message } = await fetchFn<Product[]>('GET', endpoint);
+    if (!success) {
+      console.error('WooCommerce API Error:', message);
+      return NextResponse.json({ success: false, message }, { status: 500 });
+    }
+
+    return NextResponse.json({ success: true, data });
+  } catch (error: any) {
+    return NextResponse.json({ success: false, message: 'Failed to fetch products' }, { status: 500 });
+  }
 }

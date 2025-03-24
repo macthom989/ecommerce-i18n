@@ -1,11 +1,11 @@
 'use client';
 
 import SectionHeader from '@components/ui/section-header';
-import ProductCard from '@components/product/product-card';
 import ProductCardGridLoader from '@components/common/loaders/product-card-grid-loader';
 import { useFlashSaleProductsQuery } from '@services/product/get-all-flash-sale-products';
 import dynamic from 'next/dynamic';
 import Alert from '@components/ui/alert';
+import ProductCard from '@components/product/product-card';
 
 const Countdown = dynamic(() => import('react-countdown').then((mod) => mod.default), { ssr: false });
 

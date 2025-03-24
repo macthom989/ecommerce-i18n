@@ -9,6 +9,7 @@ import ManagedDrawer from '@/components/common/drawer/managed-drawer';
 import Layout from '@/components/common/layout/main';
 import { locales } from '@/i18n/config';
 import ManagedModal from '@/components/common/modal/managed-modal';
+import { fetchSiteSettings } from '@/app/[locale]/api/setting/_fetchServer';
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -19,6 +20,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   const { locale } = await params;
   const messages = await getMessages({ locale });
   const dir = getDirection(locale as string);
+  const initialSettings = await fetchSiteSettings();
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
       <head>
@@ -26,9 +28,9 @@ export default async function LocaleLayout({ children, params }: { children: Rea
       </head>
       <body>
         <TanStackQueryProvider>
-          <NextIntlClientProvider locale={locale} messages={messages}>
+          <NextIntlClientProvider now={new Date()} locale={locale} messages={messages}>
             <ManagedUIContext>
-              <Layout>{children}</Layout>
+              <Layout initialSettings={initialSettings}>{children}</Layout>
               <ToastContainer toastClassName="!text-white" />
               <ManagedDrawer />
               <ManagedModal />

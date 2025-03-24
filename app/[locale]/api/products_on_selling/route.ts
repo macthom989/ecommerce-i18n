@@ -1,6 +1,19 @@
-import { NextResponse } from 'next/server';
-import data from '@api/products_on_selling.json';
+import { NextRequest, NextResponse } from 'next/server';
+import { fetchFn } from '@lib/fetcher-local';
+import { Product } from '@services/types';
 
-export async function GET() {
-  return NextResponse.json(data);
+export async function GET(req: NextRequest) {
+  const idCategory = 22;
+  const endpoint = `/wp-json/wc/v3/products?category=${idCategory}`;
+
+  try {
+    const { success, data, message } = await fetchFn<Product[]>('GET', endpoint);
+    if (!success) {
+      return NextResponse.json({ success: false, message }, { status: 500 });
+    }
+
+    return NextResponse.json({ success: true, data });
+  } catch (error: any) {
+    return NextResponse.json({ success: false, message: 'Failed to fetch products' }, { status: 500 });
+  }
 }

@@ -56,7 +56,6 @@ const BrandBlock: React.FC<BrandProps> = ({
     limit: 8,
     demoVariant,
   });
-  const brands = data;
   return (
     <div className={className}>
       <SectionHeader sectionHeading={sectionHeading} />
@@ -69,7 +68,6 @@ const BrandBlock: React.FC<BrandProps> = ({
           buttonGroupClassName="-mt-4 md:-mt-5 xl:-mt-7"
           autoplay={{
             delay: 4000,
-            // delay: 4000000,
           }}
         >
           {isLoading && !data
@@ -78,7 +76,7 @@ const BrandBlock: React.FC<BrandProps> = ({
                   <CardRoundedLoader uniqueKey={`category-${idx}`} />
                 </SwiperSlide>
               ))
-            : brands?.map((brand: Brand) => (
+            : data?.map((brand: Brand) => (
                 <SwiperSlide key={`brand--key${brand.id}`}>
                   <Card
                     showName={showName}

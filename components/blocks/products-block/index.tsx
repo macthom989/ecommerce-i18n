@@ -35,31 +35,26 @@ interface ProductsProps {
 }
 
 const ProductsBlock: React.FC<ProductsProps> = ({
-                                                  sectionHeading,
-                                                  categorySlug,
-                                                  className = 'mb-9 md:mb-10 xl:mb-12',
-                                                  products,
-                                                  loading,
-                                                  error,
-                                                  uniqueKey,
-                                                  variant = 'grid',
-                                                  limit = 10,
-                                                  imgWidth,
-                                                  imgHeight,
-                                                  hideProductDescription = false,
-                                                  showCategory = false,
-                                                  showRating = false,
-                                                  demoVariant,
-                                                  disableBorderRadius = false,
-                                                }) => {
+  sectionHeading,
+  categorySlug,
+  className = 'mb-9 md:mb-10 xl:mb-12',
+  products,
+  loading,
+  error,
+  uniqueKey,
+  variant = 'grid',
+  limit = 10,
+  imgWidth,
+  imgHeight,
+  hideProductDescription = false,
+  showCategory = false,
+  showRating = false,
+  demoVariant,
+  disableBorderRadius = false,
+}) => {
   return (
     <div className={className}>
-      {sectionHeading && (
-        <SectionHeader
-          sectionHeading={sectionHeading}
-          categorySlug={categorySlug}
-        />
-      )}
+      {sectionHeading && <SectionHeader sectionHeading={sectionHeading} categorySlug={categorySlug} />}
 
       {error ? (
         <Alert message={error} />
@@ -70,16 +65,11 @@ const ProductsBlock: React.FC<ProductsProps> = ({
               demoVariant === 'ancient' ? 2 : 5
             } xl:gap-x-${demoVariant === 'ancient' ? 2 : 7} gap-y-${
               demoVariant === 'ancient' ? 2 : 3
-            } xl:gap-y-${demoVariant === 'ancient' ? 2 : 5} 2xl:gap-y-${
-              demoVariant === 'ancient' ? 3 : 8
-            } bg-white`,
+            } xl:gap-y-${demoVariant === 'ancient' ? 2 : 5} 2xl:gap-y-${demoVariant === 'ancient' ? 3 : 8} bg-white`,
             {
-              'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5':
-                variant === 'grid',
-              'grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4':
-                variant === 'gridModernWide',
-              'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5':
-                variant === 'gridModern',
+              'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5': variant === 'grid',
+              'grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4': variant === 'gridModernWide',
+              'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5': variant === 'gridModern',
             },
           )}
         >

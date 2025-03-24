@@ -1,5 +1,4 @@
 import { Brand, QueryOptionsType } from '@services/types';
-import http from '@services/utils/axiosInstance';
 import { API_ENDPOINTS } from '@services/utils/api-endpoints';
 import { useQuery } from '@tanstack/react-query';
 import { fetchFn } from '@/lib/fetcher-local';

@@ -118,7 +118,7 @@ const CategoryBlock: React.FC<CategoriesProps> = ({
                   </SwiperSlide>
                 );
               })
-            : data?.categories?.data?.map((category) => (
+            : data?.map((category) => (
                 <SwiperSlide key={`category--key-${category.id}`}>
                   <Card
                     imgSize={imgSize}

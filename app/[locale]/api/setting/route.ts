@@ -1,6 +1,4 @@
-import { set } from './../../../../lib/local-storage';
 import { NextResponse } from 'next/server';
-import { fetchFn } from '@/lib/fetcher';
 
 export const revalidate = 60;
 
