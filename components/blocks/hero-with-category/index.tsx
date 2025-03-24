@@ -1,6 +1,5 @@
 'use client';
 
-import Carousel from '@components/ui/carousel/carousel';
 import { SwiperSlide } from 'swiper/react';
 import { useCategoriesQuery } from '@services/category/get-all-categories';
 import { useWindowSize } from '@utils/use-window-size';
@@ -11,6 +10,7 @@ import Alert from '@components/ui/alert';
 import { useSsrCompatible } from '@utils/use-ssr-compatible';
 import CategoryListCard from '@components/common/category/category-list-card';
 import BannerCard from '@components/banner/banner-card';
+import Carousel from '@components/ui/carousel';
 
 interface Props {
   className?: string;

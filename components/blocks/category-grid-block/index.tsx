@@ -1,6 +1,5 @@
 'use client';
 
-import Carousel from '@components/ui/carousel/carousel';
 import { SwiperSlide } from 'swiper/react';
 import { useWindowSize } from '@utils/use-window-size';
 import { useFeaturedCategoriesQuery } from '@services/category/get-all-featured-categories';
@@ -9,6 +8,7 @@ import { useSsrCompatible } from '@utils/use-ssr-compatible';
 import CategoryCard from '@components/common/category/category-card';
 import SectionHeader from '@components/ui/section-header';
 import CategoryCardLoader from '@components/common/loaders/category-card-loader';
+import Carousel from '@components/ui/carousel';
 
 interface CategoriesProps {
   sectionHeading: string;

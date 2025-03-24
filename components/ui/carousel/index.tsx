@@ -1,16 +1,16 @@
 'use client';
 
-import { useRef } from 'react';
-import { Swiper } from 'swiper/react';
 import { usePathname } from 'next/navigation';
-import { Navigation, Scrollbar, Pagination, Autoplay } from 'swiper/modules';
-import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { getDirection } from '@utils/get-direction';
+import { useRef } from 'react';
 import cn from 'classnames';
+import { Swiper } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import 'swiper/css/scrollbar';
+import { Autoplay, Navigation, Pagination, Scrollbar } from 'swiper/modules';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 type CarouselPropsType = {
   children: React.ReactNode;
@@ -34,7 +34,6 @@ type CarouselPropsType = {
   type?: 'rounded' | 'circle' | 'list';
   isFraction?: boolean;
 };
-
 const Carousel: React.FunctionComponent<CarouselPropsType> = ({
   children,
   className = '',
@@ -130,5 +129,4 @@ const Carousel: React.FunctionComponent<CarouselPropsType> = ({
     </div>
   );
 };
-
 export default Carousel;

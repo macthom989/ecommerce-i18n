@@ -1,8 +1,8 @@
 'use client';
 import Modal from './modal';
 import dynamic from 'next/dynamic';
-import Newsletter from '../newsletter';
 import { useUI } from '@/contexts/managed-ui-provider';
+import Newsletter from '@components/common/newsletter';
 // const LoginForm = dynamic(() => import('@components/auth/login-form'));
 // const SignUpForm = dynamic(() => import('@components/auth/sign-up-form'));
 // const ForgetPasswordForm = dynamic(() => import('@components/auth/forget-password-form'));

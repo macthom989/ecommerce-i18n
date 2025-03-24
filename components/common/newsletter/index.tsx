@@ -3,11 +3,13 @@ import { useUI } from '@/contexts/managed-ui-provider';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useForm } from 'react-hook-form';
-import Input from '../input';
-import Button from '../button';
+import Input from '@components/common/input';
+import Button from '@components/common/button';
+
 interface NewsLetterFormValues {
   email: string;
 }
+
 const defaultValues = {
   email: '',
 };
@@ -20,9 +22,11 @@ export default function Newsletter() {
     defaultValues,
   });
   const { closeModal } = useUI();
+
   function onSubmit(values: NewsLetterFormValues) {
     closeModal();
   }
+
   const t = useTranslations();
   return (
     <div className="flex items-center justify-center">
@@ -39,30 +43,30 @@ export default function Newsletter() {
           </div>
           <div className="flex flex-col px-5 py-7 sm:p-10 md:p-12 xl:p-14 text-center w-full">
             <h4 className="uppercase font-semibold text-xs sm:text-sm text-body mb-2 lg:mb-4">
-              {t('common:text-subscribe-now')}
+              {t('common.text-subscribe-now')}
             </h4>
             <h2 className="text-heading text-lg sm:text-xl md:text-2xl leading-8 font-bold mb-5 sm:mb-7 md:mb-9">
-              {t('common:text-newsletter-title')}
+              {t('common.text-newsletter-title')}
             </h2>
-            <p className="text-body text-sm leading-6 md:leading-7">{t('common:text-newsletter-subtitle')}</p>
+            <p className="text-body text-sm leading-6 md:leading-7">{t('common.text-newsletter-subtitle')}</p>
             <form className="pt-8 sm:pt-10 md:pt-14 mb-1 sm:mb-0" onSubmit={handleSubmit(onSubmit)}>
               <Input
-                placeholder="forms:placeholder-email-subscribe"
+                placeholder="forms.placeholder-email-subscribe"
                 type="email"
                 variant="solid"
                 className="w-full"
                 inputClassName="px-4 lg:px-7 h-12 lg:h-14 text-center bg-gray-50"
                 {...register('email', {
-                  required: 'forms:email-required',
+                  required: 'forms.email-required',
                   pattern: {
                     value:
                       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                    message: 'forms:email-error',
+                    message: 'forms.email-error',
                   },
                 })}
                 errorKey={errors.email?.message}
               />
-              <Button className="w-full h-12 lg:h-14 mt-3 sm:mt-4">{t('common:button-subscribe')}</Button>
+              <Button className="w-full h-12 lg:h-14 mt-3 sm:mt-4">{t('common.button-subscribe')}</Button>
             </form>
           </div>
         </div>

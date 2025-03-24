@@ -6,7 +6,6 @@ import { generateCartItem } from '@utils/generate-cart-item';
 import { useWindowSize } from '@utils/use-window-size';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import Carousel from '@components/ui/carousel/carousel';
 import { useSsrCompatible } from '@utils/use-ssr-compatible';
 import { SwiperSlide } from 'swiper/react';
 import { ProductAttributes } from './product-attributes';
@@ -15,6 +14,7 @@ import Counter from '../common/counter';
 import Button from '../common/button';
 import Link from '../ui/link';
 import ProductMetaReview from './product-meta-review';
+import Carousel from '@components/ui/carousel';
 
 const productGalleryCarouselResponsive = {
   '768': {

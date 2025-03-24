@@ -1,6 +1,5 @@
 'use client';
 
-import Carousel from '@components/ui/carousel/carousel';
 import { SwiperSlide } from 'swiper/react';
 import { useBrandsQuery } from '@services/brand/get-all-brands';
 import { ROUTES } from '@utils/routes';
@@ -9,6 +8,7 @@ import { Brand } from '@services/types';
 import SectionHeader from '@components/ui/section-header';
 import CardRoundedLoader from '@components/common/loaders/card-rounded-loader';
 import Card from '@components/ui/card';
+import Carousel from '@components/ui/carousel';
 
 interface BrandProps {
   sectionHeading: string;
