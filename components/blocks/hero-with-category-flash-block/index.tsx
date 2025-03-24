@@ -1,6 +1,5 @@
 'use client';
 
-import Carousel from '@components/ui/carousel/carousel';
 import { SwiperSlide } from 'swiper/react';
 import { useCategoriesQuery } from '@services/category/get-all-categories';
 import { useFlashSaleProductsQuery } from '@services/product/get-all-flash-sale-products';
@@ -13,6 +12,7 @@ import { homeFourGridBanners } from '@configs/banner';
 import CategoryListCardLoader from '@components/common/loaders/category-list-card-loader';
 import CategoryListCard from '@components/common/category/category-list-card';
 import SellWithProgress from '@components/ui/sale-with-progress';
+import Carousel from '@components/ui/carousel';
 
 interface Props {
   className?: string;

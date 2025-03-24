@@ -6,10 +6,10 @@ import Text from '@components/common/text';
 import Input from '@components/common/input';
 
 const data = {
-  title: 'text-subscribe-heading',
-  description: 'text-subscribe-description',
-  placeholder: 'placeholder-email-subscribe',
-  buttonText: 'button-subscribe',
+  title: 'common.text-subscribe-heading',
+  description: 'common.text-subscribe-description',
+  placeholder: 'forms.placeholder-email-subscribe',
+  buttonText: 'common.button-subscribe',
 };
 
 interface Props {
@@ -36,8 +36,7 @@ const Subscription: React.FC<Props> = ({
   } = useForm<FormValues>({
     defaultValues,
   });
-  const t = useTranslations('common');
-  const f = useTranslations('forms');
+  const t = useTranslations();
   const { title, description, buttonText, placeholder } = data;
 
   async function onSubmit(input: FormValues) {
@@ -62,17 +61,17 @@ const Subscription: React.FC<Props> = ({
         <div className="flex flex-col sm:flex-row items-start justify-end">
           <Input
             disableBorderRadius={disableBorderRadius}
-            placeholderTranslated={f(placeholder)}
+            placeholder={placeholder}
             type="email"
             variant="solid"
             className="w-full"
             inputClassName="px-4 lg:px-7 h-12 lg:h-14 text-center ltr:sm:text-left rtl:sm:text-right bg-white"
             {...register('subscription_email', {
-              required: 'forms:email-required',
+              required: 'forms.email-required',
               pattern: {
                 value:
                   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                message: 'forms:email-error',
+                message: 'forms.email-error',
               },
             })}
             errorKey={errors.subscription_email?.message}

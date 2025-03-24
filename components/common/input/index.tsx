@@ -6,7 +6,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   inputClassName?: string;
   labelKey?: string;
-  placeholderTranslated?: string;
+  placeholder?: string;
   name: string;
   errorKey?: string;
   type?: string;
@@ -17,10 +17,8 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
 
 const classes = {
   root: 'py-2 px-4 md:px-5 w-full appearance-none transition duration-150 ease-in-out border text-input text-xs lg:text-sm font-body placeholder-body min-h-12 transition duration-200 ease-in-out',
-  normal:
-    'bg-gray-100 border-gray-300 focus:shadow focus:bg-white focus:border-primary',
-  solid:
-    'bg-white border-gray-300 focus:outline-none focus:border-heading h-11 md:h-12',
+  normal: 'bg-gray-100 border-gray-300 focus:shadow focus:bg-white focus:border-primary',
+  solid: 'bg-white border-gray-300 focus:outline-none focus:border-heading h-11 md:h-12',
   outline: 'border-gray-300 focus:border-primary',
   shadow: 'focus:shadow',
 };
@@ -31,7 +29,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
       labelKey,
       name,
       errorKey,
-      placeholderTranslated,
+      placeholder,
       variant = 'normal',
       shadow = false,
       type = 'text',
@@ -58,10 +56,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
     return (
       <div className={className}>
         {labelKey && (
-          <label
-            htmlFor={name}
-            className="block text-gray-600 font-semibold text-sm leading-none mb-3 cursor-pointer"
-          >
+          <label htmlFor={name} className="block text-gray-600 font-semibold text-sm leading-none mb-3 cursor-pointer">
             {t(labelKey)}
           </label>
         )}
@@ -70,7 +65,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
           name={name}
           type={type}
           ref={ref}
-          placeholder={placeholderTranslated}
+          placeholder={t(placeholder)}
           className={rootClassName + `${!disableBorderRadius && ' rounded-md'}`}
           autoComplete="off"
           spellCheck="false"
