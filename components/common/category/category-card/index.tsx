@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Text from '@components/common/text';
 import { Category } from '@services/types';
 import { useTranslations } from 'next-intl';
+import { imageLoader } from '@/utils/image-loader';
 
 interface Props {
   category: Category;
@@ -20,7 +21,8 @@ const CategoryCard: React.FC<Props> = ({ category }) => {
         {products?.slice(0, 3)?.map((product) => (
           <Link href={`${product?.slug}`} key={`image--key${product?.id}`} className="flex rounded-md overflow-hidden">
             <Image
-              src={product?.image?.original ?? '/assets/placeholder/products/product-cat.svg'}
+              loader={imageLoader}
+              src={product?.images[0].src ?? '/assets/placeholder/products/product-cat.svg'}
               alt={name || t('text-category-thumbnail')}
               width={165}
               height={165}

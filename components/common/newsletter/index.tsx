@@ -47,7 +47,7 @@ export default function Newsletter() {
             <p className="text-body text-sm leading-6 md:leading-7">{t('common:text-newsletter-subtitle')}</p>
             <form className="pt-8 sm:pt-10 md:pt-14 mb-1 sm:mb-0" onSubmit={handleSubmit(onSubmit)}>
               <Input
-                placeholderKey="forms:placeholder-email-subscribe"
+                placeholder="forms:placeholder-email-subscribe"
                 type="email"
                 variant="solid"
                 className="w-full"

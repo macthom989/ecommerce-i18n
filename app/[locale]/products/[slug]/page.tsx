@@ -5,11 +5,11 @@ import Subscription from '@/components/ui/subscription';
 import { notFound } from 'next/navigation';
 import Container from '@components/ui/container';
 import { fetchFn } from '@/lib/fetcher-local';
-import { Metadata } from 'next';
+import { Metadata, ResolvingMetadata } from 'next';
 
-type GenerateMetadataProps = { params: { slug: string } };
+type GenerateMetadataProps = Promise<{ slug: string }>;
 const site = process.env.NEXT_PUBLIC_URL;
-export async function generateMetadata({ params }: GenerateMetadataProps): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: GenerateMetadataProps }): Promise<Metadata> {
   const { slug } = await params;
   const productUrl = `/api/products/${slug}`;
   const productResponse = await fetchFn('GET', productUrl);

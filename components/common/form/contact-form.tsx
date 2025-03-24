@@ -1,8 +1,8 @@
-import Input from '@components/ui/input';
-import Button from '@components/ui/button';
 import { useForm } from 'react-hook-form';
 import TextArea from '@components/ui/text-area';
-import { useTranslation } from 'next-i18next';
+import { useTranslations } from 'next-intl';
+import Button from '../button';
+import Input from '../input';
 
 interface ContactFormValues {
   name: string;
@@ -20,14 +20,14 @@ const ContactForm: React.FC = () => {
   function onSubmit(values: ContactFormValues) {
     console.error(values, 'contact');
   }
-  const { t } = useTranslation();
+  const t = useTranslations();
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto flex flex-col justify-center " noValidate>
       <div className="flex flex-col space-y-5">
         <div className="flex flex-col md:flex-row space-y-5 md:space-y-0">
           <Input
             labelKey="forms:label-name-required"
-            placeholderKey="forms:placeholder-name"
+            placeholder="forms.placeholder-name"
             {...register('name', { required: 'forms:name-required' })}
             className="w-full md:w-1/2 "
             errorKey={errors.name?.message}
@@ -36,7 +36,7 @@ const ContactForm: React.FC = () => {
           <Input
             labelKey="forms:label-email-required"
             type="email"
-            placeholderKey="forms:placeholder-email"
+            placeholder="forms:placeholder-email"
             {...register('email', {
               required: 'forms:email-required',
               pattern: {
@@ -54,7 +54,7 @@ const ContactForm: React.FC = () => {
           labelKey="forms:label-subject"
           {...register('subject', { required: 'forms:name-subject' })}
           className="relative"
-          placeholderKey="forms:placeholder-subject"
+          placeholder="forms.placeholder-subject"
           errorKey={errors.subject?.message}
           variant="solid"
         />
@@ -62,11 +62,11 @@ const ContactForm: React.FC = () => {
           labelKey="forms:label-message"
           {...register('message')}
           className="relative mb-4"
-          placeholderKey="forms:placeholder-message"
+          placeholder="forms.placeholder-message"
         />
         <div className="relative">
           <Button type="submit" className="h-12 lg:h-14 mt-1 text-sm lg:text-base w-full sm:w-auto">
-            {t('common:button-send-message')}
+            {t('common.button-send-message')}
           </Button>
         </div>
       </div>

@@ -121,7 +121,7 @@ const ProductOverlayCard: React.FC<ProductProps> = ({
           {variant !== 'modern' ? (
             <p
               className="text-body text-xs xl:text-sm leading-normal xl:leading-relaxed truncate max-w-[250px]"
-              dangerouslySetInnerHTML={{ __html: product?.short_description }}
+              dangerouslySetInnerHTML={{ __html: product?.short_description || '' }}
             />
           ) : (
             <Text className="pb-0.5 truncate">35 Brands, 1000+ Products</Text>
