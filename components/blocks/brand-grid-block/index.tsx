@@ -1,3 +1,5 @@
+'use client';
+
 import BrandCard from '@components/brand/brand-card';
 import SectionHeader from '@components/ui/section-header';
 import BrandCardLoader from '@components/common/loaders/brand-card-loader';
@@ -12,37 +14,29 @@ interface BrandProps {
 }
 
 const BrandGridBlock: React.FC<BrandProps> = ({
-                                                className = 'mb-12 md:mb-14 xl:mb-16',
-                                                sectionHeading,
-                                                variant = '4column',
-                                                limit = 16,
-                                              }) => {
+  className = 'mb-12 md:mb-14 xl:mb-16',
+  sectionHeading,
+  variant = '4column',
+  limit = 16,
+}) => {
   const { data, isLoading, error } = useBrandsQuery({
     limit: limit,
   });
   const brands = data?.brandsGrid;
   const columnClasses =
-    variant === '4column'
-      ? 'grid-cols-2 sm:grid-cols-4'
-      : 'grid-cols-2 sm:grid-cols-4 2xl:grid-cols-6';
+    variant === '4column' ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-2 sm:grid-cols-4 2xl:grid-cols-6';
   return (
     <div className={className}>
       <SectionHeader sectionHeading={sectionHeading} />
       {error ? (
         <Alert message={error?.message} />
       ) : (
-        <div
-          className={`grid ${columnClasses} gap-2.5 md:gap-3 lg:gap-5 xl:gap-7`}
-        >
+        <div className={`grid ${columnClasses} gap-2.5 md:gap-3 lg:gap-5 xl:gap-7`}>
           {isLoading
             ? Array.from({ length: limit }).map((_, idx) => (
-              <BrandCardLoader key={idx} uniqueKey={`top-brand-${idx}`} />
-            ))
-            : brands
-              ?.slice(0, limit)
-              .map((brand) => (
-                <BrandCard key={`brand--key${brand.id}`} brand={brand} />
-              ))}
+                <BrandCardLoader key={idx} uniqueKey={`top-brand-${idx}`} />
+              ))
+            : brands?.slice(0, limit).map((brand) => <BrandCard key={`brand--key${brand.id}`} brand={brand} />)}
         </div>
       )}
     </div>
