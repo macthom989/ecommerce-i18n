@@ -218,10 +218,12 @@ const ProductSingleDetails: React.FC<{ product: any }> = ({ product }) => {
               )}
             </ul>
           </div>
-
           <ProductMetaReview data={coll} />
         </div>
       </div>
+      {/* <div className="w-full hidden lg:block">
+        <ProductVideoSlider />
+      </div> */}
     </div>
   );
 };

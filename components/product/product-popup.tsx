@@ -49,7 +49,6 @@ export default function ProductPopup() {
   );
   const variations = getVariations(transformedData);
   const { slug, images, name, short_description: description } = data;
-
   const isSelected = !isEmpty(variations)
     ? !isEmpty(attributes) && Object.keys(variations).every((variation) => attributes.hasOwnProperty(variation))
     : true;

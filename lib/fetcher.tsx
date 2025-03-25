@@ -20,16 +20,20 @@ export const fetchFn = async <T = any,>(
   method: Method,
   endpoint: string,
   data?: any,
-): Promise<{ success: boolean; data?: T; message?: string }> => {
-  const response = await fetcher(endpoint, {
-    method,
-    data,
-    auth: {
-      username: process.env.WOOCOMMERCE_KEY || '',
-      password: process.env.WOOCOMMERCE_SECRET || '',
-    },
-  });
-  return { success: true, data: response.data };
-};
+): Promise<{ success: boolean; data?: T; headers?: any; message?: string }> => {
+  try {
+    const response: AxiosResponse = await fetcher(endpoint, {
+      method,
+      data,
+      auth: {
+        username: process.env.WOOCOMMERCE_KEY || '',
+        password: process.env.WOOCOMMERCE_SECRET || '',
+      },
+    });
 
+    return { success: true, data: response.data, headers: response.headers };
+  } catch (error: any) {
+    return { success: false, message: error.message };
+  }
+};
 export default fetcher;

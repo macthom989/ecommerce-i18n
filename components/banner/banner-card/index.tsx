@@ -50,12 +50,14 @@ export default function BannerCard({
           width={selectedImage.width}
           height={selectedImage.height}
           alt={title}
-          quality={100}
+          quality={90}
           className={cn(' bg-gray-300 object-cover', {
             'rounded-md': variant === 'rounded' && !disableBorderRadius,
           })}
           loader={imageLoader}
-          loading="eager"
+          priority
+          placeholder="blur"
+          blurDataURL={selectedImage.url}
         />
         {effectActive && (
           <div className="absolute top-0 ltr:-left-[100%] rtl:-right-[100%] h-full w-1/2 z-5 block transform ltr:-skew-x-12 rtl:skew-x-12 bg-gradient-to-r from-transparent to-white opacity-40 ltr:group-hover:animate-shine rtl:group-hover:animate-shineRTL" />

@@ -22,6 +22,7 @@ export type ProductsQueryOptionsType = {
   limit?: number;
 };
 export type QueryOptionsType = {
+  slug?: string;
   text?: string;
   category?: string;
   status?: string;

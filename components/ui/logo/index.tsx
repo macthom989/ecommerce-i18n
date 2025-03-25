@@ -1,4 +1,5 @@
 import { useUI } from '@/contexts/managed-ui-provider';
+import { imageLoader } from '@/utils/image-loader';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -8,21 +9,17 @@ const Logo = () => {
 
   return (
     <Link href={siteSettings?.logo?.href ?? '/'}>
-      {logoUrl.startsWith('http') ? (
-        <Image
-          src={logoUrl}
-          alt={siteSettings?.logo?.alt ?? 'logo'}
-          height={siteSettings?.logo?.height ?? 30}
-          width={siteSettings?.logo?.width ?? 95}
-          loading="eager"
-          unoptimized
-        />
-      ) : (
-        <>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={logoUrl} alt={siteSettings?.logo?.alt ?? 'logo'} width={siteSettings?.logo?.width ?? 95} />
-        </>
-      )}
+      <Image
+        loader={imageLoader}
+        src={logoUrl}
+        alt={siteSettings?.logo?.alt ?? 'logo'}
+        height={siteSettings?.logo?.height ?? 30}
+        width={siteSettings?.logo?.width ?? 95}
+        loading="eager"
+        fetchPriority="high"
+        priority
+        unoptimized
+      />
     </Link>
   );
 };
