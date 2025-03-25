@@ -1,4 +1,4 @@
-import axios, { AxiosResponse, Method } from 'axios';
+import axios, { Method } from 'axios';
 
 const fetcher = axios.create({
   baseURL: process.env.NEXT_PUBLIC_URL,
@@ -24,10 +24,6 @@ export const fetchFn = async <T = any,>(
   const response = await fetcher(endpoint, {
     method,
     data,
-    auth: {
-      username: process.env.WOOCOMMERCE_KEY || '',
-      password: process.env.WOOCOMMERCE_SECRET || '',
-    },
   });
   return { success: true, data: response.data };
 };
