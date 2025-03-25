@@ -1,7 +1,5 @@
 import { Product, QueryOptionsType } from '@services/types';
 import { API_ENDPOINTS } from '@services/utils/api-endpoints';
-import http from '@services/utils/axiosInstance';
-import shuffle from 'lodash/shuffle';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { fetchFn } from '@/lib/fetcher-local';
 

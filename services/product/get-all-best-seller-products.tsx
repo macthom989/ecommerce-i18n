@@ -1,17 +1,14 @@
 import { Product, QueryOptionsType } from '@services/types';
 import { API_ENDPOINTS } from '@services/utils/api-endpoints';
 import { useQuery } from '@tanstack/react-query';
+import { fetchFn } from '@lib/fetcher-local';
 
 export const fetchBestSellerProducts = async (): Promise<Product[]> => {
   try {
-    const res = await fetch(`/api/${API_ENDPOINTS.BEST_SELLER_PRODUCTS}`);
-    if (!res.ok) {
-      throw new Error(res.statusText);
-    }
-    const result: { data: Product[] } = await res.json();
-    return result.data;
+    const { data } = await fetchFn('GET', `/api/${API_ENDPOINTS.BEST_SELLER_PRODUCTS}`);
+    return data;
   } catch (error) {
-    console.error('Failed to fetch Products:', error);
+    console.error(`Failed to fetch ${API_ENDPOINTS.BEST_SELLER_PRODUCTS}:`, error);
     throw error;
   }
 };

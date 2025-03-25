@@ -1,7 +1,13 @@
 import { fetchFn } from '@/lib/fetcher';
 import { NextResponse } from 'next/server';
+import { Product } from '@services/types';
 
 export async function GET() {
-  const productsResponse = await fetchFn('GET', `/wp-json/wc/v3/products`);
-  return NextResponse.json(productsResponse.data, { status: 200 });
+  const endpoint = `/wp-json/wc/v3/products`;
+  try {
+    const { data } = await fetchFn<Product[]>('GET', endpoint);
+    return NextResponse.json(data);
+  } catch (error: any) {
+    return NextResponse.json({ success: false, message: 'Failed to fetch products' }, { status: 500 });
+  }
 }

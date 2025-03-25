@@ -8,7 +8,7 @@ export const fetchBrands = async () => {
   return data;
 };
 const fetchAncientBrands = async () => {
-  const { data } = await fetchFn('GET', API_ENDPOINTS.BRANDS);
+  const { data } = await fetchFn('GET', API_ENDPOINTS.BRANDS_ANCIENT);
   return data;
 };
 

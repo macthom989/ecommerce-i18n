@@ -5,10 +5,7 @@ interface Props {
   totalProduct?: number;
 }
 
-const ProgressCard: React.FC<Props> = ({
-                                         soldProduct = 0,
-                                         totalProduct = 0,
-                                       }) => {
+const ProgressCard: React.FC<Props> = ({ soldProduct = 0, totalProduct = 0 }) => {
   const progressBar = (100 / totalProduct) * soldProduct;
   const t = useTranslations('common');
   return (
@@ -24,10 +21,7 @@ const ProgressCard: React.FC<Props> = ({
         </div>
       </div>
       <div className="relative w-full h-2.5 lg:h-3 2xl:h-4 bg-gray-100 rounded-full overflow-hidden">
-        <div
-          className="absolute h-full bg-heading"
-          style={{ width: `${Math.round(progressBar)}%` }}
-        />
+        <div className="absolute h-full bg-heading" style={{ width: `${Math.round(progressBar)}%` }} />
       </div>
     </div>
   );

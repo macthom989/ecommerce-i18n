@@ -5,8 +5,9 @@ import { useWindowSize } from '@utils/use-window-size';
 import { ROUTES } from '@utils/routes';
 import { SwiperSlide } from 'swiper/react';
 import { useSsrCompatible } from '@utils/use-ssr-compatible';
-import { homeOneHeroBanner } from '@configs/banner';
 import Carousel from '@components/ui/carousel';
+import { useSettingQuery } from '@services/settings/use-setting';
+import { Skeleton } from '@components/ui/skeleton';
 
 const breakpoints = {
   '1500': {
@@ -19,6 +20,8 @@ const breakpoints = {
 
 const HeroBlock: React.FC = () => {
   const { width } = useSsrCompatible(useWindowSize(), { width: 0, height: 0 });
+  const { data, isLoading } = useSettingQuery({});
+
   return (
     <div className="heroBannerOne relative max-w-[1920px] mb-5 md:mb-12 lg:mb-14 2xl:mb-16 mx-auto overflow-hidden px-4 md:px-8 2xl:px-0">
       <Carousel
@@ -34,11 +37,17 @@ const HeroBlock: React.FC = () => {
           clickable: true,
         }}
       >
-        {homeOneHeroBanner?.map((banner: any) => (
-          <SwiperSlide className="carouselItem px-0 2xl:px-3.5" key={`banner--key-${banner?.id}`}>
-            <BannerCard banner={banner} href={`${ROUTES.COLLECTIONS}/${banner.slug}`} />
-          </SwiperSlide>
-        ))}
+        {isLoading && !data
+          ? Array.from([0, 1, 2]).map((val, index) => (
+              <SwiperSlide className="carouselItem px-0 2xl:px-3.5" key={`banner--key-${val}`}>
+                <Skeleton className="h-[225px]  lg:h-[792px] w-full rounded-xl bg-gray-100" />
+              </SwiperSlide>
+            ))
+          : data?.homeOneHeroBanner?.map((banner: any) => (
+              <SwiperSlide className="carouselItem px-0 2xl:px-3.5" key={`banner--key-${banner?.id}`}>
+                <BannerCard banner={banner} href={`${ROUTES.COLLECTIONS}/${banner.slug}`} />
+              </SwiperSlide>
+            ))}
       </Carousel>
     </div>
   );

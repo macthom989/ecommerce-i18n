@@ -1,11 +1,16 @@
 import { Product, QueryOptionsType } from '@services/types';
-import http from '@services/utils/axiosInstance';
 import { API_ENDPOINTS } from '@services/utils/api-endpoints';
 import { useQuery } from '@tanstack/react-query';
+import { fetchFn } from '@lib/fetcher-local';
 
-export const fetchProducts = async () => {
-  const { data } = await http.get(API_ENDPOINTS.PRODUCTS_2);
-  return data as Product[];
+export const fetchProducts = async (): Promise<Product[]> => {
+  try {
+    const { data } = await fetchFn('GET', `/api/${API_ENDPOINTS.PRODUCTS_2}`);
+    return data;
+  } catch (error) {
+    console.error(`Failed to fetch ${API_ENDPOINTS.PRODUCTS_2}:`, error);
+    throw error;
+  }
 };
 export const useProductsQuery = (options: QueryOptionsType) => {
   return useQuery<Product[], Error>({

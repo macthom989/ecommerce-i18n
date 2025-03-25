@@ -53,14 +53,14 @@ const ProductsWithFlashSale: React.FC<Props> = ({ className = 'mb-12 md:mb-14 xl
       {width < 1280 ? (
         <SellWithProgress
           carouselBreakpoint={carouselBreakpoint}
-          products={flashSellProduct?.productFlashSellGrid}
+          products={flashSellProduct ?? []}
           loading={flashSellProductLoading}
           className="col-span-full xl:col-span-2 row-span-full xl:row-auto lg:mb-1 xl:mb-0"
         />
       ) : (
         <SellWithProgress
           carouselBreakpoint={carouselBreakpoint}
-          products={flashSellProduct?.productFlashSellGrid}
+          products={flashSellProduct ?? []}
           loading={flashSellProductLoading}
           productVariant="gridSlim"
           imgWidth={330}

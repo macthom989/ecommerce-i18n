@@ -99,6 +99,7 @@ export type Product = {
   variations?: object;
   [key: string]: unknown;
   isNewArrival?: boolean;
+  sold?: number;
 };
 export type OrderItem = {
   id: number | string;
