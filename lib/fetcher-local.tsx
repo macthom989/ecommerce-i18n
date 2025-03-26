@@ -1,4 +1,4 @@
-import axios, { Method } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse, Method } from 'axios';
 
 const fetcher = axios.create({
   baseURL: process.env.NEXT_PUBLIC_URL,
@@ -20,12 +20,21 @@ export const fetchFn = async <T = any,>(
   method: Method,
   endpoint: string,
   data?: any,
-): Promise<{ success: boolean; data?: T; message?: string }> => {
-  const response = await fetcher(endpoint, {
-    method,
-    data,
-  });
-  return { success: true, data: response.data };
+  config?: AxiosRequestConfig,
+): Promise<{ success: boolean; data?: T; message?: string; headers?: any }> => {
+  try {
+    const response: AxiosResponse<T> = await fetcher(endpoint, {
+      method,
+      data,
+      auth: process.env.WOOCOMMERCE_KEY
+        ? { username: process.env.WOOCOMMERCE_KEY, password: process.env.WOOCOMMERCE_SECRET || '' }
+        : undefined,
+      ...config,
+    });
+    return { success: true, data: response.data, headers: response.headers };
+  } catch (error: any) {
+    return { success: false, message: error.message };
+  }
 };
 
 export default fetcher;

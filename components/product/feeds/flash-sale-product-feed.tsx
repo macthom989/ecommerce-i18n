@@ -6,6 +6,12 @@ import { useFlashSaleProductsQuery } from '@services/product/get-all-flash-sale-
 import classNames from 'classnames';
 import { ROUTES } from '@utils/routes';
 import Alert from '@components/ui/alert';
+import dynamic from 'next/dynamic';
+
+// Dynamic import với ssr: false để tránh render trên server
+const ProductFlashSaleLoader = dynamic(() => import('@components/common/loaders/product-flash-sale-loader'), {
+  ssr: false,
+});
 
 interface Props {
   className?: string;
@@ -14,15 +20,15 @@ interface Props {
 const banner = {
   id: 1,
   title: 'banner-on-selected-items',
-  slug: 'men\'s-collection',
+  slug: "men's-collection",
   image: {
     mobile: {
-      url: '/assets/images/banner/banner-mobile-2.jpg',
+      url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/banner-mobile-2-2.jpg',
       width: 450,
       height: 150,
     },
     desktop: {
-      url: '/assets/images/banner/banner-2.jpg',
+      url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/banner-2-2.jpg',
       width: 1190,
       height: 450,
     },
@@ -42,36 +48,35 @@ const flashSaleCarouselBreakpoint = {
   },
 };
 
-const FlashSaleBlock: React.FC<Props> = ({
-                                           className = 'mb-12 lg:mb-14 xl:mb-7',
-                                         }) => {
+const FlashSaleBlock: React.FC<Props> = ({ className = 'mb-12 lg:mb-14 xl:mb-7' }) => {
   const { data, isLoading, error } = useFlashSaleProductsQuery({
     limit: 10,
   });
 
   return (
     <div
-      className={classNames(
-        `grid grid-cols-1 xl:grid-cols-3 gap-y-12 lg:gap-y-14 xl:gap-y-0 xl:gap-x-7`,
-        className,
-      )}
+      className={classNames(`grid grid-cols-1 xl:grid-cols-3 gap-y-12 lg:gap-y-14 xl:gap-y-0 xl:gap-x-7`, className)}
     >
       <BannerCard
         key={`banner--key${banner.id}`}
         banner={banner}
-        href={`${ROUTES.COLLECTIONS}/${banner.slug}`}
+        href={`${ROUTES.COLLECTIONS}/${banner?.slug}`}
         className="xl:h-full xl:col-span-2"
         effectActive={true}
       />
       {error ? (
         <Alert message={error?.message} />
+      ) : isLoading && !data ? (
+        <ProductFlashSaleLoader />
       ) : (
-        <SellWithProgress
-          carouselBreakpoint={flashSaleCarouselBreakpoint}
-          products={data?.productFlashSellList}
-          loading={isLoading}
-          className="col-span-full xl:col-span-1 lg:mb-1 xl:mb-0"
-        />
+        data && (
+          <SellWithProgress
+            carouselBreakpoint={flashSaleCarouselBreakpoint}
+            products={data}
+            loading={isLoading}
+            className="col-span-full xl:col-span-1 lg:mb-1 xl:mb-0"
+          />
+        )
       )}
     </div>
   );

@@ -37,7 +37,7 @@ const BannerSliderBlock: React.FC<BannerProps> = ({ className = 'mb-12 md:mb-14 
         paginationVariant="circle"
         buttonGroupClassName="hidden"
       >
-        {promotionBanner.map((banner: any) => (
+        {promotionBanner?.map((banner: any) => (
           <SwiperSlide key={`banner--key${banner.id}`} className="px-1.5 md:px-2.5 xl:px-3.5">
             <BannerCard banner={banner} effectActive={true} href={`${ROUTES.COLLECTIONS}/${banner.slug}`} />
           </SwiperSlide>

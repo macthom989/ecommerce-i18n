@@ -8,11 +8,11 @@ import CookieBar from '@components/common/cookie-bar';
 import Button from '@components/common/button';
 import MobileNavigation from '@components/common/layout/mobile-navigation';
 import { useEffect } from 'react';
-import { fetchFn } from '@/lib/fetcher-local';
 import { useUI } from '@/contexts/managed-ui-provider';
 import ls, { lsKeys } from '@/lib/local-storage';
 import { useQuery } from '@tanstack/react-query';
-import HomeLoader from '../../loaders/home-loader';
+import HomeLoader from '@components/common/loaders/home-loader';
+import { fetchFn } from '@/lib/fetcher-local';
 import { API_ENDPOINTS } from '@/services/utils/api-endpoints';
 
 export default function Layout({ children }: React.PropsWithChildren<object>) {
@@ -20,18 +20,18 @@ export default function Layout({ children }: React.PropsWithChildren<object>) {
   const t = useTranslations('common');
   const { setSiteSettings } = useUI();
 
-  const { data, error, isLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['siteSettings'],
     queryFn: () => fetchFn('GET', API_ENDPOINTS.SETTING).then((res) => res.data),
     staleTime: 1000 * 60 * 60,
   });
 
   useEffect(() => {
-    if (data) {
+    if (data && !isLoading) {
       setSiteSettings(data);
       ls.set(lsKeys.SITESETTINGS, JSON.stringify(data));
     }
-  }, [data]);
+  }, [data, isLoading]);
 
   if (isLoading) return <HomeLoader />;
 

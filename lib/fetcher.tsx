@@ -22,7 +22,7 @@ export const fetchFn = async <T = any,>(
   data?: any,
 ): Promise<{ success: boolean; data?: T; headers?: any; message?: string }> => {
   try {
-    const response: AxiosResponse = await fetcher(endpoint, {
+    const response: AxiosResponse<T> = await fetcher(endpoint, {
       method,
       data,
       auth: {

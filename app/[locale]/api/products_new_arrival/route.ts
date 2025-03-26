@@ -1,6 +1,13 @@
+import { fetchFn } from '@/lib/fetcher';
 import { NextResponse } from 'next/server';
-import data from '@api/products_new_arrival.json'; // Import JSON
+import { Product } from '@services/types';
 
 export async function GET() {
-  return NextResponse.json(data); // Trả về JSON
+  const endpoint = `/wp-json/wc/v3/products`;
+  try {
+    const { data } = await fetchFn<Product[]>('GET', endpoint);
+    return NextResponse.json(data);
+  } catch (error: any) {
+    return NextResponse.json({ success: false, message: 'Failed to fetch products' }, { status: 500 });
+  }
 }

@@ -9,9 +9,10 @@ import ProgressCard from '@components/ui/progress-card';
 import SectionHeader from '@components/ui/section-header';
 import Index from '@components/ui/alert';
 import cn from 'classnames';
+import { Product } from '@services/types';
 
 interface Props {
-  products: any[];
+  products: Product[];
   loading: boolean;
   imgWidth?: number;
   imgHeight?: number;

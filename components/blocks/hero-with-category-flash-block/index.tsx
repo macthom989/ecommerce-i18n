@@ -80,7 +80,7 @@ export function CategoryListCardSection() {
                     <CategoryListCardLoader uniqueKey={`category-list-${idx}`} />
                   </SwiperSlide>
                 ))
-              : data?.categories.data.map((category: any) => (
+              : data?.map((category: any) => (
                   <SwiperSlide key={`sm-category--key${category.id}`}>
                     <CategoryListCard category={category} />
                   </SwiperSlide>
@@ -93,8 +93,8 @@ export function CategoryListCardSection() {
             ? Array.from({ length: 7 }).map((_, idx) => (
                 <CategoryListCardLoader key={idx} uniqueKey={`category-list-${idx}`} />
               ))
-            : data?.categories.data
-                .slice(0, 7)
+            : data
+                ?.slice(0, 7)
                 .map((category: any) => (
                   <CategoryListCard key={`lg-category--key${category.id}`} category={category} />
                 ))}
@@ -114,15 +114,10 @@ export function SellWithProgressCardSection() {
   return (
     <>
       {width < 1441 ? (
-        <SellWithProgress
-          products={data?.productFlashSellGridOne}
-          className="col-span-full"
-          loading={isLoading}
-          error={error?.message}
-        />
+        <SellWithProgress products={data ?? []} className="col-span-full" loading={isLoading} error={error?.message} />
       ) : (
         <SellWithProgress
-          products={data?.productFlashSellGridOne}
+          products={data ?? []}
           productVariant="gridSlim"
           loading={isLoading}
           imgWidth={330}

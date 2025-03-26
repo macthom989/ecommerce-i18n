@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import data from '@api/categories.json'; // Import JSON
 import { fetchFn } from '@/lib/fetcher';
 
 export async function GET() {

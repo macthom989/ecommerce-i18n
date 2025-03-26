@@ -1,4 +1,3 @@
-import { set } from './../../../../lib/local-storage';
 import { NextResponse } from 'next/server';
 import { fetchFn } from '@/lib/fetcher';
 
@@ -273,8 +272,62 @@ const banner = {
         },
       ],
     },
+    HeroBlock: [
+      {
+        id: 1,
+        title: 'winter collection',
+        slug: 'winter-collection',
+        image: {
+          mobile: {
+            url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/banner-mobile-1-1.jpg',
+            width: 480,
+            height: 275,
+          },
+          desktop: {
+            url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/banner-1-1.jpg',
+            width: 1800,
+            height: 800,
+          },
+        },
+      },
+      {
+        id: 2,
+        title: 'gift collection',
+        slug: 'gift-collection',
+        image: {
+          mobile: {
+            url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/banner-mobile-2-1.jpg',
+            width: 480,
+            height: 275,
+          },
+          desktop: {
+            url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/banner-2-1.jpg',
+            width: 1800,
+            height: 800,
+          },
+        },
+      },
+      {
+        id: 3,
+        title: 'party collection',
+        slug: 'party-collection',
+        image: {
+          mobile: {
+            url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/banner-mobile-3-1.jpg',
+            width: 480,
+            height: 275,
+          },
+          desktop: {
+            url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/banner-3-1.jpg',
+            width: 1800,
+            height: 800,
+          },
+        },
+      },
+    ],
   },
 };
+
 export async function GET() {
   const settingUrl = `/wp-json/hvcore-settings/v1/get`;
   const settingResponse = await fetchFn('GET', settingUrl);

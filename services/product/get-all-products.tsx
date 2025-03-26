@@ -1,7 +1,5 @@
 import { Product, QueryOptionsType } from '@services/types';
 import { API_ENDPOINTS } from '@services/utils/api-endpoints';
-import http from '@services/utils/axiosInstance';
-import shuffle from 'lodash/shuffle';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { fetchFn } from '@/lib/fetcher-local';
 
@@ -18,7 +16,7 @@ const fetchProducts = async ({
 }) => {
   const [, options] = queryKey;
   const perPage = options.limit ?? 10;
-  const { data } = await fetchFn('GET', `/api/category/${options.slug}?page=${pageParam}&per_page=${perPage}`);
+  const { data } = await fetchFn('GET', `/category/${options.slug}?page=${pageParam}&per_page=${perPage}`);
   if (!data || data.products.length === 0) {
     throw new Error('Không có sản phẩm');
   }

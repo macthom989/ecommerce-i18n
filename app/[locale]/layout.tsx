@@ -26,7 +26,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
       </head>
       <body>
         <TanStackQueryProvider>
-          <NextIntlClientProvider locale={locale} messages={messages}>
+          <NextIntlClientProvider now={new Date()} locale={locale} messages={messages}>
             <ManagedUIContext>
               <Layout>{children}</Layout>
               <ToastContainer toastClassName="!text-white" />

@@ -1,10 +1,10 @@
 import { Product, QueryOptionsType } from '@services/types';
-import http from '@services/utils/axiosInstance';
 import { API_ENDPOINTS } from '@services/utils/api-endpoints';
 import { useQuery } from '@tanstack/react-query';
+import { fetchFn } from '@lib/fetcher-local';
 
-export const fetchTopSellerProducts = async () => {
-  const { data } = await http.get(API_ENDPOINTS.TOP_SELLER_PRODUCTS);
+export const fetchTopSellerProducts = async (): Promise<Product[]> => {
+  const { data } = await fetchFn('GET', API_ENDPOINTS.TOP_SELLER_PRODUCTS);
   return data;
 };
 export const useTopSellerProductsQuery = (options: QueryOptionsType) => {
