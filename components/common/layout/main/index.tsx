@@ -13,6 +13,7 @@ import { useUI } from '@/contexts/managed-ui-provider';
 import ls, { lsKeys } from '@/lib/local-storage';
 import { useQuery } from '@tanstack/react-query';
 import HomeLoader from '../../loaders/home-loader';
+import { API_ENDPOINTS } from '@/services/utils/api-endpoints';
 
 export default function Layout({ children }: React.PropsWithChildren<object>) {
   const { acceptedCookies, onAcceptCookies } = useAcceptCookies();
@@ -21,7 +22,7 @@ export default function Layout({ children }: React.PropsWithChildren<object>) {
 
   const { data, error, isLoading } = useQuery({
     queryKey: ['siteSettings'],
-    queryFn: () => fetchFn('GET', '/api/setting').then((res) => res.data),
+    queryFn: () => fetchFn('GET', API_ENDPOINTS.SETTING).then((res) => res.data),
     staleTime: 1000 * 60 * 60,
   });
 

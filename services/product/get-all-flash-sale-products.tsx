@@ -7,12 +7,12 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchFn } from '@/lib/fetcher-local';
 
 export const fetchFlashSaleProducts = async () => {
-  const { data } = await fetchFn('GET', `/api/${API_ENDPOINTS.FLASH_SALE_PRODUCTS}`);
+  const { data } = await fetchFn('GET', API_ENDPOINTS.FLASH_SALE_PRODUCTS);
   return data;
 };
 
 const fetchAncientFlashSaleProducts = async () => {
-  const { data } = await fetchFn('GET', `/api/${API_ENDPOINTS.FLASH_SALE_PRODUCTS}`);
+  const { data } = await fetchFn('GET', API_ENDPOINTS.FLASH_SALE_PRODUCTS);
   return data;
 };
 

@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchFn } from '@/lib/fetcher-local';
 
 export const fetchCategories = async () => {
-  const { data } = await fetchFn('GET', `/api/${API_ENDPOINTS.CATEGORIES}`);
+  const { data } = await fetchFn('GET', API_ENDPOINTS.CATEGORIES);
   return {
     categories: {
       data: data as Category[],
@@ -14,7 +14,7 @@ export const fetchCategories = async () => {
 };
 
 const fetchAncientCategories = async () => {
-  const { data } = await fetchFn('GET', `/wp-json/wc/v3/products/${API_ENDPOINTS.CATEGORIES}`);
+  const { data } = await fetchFn('GET', API_ENDPOINTS.CATEGORIES);
   return {
     categories: {
       data: data as Category[],

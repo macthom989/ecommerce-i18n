@@ -5,12 +5,12 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchFn } from '@/lib/fetcher-local';
 
 export const fetchNewArrivalProducts = async () => {
-  const { data } = await await fetchFn('GET', `/api/products`);
+  const { data } = await await fetchFn('GET', API_ENDPOINTS.PRODUCTS);
   return data as Product[];
 };
 
 const fetchNewArrivalAncientProducts = async () => {
-  const { data } = await await fetchFn('GET', `/api/products`);
+  const { data } = await await fetchFn('GET', API_ENDPOINTS.PRODUCTS);
   return data as Product[];
 };
 

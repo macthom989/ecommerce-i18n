@@ -6,12 +6,13 @@ import { notFound } from 'next/navigation';
 import Container from '@components/ui/container';
 import { fetchFn } from '@/lib/fetcher-local';
 import { Metadata, ResolvingMetadata } from 'next';
+import { API_ENDPOINTS } from '@/services/utils/api-endpoints';
 
 type GenerateMetadataProps = Promise<{ slug: string }>;
 const site = process.env.NEXT_PUBLIC_URL;
 export async function generateMetadata({ params }: { params: GenerateMetadataProps }): Promise<Metadata> {
   const { slug } = await params;
-  const productUrl = `/api/products/${slug}`;
+  const productUrl = `${API_ENDPOINTS.PRODUCTS}/${slug}`;
   const productResponse = await fetchFn('GET', productUrl);
   const product = productResponse?.data;
   return {
@@ -37,7 +38,7 @@ type paramsType = Promise<{ slug: string }>;
 export default async function ProductPage({ params }: { params: paramsType }) {
   const { slug } = await params;
   if (!slug) return notFound();
-  const productUrl = `/api/products/${slug}`;
+  const productUrl = `${API_ENDPOINTS.PRODUCTS}/${slug}`;
   const productResponse = await fetchFn('GET', productUrl);
   const product = productResponse.data;
   return (

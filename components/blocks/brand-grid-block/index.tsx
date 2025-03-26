@@ -22,7 +22,8 @@ const BrandGridBlock: React.FC<BrandProps> = ({
   const { data, isLoading, error } = useBrandsQuery({
     limit: limit,
   });
-  const brands = data?.brandsGrid;
+
+  const brands = data;
   const columnClasses =
     variant === '4column' ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-2 sm:grid-cols-4 2xl:grid-cols-6';
   return (

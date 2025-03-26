@@ -10,7 +10,7 @@ export const API_ENDPOINTS = {
   COLLECTIONS: '/collections.json',
   BRANDS: '/brands',
   BRANDS_ANCIENT: '/brands_ancient.json',
-  PRODUCTS: '/products_flash_sale.json',
+  PRODUCTS: '/products',
   PRODUCTS_2: '/products_2.json',
   PRODUCTS_ANCIENT: '/products_ancient.json',
   FEATURED_PRODUCTS: '/featured_products',
@@ -30,5 +30,5 @@ export const API_ENDPOINTS = {
   SEARCH: '/search.json',
   ORDERS: '/orders.json',
   ORDER: '/order.json',
+  SETTING: '/setting',
 };
-  

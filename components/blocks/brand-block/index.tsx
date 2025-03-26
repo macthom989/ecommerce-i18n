@@ -56,8 +56,7 @@ const BrandBlock: React.FC<BrandProps> = ({
     limit: 8,
     demoVariant,
   });
-  const brands = data?.brands;
-
+  const brands = data;
   return (
     <div className={className}>
       <SectionHeader sectionHeading={sectionHeading} />

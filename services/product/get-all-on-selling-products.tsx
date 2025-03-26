@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchFn } from '@/lib/fetcher-local';
 
 export const fetchOnSellingProducts = async () => {
-  const { data } = await await fetchFn('GET', `/api/products`);
+  const { data } = await await fetchFn('GET', API_ENDPOINTS.PRODUCTS);
   return data;
 };
 export const useOnSellingProductsQuery = (options: QueryOptionsType) => {

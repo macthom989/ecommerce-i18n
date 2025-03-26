@@ -45,6 +45,7 @@ export type Attachment = {
   id: string | number;
   thumbnail: string;
   original: string;
+  src?: string;
 };
 export type Category = {
   id: number | string;
