@@ -1,46 +1,10 @@
+'use client';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { FaInstagram } from 'react-icons/fa';
 import cn from 'classnames';
 import { useTranslations } from 'next-intl';
-
-const instagramFeed = [
-  {
-    id: 1,
-    title: 'text-man',
-    slug: '/#',
-    image: '/assets/images/instagram/1.jpg',
-  },
-  {
-    id: 2,
-    title: 'text-woman',
-    slug: '/#',
-    image: '/assets/images/instagram/2.jpg',
-  },
-  {
-    id: 3,
-    title: 'text-watch',
-    slug: '/#',
-    image: '/assets/images/instagram/3.jpg',
-  },
-  {
-    id: 4,
-    title: 'text-man',
-    slug: '/#',
-    image: '/assets/images/instagram/4.jpg',
-  },
-  {
-    id: 5,
-    title: 'text-sports',
-    slug: '/#',
-    image: '/assets/images/instagram/5.jpg',
-  },
-  {
-    id: 6,
-    title: 'text-fashion',
-    slug: '/#',
-    image: '/assets/images/instagram/6.jpg',
-  },
-];
+import { imageLoader } from '@/utils/image-loader';
 
 interface Props {
   className?: string;
@@ -50,6 +14,30 @@ interface Props {
 
 const Instagram: React.FC<Props> = ({ className = '', variant, disableContainerBorderRadius = false }) => {
   const t = useTranslations('common');
+  const [posts, setPosts] = useState<any[]>([]);
+
+  // 🔥 Hàm fetch dữ liệu từ Instagram API
+  const fetchInstagramPosts = async () => {
+    try {
+      const accessToken =
+        'IGAAOSQWKRjDNBZAE1VeHpZALWEyYXZAEUEtyaG5VWExlendYSDVscnJzU3BwcHNjREFyb2Job1RmNVJubm04UVFyYk9xSFQwR2l1UTFpazNuWDRNRzlsUFJTUGloeTc1b0FwYzgyeDZAUMWxwdXZAsRFZA0c1FyRHJzMzBucThoZATNWYwZDZD'; // 🔥 Thay bằng Access Token của bạn
+      const userId = '17841409268757013';
+
+      const response = await fetch(
+        `https://graph.instagram.com/${userId}/media?fields=id,caption,media_type,media_url,permalink,timestamp&access_token=${accessToken}`,
+      );
+      const data = await response.json();
+      setPosts(data.data || []);
+    } catch (error) {
+      console.error('Lỗi khi lấy dữ liệu Instagram:', error);
+    }
+  };
+
+  // Gọi API khi component được render
+  useEffect(() => {
+    fetchInstagramPosts();
+  }, []);
+
   return (
     <div
       className={cn(
@@ -60,29 +48,40 @@ const Instagram: React.FC<Props> = ({ className = '', variant, disableContainerB
         className,
       )}
     >
-      {instagramFeed?.map((item) => (
-        <a className="group flex justify-center text-center relative" href={item.slug} key={`instagram--key${item.id}`}
-           target="_blank">
-          <Image
-            src={item.image ?? '/assets/placeholder/instagram.svg'}
-            alt={t(`${item.title}`) || t('text-instagram-thumbnail')}
-            width={300}
-            height={300}
-            className={cn('bg-gray-300 object-cover', {
-              'rounded-md': variant === 'rounded',
-            })}
-          />
-          <div
-            className={cn('absolute top left bg-black w-full h-full opacity-0 transition-opacity duration-300 group-hover:opacity-50', {
-              'rounded-md': variant === 'rounded',
-            })}
-          />
-          <div className="absolute top left h-full w-full flex items-center justify-center">
-            <FaInstagram
-              className="text-white text-base sm:text-xl md:text-3xl lg:text-5xl xl:text-6xl transform opacity-0 scale-400 transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:scale-100" />
-          </div>
-        </a>
-      ))}
+      {posts.length > 0 ? (
+        posts.map((post) => (
+          <a
+            className="group flex justify-center text-center relative"
+            href={post.permalink}
+            key={post.id}
+            target="_blank"
+          >
+            <Image
+              loader={imageLoader}
+              src={post.media_url}
+              alt={post.caption || t('text-instagram-thumbnail')}
+              width={300}
+              height={300}
+              className={cn('bg-gray-300 object-cover', {
+                'rounded-md': variant === 'rounded',
+              })}
+            />
+            <div
+              className={cn(
+                'absolute top left bg-black w-full h-full opacity-0 transition-opacity duration-300 group-hover:opacity-50',
+                {
+                  'rounded-md': variant === 'rounded',
+                },
+              )}
+            />
+            <div className="absolute top left h-full w-full flex items-center justify-center">
+              <FaInstagram className="text-white text-base sm:text-xl md:text-3xl lg:text-5xl xl:text-6xl transform opacity-0 scale-400 transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:scale-100" />
+            </div>
+          </a>
+        ))
+      ) : (
+        <p className="text-center col-span-3 md:col-span-6">Đang tải dữ liệu Instagram...</p>
+      )}
     </div>
   );
 };

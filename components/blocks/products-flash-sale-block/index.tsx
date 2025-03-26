@@ -55,7 +55,10 @@ function ProductFlashSaleWrapper({
       >
         <div className="flex justify-between items-center flex-wrap mb-5 md:mb-6">
           <SectionHeader sectionHeading={sectionHeading || ''} className="mb-0" />
-          {!hideCountdown && <Countdown date={date} intervalDelay={1000} renderer={renderer} />}
+          <div className="min-w-[120px] min-h-[40px] flex items-center justify-center">
+            {!hideCountdown && <Countdown date={date} intervalDelay={1000} renderer={renderer} />}
+          </div>
+          {/* {!hideCountdown && <Countdown date={date} intervalDelay={1000} renderer={renderer} />} */}
         </div>
         {children}
       </div>

@@ -31,7 +31,7 @@ export default function Layout({ children }: React.PropsWithChildren<object>) {
       setSiteSettings(data);
       ls.set(lsKeys.SITESETTINGS, JSON.stringify(data));
     }
-  }, [JSON.stringify(data)]);
+  }, [data]);
 
   if (isLoading) return <HomeLoader />;
 

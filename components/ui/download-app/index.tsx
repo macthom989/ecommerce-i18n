@@ -17,7 +17,7 @@ const DownloadApps: React.FC<Props> = ({ className, variant, disableBorderRadius
   const data = siteSettings?.bannerTheme?.DownloadApps;
   const { appButtons, title, subTitle, appImage, appImage2, appImage3 } = data ?? {};
   const t = useTranslations('common');
-  const hasMounted = useSsrCompatible(true, false);
+  // const hasMounted = useSsrCompatible(true, false);
   if (!data) return;
   return (
     <div
@@ -31,14 +31,14 @@ const DownloadApps: React.FC<Props> = ({ className, variant, disableBorderRadius
           <Text variant="mediumHeading" className="-mt-1 mb-2 md:mb-3 lg:mb-3.5 xl:mb-4">
             {t(`${title}`)}
           </Text>
-          {hasMounted && (
+          {/* {hasMounted && (
             <h2
               className="mb-6 font-normal leading-7 text-heading text-md sm:text-xl md:text-3xl xl:text-4xl 2xl:text-5xl sm:leading-8 md:leading-snug xl:leading-relaxed 2xl:leading-snug md:mb-8 lg:mb-9 xl:mb-12 2xl:mb-14 ltr:lg:pr-20 ltr:2xl:pr-0 rtl:lg:pl-20 rtl:2xl:pl-0"
               dangerouslySetInnerHTML={{
                 __html: t(`${subTitle}`),
               }}
             />
-          )}
+          )} */}
           <div className="flex justify-center px-6 sm:justify-start gap-x-2 md:gap-x-3 sm:px-0">
             {appButtons?.map((item) => (
               <Link
