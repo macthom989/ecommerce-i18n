@@ -27,7 +27,7 @@ interface BannerProps {
 
 const BannerBlock: React.FC<BannerProps> = ({ className = 'mb-12 md:mb-14 xl:mb-16 px-2.5' }) => {
   const { siteSettings } = useUI();
-  const data = siteSettings?.banners;
+  const data = siteSettings?.bannerTheme?.BannerBlock;
   return (
     <div className={`${className} grid grid-cols-2 sm:grid-cols-9 gap-2 md:gap-2.5 max-w-[1920px] mx-auto`}>
       {data &&

@@ -4,7 +4,7 @@ import BannerCard from '@components/banner/banner-card';
 import Carousel from '@components/carousel/carousel';
 import { SwiperSlide } from 'swiper/react';
 import { ROUTES } from '@utils/routes';
-import { promotionBanner } from '@configs/banner';
+import { useUI } from '@/contexts/managed-ui-provider';
 
 interface BannerProps {
   className?: string;
@@ -20,6 +20,8 @@ const breakpoints = {
 };
 
 const BannerSliderBlock: React.FC<BannerProps> = ({ className = 'mb-12 md:mb-14 xl:mb-16' }) => {
+  const { siteSettings } = useUI();
+  const promotionBanner = siteSettings?.bannerTheme?.BannerSliderBlock;
   return (
     <div className={`${className} mx-auto max-w-[1920px] overflow-hidden`}>
       <Carousel

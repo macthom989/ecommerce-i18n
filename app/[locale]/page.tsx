@@ -49,20 +49,24 @@ export default function Page() {
         <Container>
           <CategoryBlock sectionHeading="text-shop-by-category" type="rounded" />
           <ProductsFeatured sectionHeading="text-featured-products" limit={5} />
-          <BannerCard
-            key={`banner--key${homeThreeBanner[0].id}`}
-            banner={homeThreeBanner[0]}
-            href={`${ROUTES.COLLECTIONS}/${homeThreeBanner[0].slug}`}
-            className="mb-12 lg:mb-14 xl:mb-16 pb-0.5 lg:pb-1 xl:pb-0"
-          />
+          {siteSettings.bannerTheme && (
+            <BannerCard
+              key={`banner--key${siteSettings?.bannerTheme?.BannerCard[0].id}`}
+              banner={siteSettings?.bannerTheme?.BannerCard[0]}
+              href={`${ROUTES.COLLECTIONS}/${siteSettings?.bannerTheme?.BannerCard[0].slug}`}
+              className="mb-12 lg:mb-14 xl:mb-16 pb-0.5 lg:pb-1 xl:pb-0"
+            />
+          )}
 
           <BrandGridBlock sectionHeading="text-top-brands" />
-          <BannerCard
-            key={`banner--key${homeThreeBanner[1].id}`}
-            banner={homeThreeBanner[1]}
-            href={`${ROUTES.COLLECTIONS}/${homeThreeBanner[1].slug}`}
-            className="mb-12 lg:mb-14 xl:mb-16 pb-0.5 lg:pb-1 xl:pb-0"
-          />
+          {siteSettings.bannerTheme && (
+            <BannerCard
+              key={`banner--key${siteSettings?.bannerTheme?.BannerCard[1].id}`}
+              banner={siteSettings?.bannerTheme?.BannerCard[1]}
+              href={`${ROUTES.COLLECTIONS}/${siteSettings?.bannerTheme?.BannerCard[1].slug}`}
+              className="mb-12 lg:mb-14 xl:mb-16 pb-0.5 lg:pb-1 xl:pb-0"
+            />
+          )}
           <BannerWithProducts sectionHeading="text-on-selling-products" categorySlug="/search" />
           <ExclusiveBlock />
           <NewArrivalsProductFeed />
