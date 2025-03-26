@@ -22,6 +22,7 @@ export default function Layout({ children }: React.PropsWithChildren<object>) {
   const { data, error, isLoading } = useQuery({
     queryKey: ['siteSettings'],
     queryFn: () => fetchFn('GET', '/api/setting').then((res) => res.data),
+    staleTime: 1000 * 60 * 60,
   });
 
   useEffect(() => {

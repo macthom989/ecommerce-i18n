@@ -16,8 +16,8 @@ const CartButton = dynamic(() => import('@components/cart/cart-button'), {
   ssr: false,
 });
 
-const { site_header } = siteSettings;
 const Header: React.FC = () => {
+  const { siteSettings } = useUI();
   const { openSearch, openModal, setModalView, isAuthorized } = useUI();
   const t = useTranslations('common');
   const siteHeaderRef = useRef<HTMLDivElement>(null);
@@ -30,22 +30,19 @@ const Header: React.FC = () => {
 
   return (
     <header id="siteHeader" ref={siteHeaderRef} className="relative z-20 w-full h-16 sm:h-20 lg:h-24">
-      <div
-        className="fixed z-20 w-full h-16 px-4 text-gray-700 transition duration-200 ease-in-out bg-white innerSticky body-font sm:h-20 lg:h-24 md:px-8 lg:px-6">
+      <div className="fixed z-20 w-full h-16 px-4 text-gray-700 transition duration-200 ease-in-out bg-white innerSticky body-font sm:h-20 lg:h-24 md:px-8 lg:px-6">
         <div className="flex items-center justify-center mx-auto max-w-[1920px] h-full w-full">
           <Logo />
 
           <HeaderMenu
-            data={site_header.menu}
+            data={siteSettings.menus}
             className="hidden lg:flex ltr:md:ml-6 rtl:md:mr-6 ltr:xl:ml-10 rtl:xl:mr-10"
           />
 
-          <div
-            className="flex-shrink-0 ltr:ml-auto rtl:mr-auto ltr:lg:mr-5 rtl:lg:ml-5 ltr:xl:mr-8 rtl:xl:ml-8 ltr:2xl:mr-10 rtl:2xl:ml-10">
+          <div className="flex-shrink-0 ltr:ml-auto rtl:mr-auto ltr:lg:mr-5 rtl:lg:ml-5 ltr:xl:mr-8 rtl:xl:ml-8 ltr:2xl:mr-10 rtl:2xl:ml-10">
             <LanguageSwitcher />
           </div>
-          <div
-            className="items-center justify-end flex-shrink-0 hidden lg:flex gap-x-6 lg:gap-x-5 xl:gap-x-8 2xl:gap-x-10 ltr:ml-auto rtl:mr-auto">
+          <div className="items-center justify-end flex-shrink-0 hidden lg:flex gap-x-6 lg:gap-x-5 xl:gap-x-8 2xl:gap-x-10 ltr:ml-auto rtl:mr-auto">
             <button
               className="relative flex items-center justify-center flex-shrink-0 h-auto transform focus:outline-none"
               onClick={openSearch}

@@ -15,6 +15,7 @@ import BannerCard from '@components/banner/banner-card';
 
 import dynamic from 'next/dynamic';
 import Subscription from '@components/ui/subscription';
+import { useUI } from '@/contexts/managed-ui-provider';
 
 const ProductsFeatured = dynamic(() => import('@blocks/products-featured-block'), { ssr: false });
 const BannerSliderBlock = dynamic(() => import('@blocks/banner-slider-block'), { ssr: false });
@@ -24,6 +25,7 @@ const ExclusiveBlock = dynamic(() => import('@blocks/exclusive-block'), { ssr: f
 const BannerWithProducts = dynamic(() => import('@blocks/banner-with-products-block'), { ssr: false });
 
 export default function Page() {
+  const { siteSettings } = useUI();
   return (
     <div className="flex flex-col min-h-screen">
       <div
@@ -35,7 +37,13 @@ export default function Page() {
       >
         <BannerBlock />
         <Container>
-          <ProductsFlashSaleBlock date={'2025-12-01T01:02:03'} />
+          <ProductsFlashSaleBlock
+            date={
+              siteSettings.flash_sale_time_type === 'loop'
+                ? new Date(Date.now() + siteSettings.flash_sale_loop_hours * 60 * 60 * 1000).toISOString()
+                : siteSettings.flash_sale_end_time_block
+            }
+          />
         </Container>
         <BannerSliderBlock />
         <Container>

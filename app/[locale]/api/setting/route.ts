@@ -5,26 +5,28 @@ import { fetchFn } from '@/lib/fetcher';
 export const revalidate = 60;
 
 export async function GET() {
-  //   const settingUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/wp-json/hvcore-settings/v1/get`;
-  //   const settingResponse = await fetchFn('GET', settingUrl);
-  //   const setting = await settingResponse.data;
+  const settingUrl = `/wp-json/hvcore-settings/v1/get`;
+  const settingResponse = await fetchFn('GET', settingUrl);
+  const setting = await settingResponse.data;
 
-  const setting = {
-    site_name: 'Hv Core',
-    name: 'Default Theme',
-    description: 'A customizable theme.',
-    author: 'Admin',
+  const settingConst = {
+    site_name: setting.site_name || 'Hv Theme',
+    name: setting.name || 'Hv Theme',
+    description:
+      setting.description ||
+      'Fastest E-commerce template built with React, NextJS, TypeScript, @tanstack/react-query and Tailwind CSS.',
+    author: setting.author || 'REDQ',
     logo: {
-      id: 96,
+      ...setting.logo,
       alt: '',
       href: '/',
       width: 95,
       height: 30,
-      url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/Hv-Theme-1.png',
     },
-    defaultLanguage: 'en',
-    currencyCode: 'USD',
-    themeType: 'Modern',
+    defaultLanguage: setting.defaultLanguage || 'en',
+    currencyCode: setting.currencyCode || 'USD',
+    themeType: setting.themeType || 'light',
+    menus: setting.menus[0].items || [],
     site_header: {
       menu: 20,
       mobileMenu: 20,
@@ -143,12 +145,33 @@ export async function GET() {
         type: 'medium',
       },
     ],
-    flash_sale_categories: [19],
-    flash_sale_time_type: 'from_to',
-    flash_sale_loop_hours: 2,
+    bannersStandard: [
+      {
+        id: 1,
+        title: "Men's Collection",
+        slug: 'mens-collection',
+        image: {
+          mobile: {
+            url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/hero-banner-3.jpg',
+            width: 1920,
+            height: 900,
+          },
+          desktop: {
+            url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/hero-banner-3.jpg',
+            width: 1920,
+            height: 900,
+          },
+        },
+        type: 'medium',
+      },
+    ],
+    flash_sale_categories: [22],
+    flash_sale_time_type: 'from-to',
+    flash_sale_loop_hours: 10,
     flash_sale_category: 15,
     flash_sale_start_time: '17:00',
     flash_sale_end_time: '20:00',
+    flash_sale_end_time_block: '2025-03-30T01:02:03',
   };
-  return NextResponse.json(setting, { status: 200 });
+  return NextResponse.json(settingConst, { status: 200 });
 }
