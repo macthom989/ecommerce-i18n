@@ -60,13 +60,13 @@ const HeroWithCategory: React.FC<Props> = ({
             breakpoints={categoryResponsive}
             buttonSize="small"
           >
-            {!data?.categories?.data?.length && isLoading
+            {!data && isLoading
               ? Array.from({ length: 8 }).map((_, idx) => (
                   <SwiperSlide key={`category-list-${idx}`}>
                     <CategoryListCardLoader uniqueKey={`category-list-${idx}`} />
                   </SwiperSlide>
                 ))
-              : data?.categories?.data?.map((category) => (
+              : data?.map((category) => (
                   <SwiperSlide key={`category--key${category.id}`}>
                     <CategoryListCard category={category} />
                   </SwiperSlide>
@@ -75,10 +75,10 @@ const HeroWithCategory: React.FC<Props> = ({
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-3 ltr:2xl:-mr-14 rtl:2xl:-ml-14">
-          {!data?.categories?.data?.length && isLoading ? (
+          {!data && isLoading ? (
             <CategoryListFeedLoader limit={8} />
           ) : (
-            data?.categories?.data
+            data
               ?.slice(0, 8)
               .map((category) => <CategoryListCard key={`category--key${category.id}`} category={category} />)
           )}

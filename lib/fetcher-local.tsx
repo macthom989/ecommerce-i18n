@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse, Method,AxiosResponseHeaders } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse, Method } from 'axios';
 
 const fetcher = axios.create({
   baseURL: process.env.NEXT_PUBLIC_URL,
@@ -21,7 +21,7 @@ export const fetchFn = async <T = any,>(
   endpoint: string,
   data?: any,
   config?: AxiosRequestConfig,
-): Promise<{ success: boolean; data?: T; message?: string }> => {
+): Promise<{ success: boolean; data?: T; message?: string; headers?: any }> => {
   try {
     const response: AxiosResponse<T> = await fetcher(endpoint, {
       method,
@@ -31,7 +31,7 @@ export const fetchFn = async <T = any,>(
         : undefined,
       ...config,
     });
-    return { success: true, data: response.data };
+    return { success: true, data: response.data, headers: response.headers };
   } catch (error: any) {
     return { success: false, message: error.message };
   }

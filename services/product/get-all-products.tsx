@@ -16,7 +16,7 @@ const fetchProducts = async ({
 }) => {
   const [, options] = queryKey;
   const perPage = options.limit ?? 10;
-  const { data } = await fetchFn('GET', `/api/category/${options.slug}?page=${pageParam}&per_page=${perPage}`);
+  const { data } = await fetchFn('GET', `/category/${options.slug}?page=${pageParam}&per_page=${perPage}`);
   if (!data || data.products.length === 0) {
     throw new Error('Không có sản phẩm');
   }

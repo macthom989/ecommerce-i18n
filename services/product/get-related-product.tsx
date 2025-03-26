@@ -4,13 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchFn } from '@lib/fetcher-local';
 
 export const fetchRelatedProducts = async (): Promise<Product[]> => {
-  try {
-    const { data } = await fetchFn('GET', `/api/${API_ENDPOINTS.RELATED_PRODUCTS}`);
-    return data;
-  } catch (error) {
-    console.error(`Failed to fetch ${API_ENDPOINTS.RELATED_PRODUCTS}:`, error);
-    throw error;
-  }
+  const { data } = await fetchFn('GET', API_ENDPOINTS.RELATED_PRODUCTS);
+  return data;
 };
 export const useRelatedProductsQuery = (options: QueryOptionsType) => {
   return useQuery<Product[], Error>({

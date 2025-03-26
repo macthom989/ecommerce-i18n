@@ -11,7 +11,7 @@ export const fetchFlashSaleProducts = async () => {
 };
 
 const fetchAncientFlashSaleProducts = async () => {
-  const { data } = await fetchFn('GET', API_ENDPOINTS.FLASH_SALE_PRODUCTS);
+  const { data } = await fetchFn('GET', API_ENDPOINTS.FLASH_SALE_PRODUCTS_ANCIENT);
   return data;
 };
 
