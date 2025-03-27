@@ -11,6 +11,7 @@ interface CartProviderState extends State {
   // updateItem: (id: Item['id'], payload: object) => void;
   // updateItemQuantity: (id: Item['id'], quantity: number) => void;
   clearItemFromCart: (id: Item['id']) => void;
+  clearAllItemsFromCart: () => void;
   getItemFromCart: (id: Item['id']) => any | undefined;
   isInCart: (id: Item['id']) => boolean;
   // updateCartMetadata: (metadata: Metadata) => void;
@@ -43,6 +44,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const addItemToCart = (item: Item, quantity: number) => dispatch({ type: 'ADD_ITEM_WITH_QUANTITY', item, quantity });
   const removeItemFromCart = (id: Item['id']) => dispatch({ type: 'REMOVE_ITEM_OR_QUANTITY', id });
   const clearItemFromCart = (id: Item['id']) => dispatch({ type: 'REMOVE_ITEM', id });
+  const clearAllItemsFromCart = () => dispatch({ type: 'RESET_CART' });
   const isInCart = (id: Item['id']) => !!getItem(state.items, id);
   const getItemFromCart = (id: Item['id']) => getItem(state.items, id);
   // const inStock=()=>{}
@@ -52,6 +54,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
       addItemToCart,
       removeItemFromCart,
       clearItemFromCart,
+      clearAllItemsFromCart,
       getItemFromCart,
       isInCart,
     }),
