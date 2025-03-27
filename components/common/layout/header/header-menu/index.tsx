@@ -29,20 +29,19 @@ const HeaderMenu: React.FC<MenuProps> = ({ data, className }) => {
             )}
           </Link>
 
-          {item?.children && Array.isArray(item.children) && <MegaMenu columns={item.children} />}
+          {item?.type !== 'custom' && Array.isArray(item.children) && <MegaMenu columns={item.children} />}
 
-          {/* {item?.children && Array.isArray(item.children) && (
+          {item?.type === 'custom' && item.children.length > 0 && Array.isArray(item.children) && (
             <div className="absolute invisible bg-gray-200 opacity-0 group-hover:visible subMenu shadow-header ltr:left-0 rtl:right-0 group-hover:opacity-100">
               <ul className="py-5 text-sm text-body">
-                {item.subMenu.map((menu: any, index: number) => {
+                {item.children.map((menu: any, index: number) => {
                   const dept: number = 1;
                   const menuName: string = `sidebar-menu-${dept}-${index}`;
-
                   return (
                     <ListMenu
-                      dept={dept}
+                      // dept={dept}
                       data={menu}
-                      hasSubMenu={menu.subMenu}
+                      // hasSubMenu={menu.subMenu}
                       menuName={menuName}
                       key={menuName}
                       menuIndex={index}
@@ -51,7 +50,7 @@ const HeaderMenu: React.FC<MenuProps> = ({ data, className }) => {
                 })}
               </ul>
             </div>
-          )} */}
+          )}
         </div>
       ))}
     </nav>

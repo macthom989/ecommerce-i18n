@@ -3,12 +3,13 @@ import React from 'react';
 import { useLocalStorage } from '@utils/use-local-storage';
 import { cartReducer, initialState, State } from '@contexts/cart/cart-reducer';
 import { getItem, Item } from '@contexts/cart/cart-utils';
+import { Metadata } from 'next';
 
 interface CartProviderState extends State {
   addItemToCart: (item: Item, quantity: number) => void;
   removeItemFromCart: (id: Item['id']) => void;
-  // updateItem: (id: Item["id"], payload: object) => void;
-  // updateItemQuantity: (id: Item["id"], quantity: number) => void;
+  // updateItem: (id: Item['id'], payload: object) => void;
+  // updateItemQuantity: (id: Item['id'], quantity: number) => void;
   clearItemFromCart: (id: Item['id']) => void;
   getItemFromCart: (id: Item['id']) => any | undefined;
   isInCart: (id: Item['id']) => boolean;

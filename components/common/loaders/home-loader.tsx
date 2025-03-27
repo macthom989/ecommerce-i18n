@@ -1,6 +1,14 @@
+import { useEffect, useState } from 'react';
 import ContentLoader from 'react-content-loader';
 
 const HomeLoader = (props: any) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
   return (
     <ContentLoader
       speed={2}

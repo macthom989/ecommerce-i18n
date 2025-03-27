@@ -1,29 +1,26 @@
-'use client';
-import React, { useEffect, useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import cn from 'classnames';
 import SearchBox from '@components/common/search-box';
-import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
-import SearchProduct from '@components/common/search-product';
-import { useUI } from '@contexts/managed-ui-provider';
-import SearchResultLoader from '@components/common/loaders/search-result-loader';
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 import Scrollbar from '@components/common/scrollbar';
+import SearchProduct from '@components/common/search-product';
+import { useSearchQuery } from '@/services/product/use-search';
+import { useUI } from '@/contexts/managed-ui-provider';
+import SearchResultLoader from '../loaders/search-result-loader';
 
 export default function Search() {
   const { displaySearch, closeSearch } = useUI();
   const [searchText, setSearchText] = React.useState('');
-  const { data, isLoading } = {
-    data: [],
-    isLoading: false,
-  };
+  const { data, isLoading } = useSearchQuery({
+    text: searchText,
+  });
 
   function handleSearch(e: React.SyntheticEvent) {
     e.preventDefault();
   }
-
   function handleAutoSearch(e: React.FormEvent<HTMLInputElement>) {
     setSearchText(e.currentTarget.value);
   }
-
   function clear() {
     setSearchText('');
   }
@@ -92,7 +89,7 @@ export default function Search() {
                     ) : (
                       data?.map((item: any, index: number) => (
                         <div
-                          key={item.key}
+                          key={index}
                           className=" p-5 border-b border-gray-150 relative last:border-b-0"
                           onClick={closeSearch}
                         >
