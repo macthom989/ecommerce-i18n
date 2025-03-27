@@ -26,6 +26,11 @@ const CollectionCard: React.FC<Props> = ({
 }) => {
   const { slug, image, title, description } = collection;
   const t = useTranslations('common');
+
+  const imageLoader = ({ src }: { src: string }) => {
+    return src.startsWith('http') ? src : `${image}`;
+  };
+
   return (
     <Link
       href={slug}
@@ -40,7 +45,8 @@ const CollectionCard: React.FC<Props> = ({
       <div className="flex mx-auto flex-col relative">
         <div className="flex">
           <Image
-            src={image ?? '/assets/placeholder/collection.svg'}
+            loader={imageLoader}
+            src={image}
             alt={t('text-card-thumbnail')}
             width={Number(imgWidth)}
             height={Number(imgHeight)}

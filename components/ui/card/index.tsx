@@ -4,6 +4,7 @@ import { FaLink } from 'react-icons/fa';
 import Link, { LinkProps } from 'next/link';
 import { useTranslations } from 'next-intl';
 import { imageLoader } from '@/utils/image-loader';
+import { cn } from '@lib/utils';
 
 interface Props {
   item: any;
@@ -40,7 +41,7 @@ const Card: React.FC<Props> = ({
           !disableBorderRadius && (variant === 'rounded' ? 'rounded-md' : 'rounded-full')
         }`}
       >
-        <div className="flex">
+        <div className={cn('flex', { 'aspect-square': variant === 'circle' })}>
           <Image
             loader={imageLoader}
             src={image?.src ?? placeholderImage}
@@ -51,7 +52,7 @@ const Card: React.FC<Props> = ({
             className={`object-cover bg-gray-300 ${!disableBorderRadius && (variant === 'rounded' ? 'rounded-md' : 'rounded-full')}`}
           />
         </div>
-        {effectActive === true && (
+        {effectActive && (
           <>
             <div
               className={`absolute top left bg-black w-full h-full opacity-0 transition-opacity duration-300 group-hover:opacity-30 ${
@@ -64,7 +65,7 @@ const Card: React.FC<Props> = ({
           </>
         )}
       </div>
-      {!!showName !== false && (
+      {showName && (
         <Text variant="heading" className="capitalize">
           {name}
         </Text>

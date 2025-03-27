@@ -10,6 +10,7 @@ import SectionHeader from '@components/ui/section-header';
 import Index from '@components/ui/alert';
 import cn from 'classnames';
 import { Product } from '@services/types';
+import isEmpty from 'lodash/isEmpty';
 
 interface Props {
   products: Product[];
@@ -50,6 +51,10 @@ const SellWithProgress: React.FC<Props> = ({
   imgHeight = 210,
   carouselBreakpoint,
 }) => {
+  if (isEmpty(products)) {
+    return null;
+  }
+
   return (
     <div
       className={`flex flex-col border border-gray-300 rounded-lg pt-6 sm:pt-7 lg:pt-8 xl:pt-7 2xl:pt-9 px-4 md:px-5 lg:px-7 pb-6 lg:pb-7 ${
