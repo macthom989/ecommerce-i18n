@@ -339,7 +339,7 @@ export async function GET() {
     description:
       setting.description ||
       'Fastest E-commerce template built with React, NextJS, TypeScript, @tanstack/react-query and Tailwind CSS.',
-    author: setting.author || 'REDQ',
+    author: setting.author || 'Hv Theme',
     logo: {
       ...setting.logo,
       alt: '',
