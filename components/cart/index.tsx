@@ -4,7 +4,7 @@ import { fadeInOut } from '@/services/utils/motion/fade-in-out';
 import { useUI } from '@contexts/managed-ui-provider';
 import { useCart } from '@contexts/cart/cart-context';
 import usePrice from '@/services/product/use-price';
-import { IoClose } from 'react-icons/io5';
+import { IoClose, IoTrashOutline } from 'react-icons/io5';
 import CartItem from './cart-item';
 import EmptyCart from './empty-cart';
 import { ROUTES } from '@utils/routes';
@@ -15,7 +15,7 @@ import Link from 'next/link';
 export default function Cart() {
   const t = useTranslations('common');
   const { closeCart } = useUI();
-  const { items, total, isEmpty } = useCart();
+  const { items, total, isEmpty, clearAllItemsFromCart } = useCart();
   const { price: cartTotal } = usePrice({
     amount: total,
     currencyCode: 'USD',
@@ -51,7 +51,19 @@ export default function Cart() {
         </motion.div>
       )}
 
-      <div className="flex flex-col px-5 pt-2 pb-5 md:px-7 md:pb-7" onClick={closeCart}>
+      <div className="flex flex-col px-5 pt-2 pb-5 md:px-7 md:pb-7">
+        {!isEmpty && (
+          <div className="mb-3 w-full">
+            <button
+              onClick={clearAllItemsFromCart}
+              className="w-full px-5 py-2 flex items-center justify-center rounded-md text-sm text-red-600 border border-red-200 hover:bg-red-50 transition duration-300"
+            >
+              <IoTrashOutline className="mr-2" />
+              {t('text-remove-all-items')}
+            </button>
+          </div>
+        )}
+
         <Link
           href={!isEmpty ? ROUTES.CHECKOUT : '/'}
           className={cn(
