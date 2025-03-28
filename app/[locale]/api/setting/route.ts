@@ -190,6 +190,76 @@ const banner = {
         type: 'small',
       },
     ],
+    BannerCarouselBlock: [
+      {
+        id: 1,
+        title: "Men's Collection",
+        slug: "men's-collection",
+        image: {
+          mobile: {
+            url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/banner-mobile-1-4.jpg',
+            width: 450,
+            height: 150,
+          },
+          desktop: {
+            url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/banner-1-5.jpg',
+            width: 580,
+            height: 360,
+          },
+        },
+      },
+      {
+        id: 2,
+        title: "Women's Collection",
+        slug: "women's-collection",
+        image: {
+          mobile: {
+            url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/banner-mobile-2-5.jpg',
+            width: 450,
+            height: 150,
+          },
+          desktop: {
+            url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/banner-2-7.jpg',
+            width: 580,
+            height: 360,
+          },
+        },
+      },
+      {
+        id: 3,
+        title: "Kid's Collection",
+        slug: "kid's-collection",
+        image: {
+          mobile: {
+            url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/banner-mobile-3-3.jpg',
+            width: 450,
+            height: 150,
+          },
+          desktop: {
+            url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/banner-3-6.jpg',
+            width: 580,
+            height: 360,
+          },
+        },
+      },
+    ],
+    BannerOne: {
+      id: 1,
+      title: 'Holiday Offers',
+      slug: 'holiday-offers',
+      image: {
+        mobile: {
+          url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/banner-mobile-1-2.jpg',
+          width: 450,
+          height: 120,
+        },
+        desktop: {
+          url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/banner-1-6.jpg',
+          width: 1800,
+          height: 270,
+        },
+      },
+    },
     BannerCard: [
       {
         id: 1,
@@ -225,6 +295,29 @@ const banner = {
             height: 420,
           },
         },
+      },
+    ],
+    CollectionBlock: [
+      {
+        id: 1,
+        slug: '/search',
+        image: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/1.jpg',
+        title: 'collection-title-one',
+        description: 'collection-description-one',
+      },
+      {
+        id: 2,
+        slug: '/search',
+        image: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/2.jpg',
+        title: 'collection-title-two',
+        description: 'collection-description-two',
+      },
+      {
+        id: 3,
+        slug: '/search',
+        image: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/3.jpg',
+        title: 'collection-title-three',
+        description: 'collection-description-three',
       },
     ],
     ExclusiveBlock: {
@@ -271,6 +364,12 @@ const banner = {
           buttonHeight: 60,
         },
       ],
+    },
+    Support: {
+      title: 'support-heading',
+      description: 'support-sub-heading',
+      buttonText: 'button-chat-services',
+      supportImage: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/support.png',
     },
     HeroBlock: [
       {

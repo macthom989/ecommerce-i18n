@@ -1,39 +1,18 @@
 'use client';
 
-import BannerCard from '@components/banner/banner-card';
-import SellWithProgress from '@components/ui/sale-with-progress';
 import { useFlashSaleProductsQuery } from '@services/product/get-all-flash-sale-products';
 import classNames from 'classnames';
+import isEmpty from 'lodash/isEmpty';
+import { cn } from '@lib/utils';
+import { ProductFlashSaleFeedLoader } from '@components/common/loaders/product-flash-sale-feed-loader';
+import BannerCard from '@components/banner/banner-card';
 import { ROUTES } from '@utils/routes';
 import Alert from '@components/ui/alert';
-import dynamic from 'next/dynamic';
-
-// Dynamic import với ssr: false để tránh render trên server
-const ProductFlashSaleLoader = dynamic(() => import('@components/common/loaders/product-flash-sale-loader'), {
-  ssr: false,
-});
+import SellWithProgress from '@components/ui/sale-with-progress';
 
 interface Props {
   className?: string;
 }
-
-const banner = {
-  id: 1,
-  title: 'banner-on-selected-items',
-  slug: "men's-collection",
-  image: {
-    mobile: {
-      url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/banner-mobile-2-2.jpg',
-      width: 450,
-      height: 150,
-    },
-    desktop: {
-      url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/banner-2-2.jpg',
-      width: 1190,
-      height: 450,
-    },
-  },
-};
 
 const flashSaleCarouselBreakpoint = {
   '1280': {
@@ -53,6 +32,28 @@ const FlashSaleBlock: React.FC<Props> = ({ className = 'mb-12 lg:mb-14 xl:mb-7' 
     limit: 10,
   });
 
+  const banner = {
+    id: 1,
+    title: 'banner-on-selected-items',
+    slug: "men's-collection",
+    image: {
+      mobile: {
+        url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/banner-mobile-2-2.jpg',
+        width: 450,
+        height: 150,
+      },
+      desktop: {
+        url: 'https://moccasin-aardvark-454600.hostingersite.com/wp-content/uploads/2025/03/banner-2-2.jpg',
+        width: isEmpty(data) ? 1920 : 1190,
+        height: 450,
+      },
+    },
+  };
+
+  if (isLoading) {
+    return <ProductFlashSaleFeedLoader />;
+  }
+
   return (
     <div
       className={classNames(`grid grid-cols-1 xl:grid-cols-3 gap-y-12 lg:gap-y-14 xl:gap-y-0 xl:gap-x-7`, className)}
@@ -61,13 +62,11 @@ const FlashSaleBlock: React.FC<Props> = ({ className = 'mb-12 lg:mb-14 xl:mb-7' 
         key={`banner--key${banner.id}`}
         banner={banner}
         href={`${ROUTES.COLLECTIONS}/${banner?.slug}`}
-        className="xl:h-full xl:col-span-2"
+        className={cn('xl:h-full xl:col-span-2', { 'xl:col-span-3': isEmpty(data) })}
         effectActive={true}
       />
       {error ? (
         <Alert message={error?.message} />
-      ) : isLoading && !data ? (
-        <ProductFlashSaleLoader />
       ) : (
         data && (
           <SellWithProgress

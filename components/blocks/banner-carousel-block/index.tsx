@@ -20,7 +20,7 @@ const breakpoints = {
 
 interface BannerProps {
   className?: string;
-  bannerData: any;
+  bannerData?: any;
 }
 
 const BannerCarouselBlock: React.FC<BannerProps> = ({

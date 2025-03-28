@@ -1,9 +1,12 @@
+'use client';
+
 import Image from 'next/image';
 import { IoChatbubbleEllipsesOutline } from 'react-icons/io5';
 import cn from 'classnames';
 import { useTranslations } from 'next-intl';
 import Button from '@components/common/button';
 import Text from '@components/common/text';
+import { useUI } from '@contexts/managed-ui-provider';
 
 const data = {
   title: 'support-heading',
@@ -17,8 +20,18 @@ interface Props {
 }
 
 const Support: React.FC<Props> = ({ className }) => {
-  const { title, description, supportImage, buttonText } = data;
+  const { siteSettings } = useUI();
+  const data = siteSettings?.bannerTheme?.Support;
   const t = useTranslations('common');
+
+  if (!data) return null;
+
+  const { title, description, supportImage, buttonText } = data;
+
+  const imageLoader = ({ src }: { src: string }) => {
+    return src.startsWith('http') ? src : `${supportImage}`;
+  };
+
   return (
     <div
       className={cn(
@@ -30,12 +43,11 @@ const Support: React.FC<Props> = ({ className }) => {
         <Text variant="mediumHeading" className="mb-2 md:mb-3 lg:mb-3.5">
           {t(`${title}`)}
         </Text>
-        <p className="text-body text-xs md:text-sm leading-6 md:leading-7">
-          {t(`${description}`)}
-        </p>
+        <p className="text-body text-xs md:text-sm leading-6 md:leading-7">{t(`${description}`)}</p>
       </div>
       <div className="mb-2.5 md:mb-0 xl:mb-2 2xl:mb-4 3xl:mb-6 md:px-20 lg:px-40 xl:px-0">
         <Image
+          loader={imageLoader}
           src={supportImage}
           alt={t('text-support-thumbnail')}
           width={870}
