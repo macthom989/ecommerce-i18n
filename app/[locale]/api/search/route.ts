@@ -53,9 +53,38 @@ async function GET(req: Request) {
   }
 
   if (searchParams.has('color')) {
-    params.set('attribute', 'pa_color'); // Giả sử color là attribute
+    params.set('attribute', 'pa_color');
     params.set('attribute_term', searchParams.get('color')!);
   }
+
+  // Xử lý sort theo tham số `sort_by`
+  const sortBy = searchParams.get('sort_by') || 'newest'; // Mặc định là newest
+  let orderBy = 'date';
+  let order = 'desc';
+
+  switch (sortBy.toLowerCase()) {
+    case 'newest':
+      orderBy = 'date';
+      order = 'desc';
+      break;
+    case 'popularity':
+      orderBy = 'popularity';
+      order = 'desc';
+      break;
+    case 'low-high':
+      orderBy = 'price';
+      order = 'asc';
+      break;
+    case 'high-low':
+      orderBy = 'price';
+      order = 'desc';
+      break;
+    default:
+      orderBy = 'date';
+      order = 'desc';
+  }
+  params.set('orderby', orderBy);
+  params.set('order', order);
 
   const endpoint = `/wp-json/wc/v3/products?${params.toString()}`;
   const response = await fetchFn<Product[]>('GET', endpoint);

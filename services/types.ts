@@ -55,7 +55,7 @@ export type Category = {
   image?: Attachment;
   icon?: string;
   products?: Product[];
-  productCount?: number;
+  count?: number;
 };
 export type TagWoo = {
   id: string;

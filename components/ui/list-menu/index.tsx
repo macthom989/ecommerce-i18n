@@ -13,7 +13,7 @@ const ListMenu = ({ dept, data, hasSubMenu, hasMegaMenu, hasBrands, hasBanners, 
             .split('/')
             .filter((segment) => segment);
       const index = pathname.indexOf('product-tag');
-      return index !== -1 && index + 1 < pathname.length ? `/collection/${pathname[pathname.length - 1]}` : '';
+      return index !== -1 && index + 1 < pathname.length ? `/collections/${pathname[pathname.length - 1]}` : '';
     } catch (error) {
       console.error('Invalid URL:', url);
       return '';

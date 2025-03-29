@@ -10,14 +10,12 @@ import { useTranslations } from 'next-intl';
 import Text from '../common/text';
 import Drawer from 'rc-drawer';
 
-const CollectionTopBar = () => {
+const CollectionTopBar = ({ totalItem }: { totalItem: number }) => {
   const { openFilter, displayFilter, closeFilter } = useUI();
   const t = useTranslations('common');
-  const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const slug = searchParams.get('slug');
-  const collectionTitle = slug?.split('-').join(' ');
+  const segments = pathname.split('/');
+  const collectionTitle = segments[segments.length - 1]?.split('-').join(' ');
   const dir = getDirection(pathname);
   const contentWrapperCSS = dir === 'ltr' ? { left: 0 } : { right: 0 };
 
@@ -36,7 +34,9 @@ const CollectionTopBar = () => {
       </button>
 
       <div className="flex items-center justify-end">
-        <div className="flex-shrink-0 text-body text-xs md:text-sm leading-4">9,608 {t('text-items')}</div>
+        <div className="flex-shrink-0 text-body text-xs md:text-sm leading-4">
+          {totalItem} {t('text-items')}
+        </div>
       </div>
 
       <Drawer

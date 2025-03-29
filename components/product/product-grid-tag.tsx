@@ -1,4 +1,5 @@
 'use client';
+import React from 'react';
 import ProductCard from '@components/product/product-card';
 import ProductFeedLoader from '@components/common/loaders/product-feed-loader';
 import { Product } from '@services/types';
@@ -6,16 +7,19 @@ import { useTranslations } from 'next-intl';
 import Button from '@components/common/button';
 import { useSearchParams } from 'next/navigation';
 import { useProductsQuery } from '@/services/product/get-all-products-tag';
+import { Dispatch, useEffect } from 'react';
 
 interface ProductGridProps {
   className?: string;
   slug?: string;
+  setTotalItem?: Dispatch<number>;
 }
 
-export const ProductGrid: React.FC<ProductGridProps> = ({ className = '', slug }) => {
+export const ProductGrid: React.FC<ProductGridProps> = ({ className = '', slug, setTotalItem }) => {
   const searchParams = useSearchParams();
   const queryObject = Object.fromEntries(searchParams.entries());
   const limit = parseInt(searchParams.get('per_page') || '10', 10);
+  const t = useTranslations('common');
   const {
     isFetching: isLoading,
     isFetchingNextPage: loadingMore,
@@ -24,9 +28,10 @@ export const ProductGrid: React.FC<ProductGridProps> = ({ className = '', slug }
     data,
     error,
   } = useProductsQuery({ limit: limit, slug, ...queryObject });
-
-  const t = useTranslations('common');
-
+  useEffect(() => {
+    if (!Array.isArray(data?.pages)) return;
+    setTotalItem?.(data.pages[0]?.count || 0);
+  }, [data, setTotalItem]);
   if (error) {
     return (
       <div className="text-center text-red-500 font-semibold">
@@ -34,7 +39,6 @@ export const ProductGrid: React.FC<ProductGridProps> = ({ className = '', slug }
       </div>
     );
   }
-
   const hasProducts = data?.pages?.some((page) => page?.data?.length > 0);
   return (
     <>

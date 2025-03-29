@@ -10,11 +10,10 @@ import { Dispatch, useEffect } from 'react';
 
 interface ProductGridProps {
   className?: string;
-  query?: string;
   setTotalItem?: Dispatch<number>;
 }
 
-export const ProductGrid: React.FC<ProductGridProps> = ({ className = '', query, setTotalItem }) => {
+export const ProductGrid: React.FC<ProductGridProps> = ({ className = '', setTotalItem }) => {
   const searchParams = useSearchParams();
   const queryObject = Object.fromEntries(searchParams.entries());
   const limit = parseInt(searchParams.get('per_page') || '10', 10);
@@ -51,7 +50,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({ className = '', query,
       ) : (
         <>
           {data?.pages?.length === 0 || data?.pages?.every((page) => page.data.length === 0) ? (
-            <p className="text-center text-gray-500 font-semibold">Không có sản phẩm thuộc danh mục này</p>
+            <p className="text-center text-gray-500 font-semibold">No products found</p>
           ) : (
             <div
               className={`grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-3 lg:gap-x-5 xl:gap-x-7 gap-y-3 xl:gap-y-5 2xl:gap-y-8 ${className}`}
