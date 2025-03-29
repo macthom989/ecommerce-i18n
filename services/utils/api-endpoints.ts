@@ -8,6 +8,7 @@ export const API_ENDPOINTS = {
   CATEGORIES_ANCIENT: '/categories',
   FEATURED_CATEGORIES: '/featured_categories',
   COLLECTIONS: '/collections',
+  TAGS: '/tags',
   BRANDS: '/brands',
   BRANDS_ANCIENT: '/brands',
   PRODUCTS: '/products',

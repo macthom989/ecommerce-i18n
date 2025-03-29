@@ -7,11 +7,10 @@ import Footer from '@components/common/layout/footer';
 import CookieBar from '@components/common/cookie-bar';
 import Button from '@components/common/button';
 import MobileNavigation from '@components/common/layout/mobile-navigation';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useUI } from '@/contexts/managed-ui-provider';
 import ls, { lsKeys } from '@/lib/local-storage';
 import { useQuery } from '@tanstack/react-query';
-import HomeLoader from '@components/common/loaders/home-loader';
 import { fetchFn } from '@/lib/fetcher-local';
 import { API_ENDPOINTS } from '@/services/utils/api-endpoints';
 
@@ -24,16 +23,24 @@ export default function Layout({ children }: React.PropsWithChildren<object>) {
     queryKey: ['siteSettings'],
     queryFn: () => fetchFn('GET', API_ENDPOINTS.SETTING).then((res) => res.data),
     staleTime: 1000 * 60 * 60,
+    select: (newData) => {
+      const storedData = JSON.parse(ls.get(lsKeys.SITESETTINGS) || '{}');
+      return JSON.stringify(newData) === JSON.stringify(storedData) ? storedData : newData;
+    },
   });
 
   useEffect(() => {
-    if (data && !isLoading) {
+    if (data) {
       setSiteSettings(data);
       ls.set(lsKeys.SITESETTINGS, JSON.stringify(data));
     }
-  }, [data, isLoading]);
+  }, [data]);
 
-  if (isLoading) return <HomeLoader />;
+  const cookieAction = useCallback(() => {
+    onAcceptCookies();
+  }, [onAcceptCookies]);
+
+  if (isLoading) return;
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -54,7 +61,7 @@ export default function Layout({ children }: React.PropsWithChildren<object>) {
         title={t('text-cookies-title')}
         hide={acceptedCookies}
         action={
-          <Button onClick={() => onAcceptCookies()} variant="slim">
+          <Button onClick={cookieAction} variant="slim">
             {t('text-accept-cookies')}
           </Button>
         }

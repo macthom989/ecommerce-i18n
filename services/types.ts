@@ -57,6 +57,15 @@ export type Category = {
   products?: Product[];
   productCount?: number;
 };
+export type TagWoo = {
+  id: string;
+  name: string;
+  description?: string;
+  image?: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type Collection = {
   id: number | string;
   name: string;

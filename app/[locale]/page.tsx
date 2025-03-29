@@ -12,11 +12,9 @@ import DownloadApps from '@components/ui/download-app';
 import NewArrivalsProductFeed from '@components/product/feeds/new-arrivals-product-feed';
 import { ROUTES } from '@utils/routes';
 import BannerCard from '@components/banner/banner-card';
-
 import dynamic from 'next/dynamic';
 import Subscription from '@components/ui/subscription';
 import { useUI } from '@/contexts/managed-ui-provider';
-
 const ProductsFeatured = dynamic(() => import('@blocks/products-featured-block'), { ssr: false });
 const BannerSliderBlock = dynamic(() => import('@blocks/banner-slider-block'), { ssr: false });
 const BrandGridBlock = dynamic(() => import('@blocks/brand-grid-block'), { ssr: false });
