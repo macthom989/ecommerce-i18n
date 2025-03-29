@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 interface MenuItem {
@@ -19,13 +18,21 @@ type MegaMenuProps = {
 };
 
 const Index: React.FC<MegaMenuProps> = ({ columns }) => {
-  const t = useTranslations('menu');
-  function getCategoryPath(url) {
-    const pathname = new URL(url).pathname.split('/').filter((segment) => segment);
-    const index = pathname.indexOf('product-category');
-    return index !== -1 && index + 1 < pathname.length ? `/category/${pathname[pathname.length - 1]}` : '';
-  }
+  function getCategoryPath(url: string) {
+    try {
+      const pathname = url.startsWith('/')
+        ? url.split('/').filter((segment) => segment)
+        : new URL(url, typeof window !== 'undefined' ? window.location.origin : 'http://localhost').pathname
+            .split('/')
+            .filter((segment) => segment);
 
+      const index = pathname.indexOf('product-category');
+      return index !== -1 && index + 1 < pathname.length ? `/search?category=${pathname[pathname.length - 1]}` : '';
+    } catch (error) {
+      console.error('Invalid URL:', url);
+      return '';
+    }
+  }
   return (
     <div className="absolute bg-gray-200 megaMenu shadow-header ltr:-left-28 rtl:-right-28 ltr:xl:left-0 rtl:xl:right-0">
       <div className="grid grid-cols-5">

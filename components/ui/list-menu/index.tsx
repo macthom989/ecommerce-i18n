@@ -1,4 +1,3 @@
-import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { IoIosArrowForward } from 'react-icons/io';
 import Index from '@components/ui/mega-menu';
@@ -6,11 +5,24 @@ import { cn } from '@lib/utils';
 import Link from 'next/link';
 
 const ListMenu = ({ dept, data, hasSubMenu, hasMegaMenu, hasBrands, hasBanners, menuIndex }: any) => {
-  const t = useTranslations('menu');
+  function getCategoryPath(url: string) {
+    try {
+      const pathname = url.startsWith('/')
+        ? url.split('/').filter((segment) => segment)
+        : new URL(url, typeof window !== 'undefined' ? window.location.origin : 'http://localhost').pathname
+            .split('/')
+            .filter((segment) => segment);
+      const index = pathname.indexOf('product-tag');
+      return index !== -1 && index + 1 < pathname.length ? `/collection/${pathname[pathname.length - 1]}` : '';
+    } catch (error) {
+      console.error('Invalid URL:', url);
+      return '';
+    }
+  }
   return (
     <li className={cn(!hasMegaMenu ? 'group relative ' : '')}>
       <Link
-        href={data.url}
+        href={getCategoryPath(data.url)}
         className="flex items-center py-2 ltr:pl-5 rtl:pr-5 ltr:xl:pl-7 rtl:xl:pr-7 ltr:pr-3 rtl:pl-3 ltr:xl:pr-3.5 rtl:xl:pl-3.5 hover:text-heading hover:bg-gray-300"
       >
         {data.icon && <span className="inline-flex ltr:mr-2 rtl:ml-2">{data.icon}</span>}
@@ -21,7 +33,7 @@ const ListMenu = ({ dept, data, hasSubMenu, hasMegaMenu, hasBrands, hasBanners, 
           </span>
         )}
       </Link>
-      {hasSubMenu && <SubMenu dept={dept} data={data.subMenu} menuIndex={menuIndex} />}
+      {hasSubMenu && <SubMenu dept={dept} data={data.children} menuIndex={menuIndex} />}
       {(hasMegaMenu || hasBrands || hasBanners) && (
         <div className="absolute flex bg-white categoryMegaMenu shadow-header w-[630px] xl:w-[1000px] 2xl:w-[1200px] ltr:left-full rtl:right-full">
           <div className="flex-shrink-0">
