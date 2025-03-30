@@ -55,7 +55,7 @@ export type Category = {
   image?: Attachment;
   icon?: string;
   products?: Product[];
-  productCount?: number;
+  count?: number;
 };
 export type TagWoo = {
   id: string;
@@ -147,6 +147,14 @@ export type Shop = {
   socialShare: any;
   created_at: string;
   updated_at: string;
+};
+
+export type SearchDataProduct = {
+  count: number;
+  currentPage: number;
+  perPage: number;
+  totalPages: number;
+  data: Product[];
 };
 
 export type SVGIconProps = React.SVGAttributes<SVGElement>;

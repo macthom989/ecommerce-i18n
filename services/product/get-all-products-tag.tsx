@@ -4,6 +4,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { fetchFn } from '@/lib/fetcher-local';
 
 type PaginatedProduct = {
+  count: number;
   data: Product[];
   paginatorInfo: {
     nextPageUrl: number | null;
@@ -27,6 +28,7 @@ const fetchProducts = async ({
   }
 
   return {
+    count: response.data.count,
     data: response.data.products ?? [],
     paginatorInfo: {
       nextPageUrl: response.data.currentPage < response.data.totalPages ? pageParam + 1 : null,

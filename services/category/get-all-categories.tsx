@@ -14,7 +14,7 @@ const fetchAncientCategories = async () => {
 };
 
 export const useCategoriesQuery = (options: CategoriesQueryOptionsType) => {
-  return useQuery< Category[], Error>({
+  return useQuery<Category[], Error>({
     queryKey:
       options.demoVariant === 'ancient'
         ? [API_ENDPOINTS.CATEGORIES_ANCIENT, options]

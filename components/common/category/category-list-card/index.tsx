@@ -10,7 +10,7 @@ interface Props {
 }
 
 const CategoryListCard: React.FC<Props> = ({ category }) => {
-  const { name, image, productCount } = category;
+  const { name, image, count } = category;
   const t = useTranslations('common');
   return (
     <Link
@@ -33,7 +33,7 @@ const CategoryListCard: React.FC<Props> = ({ category }) => {
       </div>
       <div className="flex items-center">
         <div className="text-xs font-medium w-5 h-5 flex flex-shrink-0 justify-center items-center bg-gray-350 rounded ltr:2xl:mr-2 rtl:2xl:ml-2">
-          {productCount}
+          {count}
         </div>
         <IoIosArrowForward className="hidden 2xl:block text-sm text-heading" />
       </div>
