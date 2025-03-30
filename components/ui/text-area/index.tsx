@@ -25,7 +25,7 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, Props>((props, ref) => {
     className,
     labelKey,
     name,
-    placeholderKey,
+    placeholder,
     errorKey,
     variant = 'normal',
     shadow = false,
@@ -53,7 +53,7 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, Props>((props, ref) => {
         rows={4}
         ref={ref}
         // @ts-ignore
-        placeholder={t(placeholderKey)}
+        placeholder={t(placeholder)}
         {...rest}
       />
       {errorKey && <p className="my-2 text-xs text-red-500">{t(errorKey)}</p>}
