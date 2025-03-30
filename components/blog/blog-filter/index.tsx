@@ -1,5 +1,5 @@
-import { SortOption, SortSelect } from '@/app/[locale]/blog/_components/sort-select';
-import { SearchInput } from '@/app/[locale]/blog/_components/search-input';
+import { SortOption, SortSelect } from '@components/common/sort-select';
+import { SearchDebounce } from '@components/common/search-debounce';
 
 function BlogFilterBlock({ onSearch, onSort }: { onSearch: (value: string) => void; onSort: (value: string) => void }) {
   // Sort options
@@ -12,7 +12,7 @@ function BlogFilterBlock({ onSearch, onSort }: { onSearch: (value: string) => vo
   return (
     <div className="flex flex-col md:flex-row md:justify-between gap-4 mb-8 w-full">
       <div className="max-w-sm lg:w-2/5">
-        <SearchInput onSearch={onSearch} />
+        <SearchDebounce onSearch={onSearch} />
       </div>
       <SortSelect options={sortOptions} onChange={onSort} />
     </div>

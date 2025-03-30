@@ -1,12 +1,12 @@
 import isEmpty from 'lodash/isEmpty';
-import { Post } from '@/app/[locale]/blog/_data/types';
-import BlogCard from '@/app/[locale]/blog/_components/blog-card';
+import BlogCard from '@components/blog/blog-card';
+import { Post } from '@services/types';
 
 interface BlogsGridProps {
   posts: Post[];
 }
 
-const BlogsGridBlock: React.FC<BlogsGridProps> = ({ posts = [] }) => {
+const BlogGridBlock: React.FC<BlogsGridProps> = ({ posts = [] }) => {
   if (isEmpty(posts)) {
     return (
       <div className="text-center py-12">
@@ -24,4 +24,4 @@ const BlogsGridBlock: React.FC<BlogsGridProps> = ({ posts = [] }) => {
   );
 };
 
-export default BlogsGridBlock;
+export default BlogGridBlock;

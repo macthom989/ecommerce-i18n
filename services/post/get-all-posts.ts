@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchFn } from '@/lib/fetcher-local';
 import { API_ENDPOINTS } from '@services/utils/api-endpoints';
-import { Post } from '@/app/[locale]/blog/_data/types';
+import { Post } from '@services/types';
 
 export type PostsResponse = {
   count: number;

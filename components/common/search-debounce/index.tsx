@@ -12,7 +12,7 @@ interface SearchInputProps {
   className?: string;
 }
 
-export function SearchInput({
+export function SearchDebounce({
   onSearch,
   placeholder = 'Search articles...',
   initialValue = '',

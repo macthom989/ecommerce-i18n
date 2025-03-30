@@ -3,10 +3,10 @@
 import { useCallback, useState } from 'react';
 import { usePostsQuery } from '@services/post/get-all-posts';
 import Container from '@components/ui/container';
-import { Pagination } from '@/app/[locale]/blog/_components/pagination-truncate';
-import BlogFilterBlock from '@/app/[locale]/blog/_components/blog-filter-block';
-import BlogPageLoading from '@/app/[locale]/blog/_components/loader';
-import BlogsGridBlock from '@/app/[locale]/blog/_components/blogs-grid-block';
+import BlogGridBlock from '@blocks/blog-grid-block';
+import BlogPageLoading from '@components/common/loaders/blog-grid-loader';
+import BlogFilterBlock from '@components/blog/blog-filter';
+import { Pagination } from '@components/common/pagination-dynamic';
 
 export default function BlogPage() {
   const [page, setPage] = useState(1);
@@ -33,7 +33,7 @@ export default function BlogPage() {
     <Container>
       <div className="py-6 sm:py-8 md:py-12 px-4 sm:px-6 md:px-0">
         <BlogFilterBlock onSearch={handleSearch} onSort={(value) => handleSort(value)} />
-        {isLoading && !data ? <BlogPageLoading /> : data && <BlogsGridBlock posts={data?.posts} />}
+        {isLoading && !data ? <BlogPageLoading /> : data && <BlogGridBlock posts={data?.posts} />}
         {Boolean(data?.totalPages && data?.totalPages > 1) && (
           <div className="flex justify-center mt-8 sm:mt-12 overflow-x-auto w-full">
             <Pagination totalPages={data?.totalPages} currentPage={page} onPageChange={setPage} />
