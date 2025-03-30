@@ -7,8 +7,10 @@ import SearchProduct from '@components/common/search-product';
 import { useSearchQuery } from '@/services/product/use-search';
 import { useUI } from '@/contexts/managed-ui-provider';
 import SearchResultLoader from '../loaders/search-result-loader';
+import { useRouter } from 'next/navigation';
 
 export default function Search() {
+  const router = useRouter();
   const { displaySearch, closeSearch } = useUI();
   const [searchText, setSearchText] = React.useState('');
   const { data, isLoading } = useSearchQuery({
@@ -16,6 +18,8 @@ export default function Search() {
   });
 
   function handleSearch(e: React.SyntheticEvent) {
+    router.push(`/search?text=${searchText}`);
+    closeSearch();
     e.preventDefault();
   }
   function handleAutoSearch(e: React.FormEvent<HTMLInputElement>) {
@@ -87,7 +91,8 @@ export default function Search() {
                         ))}
                       </div>
                     ) : (
-                      data?.map((item: any, index: number) => (
+                      data &&
+                      data?.data?.map((item: any, index: number) => (
                         <div
                           key={index}
                           className=" p-5 border-b border-gray-150 relative last:border-b-0"
