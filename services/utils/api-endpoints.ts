@@ -32,4 +32,5 @@ export const API_ENDPOINTS = {
   ORDERS: '/orders',
   ORDER: '/order',
   SETTING: '/setting',
+  POST: '/posts',
 };
