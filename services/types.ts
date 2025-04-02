@@ -249,3 +249,35 @@ export interface Post {
     'wp:term'?: PostWpTerm[][];
   };
 }
+
+export interface PaymentMethod {
+  id: string; // ID phương thức thanh toán (ví dụ: "cod", "paypal", "bacs")
+  title: string; // Tiêu đề ngắn của phương thức thanh toán (ví dụ: "Cash on Delivery")
+  description: string; // Mô tả chi tiết phương thức thanh toán
+  order: number; // Thứ tự sắp xếp của phương thức
+  enabled: boolean; // Trạng thái bật/tắt phương thức
+  method_title: string; // Tiêu đề hiển thị trên UI
+  method_description: string; // Mô tả hiển thị trên UI
+  settings: {
+    title: {
+      id: string;
+      label: string;
+      description: string;
+      type: string;
+      value: string;
+      default: string;
+      tip: string;
+      placeholder: string;
+    };
+    instructions?: {
+      id: string;
+      label: string;
+      description: string;
+      type: string;
+      value: string;
+      default: string;
+      tip: string;
+      placeholder: string;
+    };
+  };
+}
