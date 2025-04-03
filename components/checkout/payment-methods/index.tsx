@@ -3,13 +3,18 @@
 import { useGetPaymentMethodsQuery } from '@services/payment-method/get-all-payment-methods';
 import { PaymentMethod } from '@services/types';
 import { useState } from 'react';
+import { useCheckout } from '@contexts/checkout-provider';
 
 const PaymentMethods = () => {
   const { data, isLoading, isError } = useGetPaymentMethodsQuery();
-  const [selectedMethod, setSelectedMethod] = useState<string>('');
-
-  const handlePaymentMethodChange = (methodId: string) => {
-    setSelectedMethod(methodId);
+  const [selectedMethod, setSelectedMethod] = useState<PaymentMethod>();
+  const { updateCheckoutData } = useCheckout();
+  const handlePaymentMethodChange = (method: PaymentMethod) => {
+    setSelectedMethod(method);
+    updateCheckoutData({
+      payment_method: method.id,
+      payment_method_title: method.method_title,
+    });
   };
 
   return (
@@ -66,9 +71,11 @@ const PaymentMethods = () => {
             <div
               key={method.id}
               className={`relative border rounded-md p-4 cursor-pointer transition-all ${
-                selectedMethod === method.id ? 'border-gray-900 bg-gray-50' : 'border-gray-200 hover:border-gray-300'
+                selectedMethod?.id === method.id
+                  ? 'border-gray-900 bg-gray-50'
+                  : 'border-gray-200 hover:border-gray-300'
               }`}
-              onClick={() => handlePaymentMethodChange(method.id)}
+              onClick={() => handlePaymentMethodChange(method)}
             >
               <div className="flex items-start">
                 <div className="flex items-center h-5">
@@ -77,8 +84,8 @@ const PaymentMethods = () => {
                     name="payment-method"
                     type="radio"
                     className="h-4 w-4 text-gray-900 border-gray-300 focus:ring-gray-500"
-                    checked={selectedMethod === method.id}
-                    onChange={() => handlePaymentMethodChange(method.id)}
+                    checked={selectedMethod?.id === method.id}
+                    onChange={() => handlePaymentMethodChange(method)}
                   />
                 </div>
                 <div className="ml-3 flex-1">

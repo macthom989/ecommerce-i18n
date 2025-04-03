@@ -281,3 +281,17 @@ export interface PaymentMethod {
     };
   };
 }
+
+export type TLineItem = {
+  product_id: number;
+  quantity?: number;
+};
+
+export interface CheckoutFormValues {
+  payment_method: string;
+  payment_method_title: string;
+  set_paid?: boolean;
+  billing?: object;
+  shipping?: object;
+  line_items: TLineItem[];
+}

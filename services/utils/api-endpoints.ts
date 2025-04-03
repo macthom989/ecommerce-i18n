@@ -34,4 +34,5 @@ export const API_ENDPOINTS = {
   SETTING: '/setting',
   POST: '/posts',
   PAYMENT_METHODS: '/payment_methods',
+  CHECKOUT: '/checkout',
 };

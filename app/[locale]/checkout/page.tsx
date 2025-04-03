@@ -6,10 +6,11 @@ import Subscription from '@components/ui/subscription';
 import CheckoutCard from '@components/checkout/checkout-card';
 import PaymentMethods from '@components/checkout/payment-methods';
 import CheckoutForm from '@components/checkout/checkout-form';
+import { CheckoutProvider } from '@contexts/checkout-provider';
 
 export default function CheckoutPage() {
   return (
-    <>
+    <CheckoutProvider>
       <PageHeader pageHeader="text-page-checkout" />
       <Container>
         <div className="py-14 xl:py-20 px-0 2xl:max-w-screen-2xl xl:max-w-screen-xl mx-auto flex flex-col md:flex-row w-full">
@@ -23,6 +24,6 @@ export default function CheckoutPage() {
         </div>
         <Subscription />
       </Container>
-    </>
+    </CheckoutProvider>
   );
 }

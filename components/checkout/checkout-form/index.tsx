@@ -8,7 +8,8 @@ import TextArea from '@components/ui/text-area';
 import { CheckBox } from '@components/ui/checkbox';
 import Input from '@components/common/input';
 import { PaymentMethod } from '@services/types';
-import { useState } from 'react';
+import { useCheckout } from '@contexts/checkout-provider';
+import { useCheckoutMutation } from '@services/order/order-create';
 
 interface CheckoutFormValues {
   payment_method: Pick<PaymentMethod, 'id'>;
@@ -61,20 +62,25 @@ interface CheckoutInputType {
 const CheckoutForm: React.FC = () => {
   const router = useRouter();
   const t = useTranslations();
-
-  const [lineItems, setLineItems] = useState<{ product_id: number; quantity: number }[]>();
-  const [paymentMethod, setPaymentMethod] = useState<Pick<PaymentMethod, 'id' | 'method_title'>>();
-
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<CheckoutInputType>();
+  } = useForm<CheckoutInputType>({});
+
+  const { mutate } = useCheckoutMutation();
+  const { checkoutData, updateCheckoutData } = useCheckout();
 
   function onSubmit(input: CheckoutInputType) {
-    // updateUser(input);
-    // router.push(ROUTES.ORDER);
-    console.log(input);
+    updateCheckoutData({ billing: input, shipping: input });
+    mutate(
+      {
+        ...checkoutData,
+        billing: input,
+        shipping: input,
+      },
+      { onSuccess: (data) => router.push(`/orders/${data?.orderId}`) },
+    );
   }
 
   return (
@@ -162,6 +168,7 @@ const CheckoutForm: React.FC = () => {
           <div className="flex w-full">
             <Button
               className="w-full sm:w-auto"
+              disabled={!checkoutData.payment_method}
               // loading={isPending} disabled={isPending}
             >
               {t('common.button-place-order')}
