@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import React, { forwardRef, ButtonHTMLAttributes } from 'react';
+import React, { ButtonHTMLAttributes, forwardRef } from 'react';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
@@ -34,7 +34,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
       'h-11 md:h-12 px-5 bg-gray-200 text-heading py-2 transform-none normal-case hover:bg-gray-300':
         variant === 'smoke',
       'cursor-not-allowed': loading,
-      'cursor-not-allowed hover:cursor-not-allowed': disabled,
+      'cursor-not-allowed hover:cursor-not-allowed opacity-70': disabled,
     },
     className,
   );
