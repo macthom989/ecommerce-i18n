@@ -25,6 +25,7 @@ export const CheckoutProvider = ({ children }: { children: ReactNode }) => {
     billing: {},
     shipping: {},
     line_items: lineItems,
+    customer_note: '',
   });
 
   const updateCheckoutData = (data: Partial<CheckoutFormValues>) => {

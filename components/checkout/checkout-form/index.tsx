@@ -10,6 +10,7 @@ import Input from '@components/common/input';
 import { PaymentMethod } from '@services/types';
 import { useCheckout } from '@contexts/checkout-provider';
 import { useCheckoutMutation } from '@services/order/order-create';
+import { useCart } from '@contexts/cart/cart-context';
 
 interface CheckoutFormValues {
   payment_method: Pick<PaymentMethod, 'id'>;
@@ -20,43 +21,16 @@ interface CheckoutFormValues {
   line_items: { product_id: number; quantity: number }[];
 }
 
-// Example Params Checkout:
-// {
-//   "payment_method": "ppcp-gateway",
-//   "payment_method_title": "Thanh toán khi nhận hàng",
-//   "set_paid": true,
-//   "billing": {
-//   "first_name": "Nguyen",
-//     "last_name": "Van A",
-//     "email": "nguyenvana@example.com",
-//     "address_1": "asldj",
-//     "phone": "0123456789"
-// }, "shipping": {
-//   "first_name": "Mac",
-//     "last_name": "Van B",
-//     "email": "MacvanB@example.com",
-//     "address_1": "dddddddd",
-//     "phone": "0123456789"
-// },
-//   "line_items": [
-//   {
-//     "product_id": 123,
-//     "quantity": 1
-//   }
-// ]
-// }
-
 interface CheckoutInputType {
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   phone: string;
   email: string;
   address_1: string;
-  address_2?: string;
   city: string;
-  zipCode: string;
+  postcode: string;
   save: boolean;
-  note: string;
+  customer_note: string;
 }
 
 const CheckoutForm: React.FC = () => {
@@ -68,18 +42,26 @@ const CheckoutForm: React.FC = () => {
     formState: { errors },
   } = useForm<CheckoutInputType>({});
 
-  const { mutate } = useCheckoutMutation();
+  const { mutate, isPending } = useCheckoutMutation();
   const { checkoutData, updateCheckoutData } = useCheckout();
+  const { clearAllItemsFromCart } = useCart();
 
   function onSubmit(input: CheckoutInputType) {
     updateCheckoutData({ billing: input, shipping: input });
+    const { customer_note, ...rest } = input;
     mutate(
       {
         ...checkoutData,
-        billing: input,
-        shipping: input,
+        billing: rest,
+        shipping: rest,
+        customer_note: customer_note,
       },
-      { onSuccess: (data) => router.push(`/orders/${data?.orderId}`) },
+      {
+        onSuccess: (data) => {
+          clearAllItemsFromCart();
+          router.push(`/orders/${data?.orderId}`);
+        },
+      },
     );
   }
 
@@ -88,24 +70,24 @@ const CheckoutForm: React.FC = () => {
       <h2 className="text-lg md:text-xl xl:text-2xl font-bold text-heading mb-6 xl:mb-8">
         {t('common.text-shipping-address')}
       </h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto flex flex-col justify-center ">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto flex flex-col justify-center" noValidate>
         <div className="flex flex-col space-y-4 lg:space-y-5">
           <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0">
             <Input
               labelKey="forms.label-first-name"
-              {...register('firstName', {
+              {...register('first_name', {
                 required: 'forms.first-name-required',
               })}
-              errorKey={errors.firstName?.message}
+              errorKey={errors.first_name?.message}
               variant="solid"
               className="w-full lg:w-1/2 "
             />
             <Input
               labelKey="forms.label-last-name"
-              {...register('lastName', {
+              {...register('last_name', {
                 required: 'forms.last-name-required',
               })}
-              errorKey={errors.lastName?.message}
+              errorKey={errors.last_name?.message}
               variant="solid"
               className="w-full lg:w-1/2 ltr:lg:ml-3 rtl:lg:mr-3 mt-2 md:mt-0"
             />
@@ -151,7 +133,7 @@ const CheckoutForm: React.FC = () => {
 
             <Input
               labelKey="forms.label-postcode"
-              {...register('zipCode')}
+              {...register('postcode')}
               variant="solid"
               className="w-full lg:w-1/2 ltr:lg:ml-3 rtl:lg:mr-3 mt-2 md:mt-0"
             />
@@ -161,15 +143,15 @@ const CheckoutForm: React.FC = () => {
           </div>
           <TextArea
             labelKey="forms.label-order-notes"
-            {...register('note')}
+            {...register('customer_note')}
             placeholder="forms.placeholder-order-notes"
             className="relative pt-3 xl:pt-6"
           />
           <div className="flex w-full">
             <Button
               className="w-full sm:w-auto"
-              disabled={!checkoutData.payment_method}
-              // loading={isPending} disabled={isPending}
+              disabled={!checkoutData.payment_method || isPending}
+              loading={isPending}
             >
               {t('common.button-place-order')}
             </Button>

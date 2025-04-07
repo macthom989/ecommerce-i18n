@@ -114,21 +114,36 @@ export type OrderItem = {
   id: number | string;
   name: string;
   price: number;
+  product_id: number;
+  variation_id: number;
   quantity: number;
+  subtotal: number;
+  total: number;
+  image: {
+    id: number;
+    src: string;
+  };
 };
 export type Order = {
   id: string | number;
+  date_created: string;
   name: string;
   slug: string;
-  products: OrderItem[];
+  line_items: OrderItem[];
   total: number;
   tracking_number: string;
   customer: {
     id: number;
     email: string;
   };
-  shipping_fee: number;
-  payment_gateway: string;
+  shipping_total: number;
+  payment_method: string;
+  payment_method_title: string;
+  billing: {
+    email: string;
+  };
+  currency: string;
+  customer_note: string;
 };
 
 export type Shop = {
@@ -294,4 +309,5 @@ export interface CheckoutFormValues {
   billing?: object;
   shipping?: object;
   line_items: TLineItem[];
+  customer_note?: string;
 }

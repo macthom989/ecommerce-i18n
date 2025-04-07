@@ -1,3 +1,5 @@
+'use client';
+
 import Scrollbar from '@/components/common/scrollbar';
 import { motion } from 'framer-motion';
 import { fadeInOut } from '@/services/utils/motion/fade-in-out';
@@ -11,8 +13,12 @@ import { ROUTES } from '@utils/routes';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
+import Button from '@components/common/button';
+import { CgShoppingCart } from 'react-icons/cg';
+import { useRouter } from 'next/navigation';
 
 export default function Cart() {
+  const router = useRouter();
   const t = useTranslations('common');
   const { closeCart } = useUI();
   const { items, total, isEmpty, clearAllItemsFromCart } = useCart();
@@ -47,7 +53,20 @@ export default function Cart() {
           className="flex flex-col items-center justify-center px-5 pt-8 pb-5 md:px-7"
         >
           <EmptyCart />
-          <h3 className="pt-8 text-lg font-bold text-heading">{t('text-empty-cart')}</h3>
+          <h3 className="py-8 text-lg font-bold text-heading">{t('text-empty-cart')}</h3>
+          <Button
+            className="flex gap-2 transition-all"
+            onClick={() => {
+              closeCart();
+              router.push(ROUTES.PRODUCT);
+            }}
+          >
+            <CgShoppingCart className="h-4 w-4 animate-bounce" />{' '}
+            <Link href={ROUTES.PRODUCT} onClick={() => closeCart()}>
+              Go to shopping
+            </Link>
+            <CgShoppingCart className="h-4 w-4 animate-bounce" />
+          </Button>
         </motion.div>
       )}
 
