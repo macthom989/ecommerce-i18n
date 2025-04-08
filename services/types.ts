@@ -311,3 +311,15 @@ export interface CheckoutFormValues {
   line_items: TLineItem[];
   customer_note?: string;
 }
+
+export interface PostCategory {
+  id: number;
+  count: number;
+  description: string;
+  link: string;
+  name: string;
+  slug: string;
+  taxonomy: string;
+  parent: number;
+  meta?: any[];
+}

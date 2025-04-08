@@ -5,7 +5,7 @@ import { fetchFn } from '@lib/fetcher-local';
 
 export const fetchFeaturedCategories = async (): Promise<Category[]> => {
   try {
-    const { data } = await fetchFn('GET', `/api/${API_ENDPOINTS.FEATURED_CATEGORIES}`);
+    const { data } = await fetchFn('GET', API_ENDPOINTS.FEATURED_CATEGORIES);
     return data;
   } catch (error) {
     console.error(`Failed to fetch ${API_ENDPOINTS.FEATURED_CATEGORIES}:`, error);

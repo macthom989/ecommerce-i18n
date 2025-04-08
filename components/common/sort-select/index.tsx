@@ -2,16 +2,17 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { LuChevronDown } from 'react-icons/lu';
+import { SortOptionValue } from '@services/post/get-all-posts';
 
 export interface SortOption {
   label: string;
-  value: string;
+  value: SortOptionValue;
 }
 
 interface SortSelectProps {
   options: SortOption[];
   defaultValue?: string;
-  onChange: (value: string) => void;
+  onChange: (value: SortOptionValue) => void;
   className?: string;
 }
 

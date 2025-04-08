@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useState } from 'react';
-import { usePostsQuery } from '@services/post/get-all-posts';
+import { SortOptionValue, usePostsQuery } from '@services/post/get-all-posts';
 import Container from '@components/ui/container';
 import BlogGridBlock from '@blocks/blog-grid-block';
 import BlogPageLoading from '@components/common/loaders/blog-grid-loader';
@@ -12,10 +12,10 @@ export default function BlogPage() {
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
   const [searchString, setSearchString] = useState<string>('');
-  const [sortBy, setSortBy] = useState('date_desc');
+  const [sortBy, setSortBy] = useState<SortOptionValue>('date_desc');
 
   // Query posts with all parameters
-  const { data, isLoading } = usePostsQuery(page, perPage, searchString, sortBy);
+  const { data, isLoading } = usePostsQuery({ page, perPage, search: searchString, sortBy });
 
   // Handle search
   const handleSearch = useCallback((value: string) => {
@@ -24,7 +24,7 @@ export default function BlogPage() {
   }, []);
 
   // Handle sort
-  const handleSort = useCallback((value: string) => {
+  const handleSort = useCallback((value: SortOptionValue) => {
     setSortBy(value);
     setPage(1); // Reset to first page on new sort
   }, []);

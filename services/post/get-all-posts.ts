@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { QueryKey, useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { fetchFn } from '@/lib/fetcher-local';
 import { API_ENDPOINTS } from '@services/utils/api-endpoints';
 import { Post } from '@services/types';
@@ -11,19 +11,27 @@ export type PostsResponse = {
   posts: Post[];
 };
 
-interface FetchPostsParams {
-  page: number;
-  perPage: number;
+export type SortOptionValue = 'date_desc' | 'date_asc' | 'title_asc' | 'title_desc';
+
+export interface PostsQueryParams {
+  page?: number;
+  perPage?: number;
   search?: string;
-  sortBy?: string;
+  sortBy?: SortOptionValue;
   categoryId?: number;
   tagId?: number;
+  enabled?: boolean;
+}
+
+export interface PostsQueryOptions<TData = PostsResponse>
+  extends Omit<UseQueryOptions<PostsResponse, Error, TData, QueryKey>, 'queryKey' | 'queryFn'> {
+  select?: (data: PostsResponse) => TData;
 }
 
 /**
  * Maps sort options to WordPress API parameters
  */
-const mapSortToWordPress = (sortBy: string): { orderby: string; order: string } => {
+const mapSortToWordPress = (sortBy: SortOptionValue = 'date_desc'): { orderby: string; order: string } => {
   switch (sortBy) {
     case 'date_desc':
       return { orderby: 'date', order: 'desc' };
@@ -39,21 +47,20 @@ const mapSortToWordPress = (sortBy: string): { orderby: string; order: string } 
 };
 
 const fetchPosts = async ({
-  page,
-  perPage,
+  page = 1,
+  perPage = 10,
   search,
   sortBy = 'date_desc',
   categoryId,
   tagId,
-}: FetchPostsParams): Promise<PostsResponse> => {
+}: PostsQueryParams): Promise<PostsResponse> => {
   // Build query parameters
   const queryParams = new URLSearchParams();
+
   // Add required parameters
   queryParams.append('page', page.toString());
   queryParams.append('per_page', perPage.toString());
-
-  // WordPress requires _embed to include featured media and author data
-  queryParams.append('_embed', 'true');
+  queryParams.append('_embed', 'true'); // WordPress requires _embed to include featured media and author data
 
   // Add optional parameters if they exist
   if (search && search.trim() !== '') {
@@ -74,28 +81,52 @@ const fetchPosts = async ({
     queryParams.append('tags', tagId.toString());
   }
 
+  const endpoint = `${API_ENDPOINTS.POST}?${queryParams.toString()}`;
+
   // Make the API request
-  const response = await fetchFn('GET', `${API_ENDPOINTS.POST}?${queryParams.toString()}`);
+  const response = await fetchFn('GET', endpoint);
 
   if (!response.success || !response.data) {
-    throw new Error(response.message || 'Unknown Error');
+    throw new Error(response.message || 'Failed to fetch posts');
   }
 
   return response.data;
 };
 
-export const usePostsQuery = (
-  page: number,
+/**
+ * Custom hook for fetching posts with support for data transformation
+ * @template TData The type of transformed result data
+ */
+export const usePostsQuery = <TData = PostsResponse>({
+  page = 1,
   perPage = 10,
-  search?: string,
+  search,
   sortBy = 'date_desc',
-  categoryId?: number,
-  tagId?: number,
-) => {
-  return useQuery<PostsResponse, Error>({
-    queryKey: [API_ENDPOINTS.POST, page, perPage, search, sortBy, categoryId, tagId],
+  categoryId,
+  tagId,
+  enabled = true,
+  ...options
+}: PostsQueryParams & PostsQueryOptions<TData> = {}) => {
+  return useQuery<PostsResponse, Error, TData>({
+    queryKey: ['posts', { page, perPage, search, sortBy, categoryId, tagId }],
     queryFn: () => fetchPosts({ page, perPage, search, sortBy, categoryId, tagId }),
     staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 10, // 10 minutes
     retry: 1, // Only retry once on failure
+    refetchOnWindowFocus: false,
+    enabled,
+    ...options,
   });
+};
+
+export const postsSelectors = {
+  simplifiedPosts: (data: PostsResponse) =>
+    data.posts.map((post) => ({
+      id: post.id,
+      title: post?.title?.rendered,
+      slug: post.slug,
+      excerpt: post?.excerpt?.rendered,
+      featuredImage: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || null,
+      date: post?.date,
+    })),
 };

@@ -33,6 +33,7 @@ export const API_ENDPOINTS = {
   ORDER: '/order',
   SETTING: '/setting',
   POST: '/posts',
+  CATEGORY_POST: '/categories_post',
   PAYMENT_METHODS: '/payment_methods',
   CHECKOUT: '/checkout',
 };
