@@ -6,8 +6,14 @@ import { useCart } from '@contexts/cart/cart-context';
 import { useTranslations } from 'next-intl';
 import { CheckoutItem } from '@components/checkout/checkout-card/checkout-item';
 import { CheckoutCardFooterItem } from '@components/checkout/checkout-card/checkout-footer-item';
+import Button from '@components/common/button';
+import { CgShoppingCart } from 'react-icons/cg';
+import Link from 'next/link';
+import { ROUTES } from '@utils/routes';
+import { useRouter } from 'next/navigation';
 
 const CheckoutCard: React.FC = () => {
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const { items, total, isEmpty } = useCart();
   const { price: subtotal } = usePrice({
@@ -48,7 +54,15 @@ const CheckoutCard: React.FC = () => {
         <span className="ltr:ml-auto rtl:mr-auto flex-shrink-0">{t('text-sub-total')}</span>
       </div>
       {!isEmpty && items.map((item) => <CheckoutItem item={item} key={item.id} />)}
-      {isEmpty && <p className="text-red-500 lg:px-3 py-4">{t('text-empty-cart')}</p>}
+      {isEmpty && (
+        <div className="flex-col flex items-center">
+          <p className="text-red-500 lg:px-3 py-4 text-center">{t('text-empty-cart')}</p>
+          <Button className=" flex gap-2 transition-all" onClick={() => router.push(ROUTES.PRODUCT)}>
+            <CgShoppingCart className="h-4 w-4 animate-bounce" /> <Link href={ROUTES.PRODUCT}>Go to shopping</Link>
+            <CgShoppingCart className="h-4 w-4 animate-bounce" />
+          </Button>
+        </div>
+      )}
       {checkoutFooter.map((item: any) => (
         <CheckoutCardFooterItem item={item} key={item.id} />
       ))}

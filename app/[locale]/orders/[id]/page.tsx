@@ -3,6 +3,7 @@ import PageHeader from '@components/common/page-header';
 import Container from '@components/ui/container';
 import Subscription from '@components/ui/subscription';
 import OrderInformation from '@components/order/order-information';
+import OrderDetails from '@components/order/order-details';
 
 export default function OrderPage({ params }: { params: Promise<{ id: string }> }) {
   const orderId = use(params)?.id;
@@ -10,7 +11,12 @@ export default function OrderPage({ params }: { params: Promise<{ id: string }> 
     <>
       <PageHeader pageHeader="text-page-order" />
       <Container>
-        <OrderInformation orderId={orderId} />
+        {orderId && (
+          <div className="py-6">
+            <OrderInformation orderId={orderId} />
+            <OrderDetails orderId={orderId} />
+          </div>
+        )}
         <Subscription />
       </Container>
     </>

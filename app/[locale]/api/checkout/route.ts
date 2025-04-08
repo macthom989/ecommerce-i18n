@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
     };
 
     const endpointUrl = `/wp-json/wc/v3/orders`;
-    const { data } = await fetchFn('POST', endpointUrl, JSON.stringify(orderData));
+    const { data } = await fetchFn('POST', endpointUrl, orderData);
 
     if (!data || !data.id) {
       return NextResponse.json({ error: 'Order creation failed' }, { status: 500 });
