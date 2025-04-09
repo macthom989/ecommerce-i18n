@@ -1,18 +1,12 @@
-import ContentLoader from 'react-content-loader';
+import { Skeleton } from '@components/ui/skeleton';
 
-const BlogCategoryCardLoader = (props: any) => (
-  <ContentLoader
-    speed={2}
-    width={197}
-    height={249}
-    viewBox="0 0 197 249"
-    backgroundColor="#f3f3f3"
-    foregroundColor="#ecebeb"
-    className="w-full h-auto"
-    {...props}
-  >
-    <rect x="0" y="0" rx="6" ry="6" width="197" height="197" />
-  </ContentLoader>
-);
-
-export default BlogCategoryCardLoader;
+export function BlogCategoryCardSkeleton({ delay = 0 }: { delay?: number }) {
+  return (
+    <div
+      className="flex flex-col items-center space-y-2 transition-all duration-200 hover:scale-105"
+      style={{ animationDelay: `${delay}ms` }}
+    >
+      <Skeleton className="w-32 h-32 md:w-48 md:h-48 " />
+    </div>
+  );
+}

@@ -21,6 +21,7 @@ export interface PostsQueryParams {
   categoryId?: number;
   tagId?: number;
   enabled?: boolean;
+  slug?: string;
 }
 
 export interface PostsQueryOptions<TData = PostsResponse>
@@ -53,6 +54,7 @@ const fetchPosts = async ({
   sortBy = 'date_desc',
   categoryId,
   tagId,
+  slug,
 }: PostsQueryParams): Promise<PostsResponse> => {
   // Build query parameters
   const queryParams = new URLSearchParams();
@@ -75,6 +77,9 @@ const fetchPosts = async ({
   // Add category and tag filters if provided
   if (categoryId) {
     queryParams.append('categories', categoryId.toString());
+  }
+  if (slug) {
+    queryParams.append('slug', slug.toString());
   }
 
   if (tagId) {
@@ -104,12 +109,13 @@ export const usePostsQuery = <TData = PostsResponse>({
   sortBy = 'date_desc',
   categoryId,
   tagId,
+  slug,
   enabled = true,
   ...options
 }: PostsQueryParams & PostsQueryOptions<TData> = {}) => {
   return useQuery<PostsResponse, Error, TData>({
-    queryKey: ['posts', { page, perPage, search, sortBy, categoryId, tagId }],
-    queryFn: () => fetchPosts({ page, perPage, search, sortBy, categoryId, tagId }),
+    queryKey: [API_ENDPOINTS.POST, { page, perPage, search, sortBy, categoryId, tagId, slug }],
+    queryFn: () => fetchPosts({ page, perPage, search, sortBy, categoryId, tagId, slug }),
     staleTime: 1000 * 60 * 5, // 5 minutes
     gcTime: 1000 * 60 * 10, // 10 minutes
     retry: 1, // Only retry once on failure
