@@ -1,9 +1,9 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { fetchFn } from '@lib/fetcher';
 import { PostCategory } from '@services/types';
 
-export async function GET(_: Request, { params }: { params: { slug: string } }) {
-  const { slug } = params;
+export async function GET(_: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
 
   try {
     const { data } = await fetchFn<PostCategory[]>('GET', `/wp-json/wp/v2/categories?slug=${slug}`);

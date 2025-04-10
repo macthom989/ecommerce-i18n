@@ -19,7 +19,7 @@ interface Props {
 }
 
 // Extract image URL from HTML img tag
-const extractImageUrlFromHtml = (html) => {
+export const extractImageUrlFromHtml = (html) => {
   if (!html) return null;
 
   const match = html.match(/<img[^>]+src="([^">]+)"/);

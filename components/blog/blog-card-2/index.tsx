@@ -64,21 +64,21 @@ export function BlogCard2({ post }: BlogCardProps) {
 
         {/* Content */}
         <div className="flex flex-col flex-grow p-4">
-          <h3 className="line-clamp-2 text-lg font-bold leading-tight text-gray-900 mb-2 group-hover:text-gray-700">
+          <h3 className="line-clamp-2 text-2xl font-bold leading-tight text-gray-900 mb-2 group-hover:text-gray-700">
             {post.title.rendered}
           </h3>
 
           {/* Optional excerpt */}
           {post.excerpt?.rendered && (
             <div
-              className="line-clamp-2 text-sm text-gray-600 mb-3"
+              className="line-clamp-2 text-lg text-gray-600 mb-3"
               dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
             />
           )}
 
           {/* Date */}
           <div className="mt-auto pt-2 border-t border-gray-100">
-            <time dateTime={post.date} className="text-xs text-gray-500 flex items-center">
+            <time dateTime={post.date} className="text-lg text-gray-500 flex items-center">
               <AiOutlineCalendar className="w-3 h-3 mr-1" />
               {format(new Date(post.date), 'MMM d, yyyy')}
             </time>
