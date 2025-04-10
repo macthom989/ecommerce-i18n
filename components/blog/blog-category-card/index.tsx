@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import Text from '../../common/text';
 import { FaLink } from 'react-icons/fa';
@@ -8,89 +10,82 @@ import { cn } from '@lib/utils';
 
 interface Props {
   item: any;
-  variant?: 'rounded' | 'circle';
   size?: 'small' | 'medium';
   imgSize?: 'large';
   effectActive?: boolean;
   effectActiveScale?: boolean;
   href: LinkProps['href'];
-  showName?: boolean;
-  namePosition?: 'bottom' | 'center';
   disableBorderRadius?: boolean;
 }
 
-const Card: React.FC<Props> = ({
+// Extract image URL from HTML img tag
+const extractImageUrlFromHtml = (html) => {
+  if (!html) return null;
+
+  const match = html.match(/<img[^>]+src="([^">]+)"/);
+  return match ? match[1] : null;
+};
+
+const BlogCategoryCard: React.FC<Props> = ({
   item,
-  variant = 'circle',
-  size = 'small',
+  size = 'medium',
   effectActive = false,
   effectActiveScale = false,
   href,
-  showName = true,
-  namePosition = 'bottom',
   imgSize,
   disableBorderRadius = false,
 }) => {
-  const { name, image } = item ?? {};
+  const { name, image, description } = item ?? {};
   const imageSize: any = (imgSize === 'large' && 375) || (size === 'small' && 180) || (size === 'medium' && 198);
-  const isRounded = variant === 'rounded';
-  const isCircle = variant === 'circle';
+
   const hasRadius = !disableBorderRadius;
   const placeholderImage = `/assets/placeholder/card-${size}.svg`;
   const t = useTranslations('common');
 
+  // Check if description contains image tag and extract URL
+  const descriptionImageUrl = extractImageUrlFromHtml(description);
+  const imageUrl = descriptionImageUrl || image?.src || placeholderImage;
+
   return (
     <Link href={href} className="group flex justify-center text-center flex-col">
       <div
-        className={cn(
-          'group relative inline-flex mb-3.5 md:mb-4 lg:mb-5 xl:mb-6 mx-auto overflow-hidden',
-          hasRadius && (isRounded ? 'rounded-md' : 'rounded-full'),
-        )}
+        className={cn('relative inline-flex mx-auto overflow-hidden', hasRadius && 'rounded-md')}
         style={{
           width: imageSize,
           height: imageSize,
         }}
       >
-        <div
-          className={cn(
-            'relative flex w-full h-full',
-            isCircle && 'aspect-square',
-            isRounded && 'aspect-square', // Ensure consistent square dimensions for rounded type
-          )}
-        >
+        <div className={cn('relative flex w-full h-full aspect-square overflow-hidden')}>
           <Image
             loader={imageLoader}
-            src={image?.src ?? placeholderImage}
+            src={imageUrl}
             alt={name || t('text-card-thumbnail')}
             width={imageSize}
             height={imageSize}
             quality={100}
             className={cn(
-              'object-cover bg-gray-300 w-full h-full',
-              hasRadius && (isRounded ? 'rounded-md' : 'rounded-full'),
+              'object-cover bg-gray-300',
+              hasRadius && 'rounded-md',
               effectActiveScale && 'group-hover:scale-105 transition-transform duration-300',
             )}
-            sizes={`${imageSize}px`}
           />
         </div>
 
-        {/* Center name position overlay */}
-        {showName && namePosition === 'center' && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="bg-black bg-opacity-40 px-3 py-2 rounded">
-              <Text variant="heading" className="capitalize text-white">
-                {name}
-              </Text>
-            </div>
+        {/* Fixed center name overlay - always displayed */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="bg-black bg-opacity-50 px-3 py-2 rounded">
+            <Text variant="heading" className="capitalize text-white">
+              {name || t('text-unnamed-item')}
+            </Text>
           </div>
-        )}
+        </div>
 
         {effectActive && (
           <>
             <div
               className={cn(
                 'absolute inset-0 bg-black w-full h-full opacity-0 transition-opacity duration-300 group-hover:opacity-30',
-                hasRadius && (isRounded ? 'rounded-md' : 'rounded-full'),
+                hasRadius && 'rounded-md',
               )}
             />
             <div className="absolute inset-0 flex items-center justify-center">
@@ -99,14 +94,8 @@ const Card: React.FC<Props> = ({
           </>
         )}
       </div>
-      {/* Bottom name position (original behavior) */}
-      {showName && namePosition === 'bottom' && (
-        <Text variant="heading" className="capitalize">
-          {name}
-        </Text>
-      )}
     </Link>
   );
 };
 
-export default Card;
+export default BlogCategoryCard;

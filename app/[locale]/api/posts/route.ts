@@ -11,6 +11,7 @@ export async function GET(req: Request) {
 
     // Extract all query parameters with defaults
     const page = Number.parseInt(searchParams.get('page') || '1', 10);
+    const slug = searchParams.get('slug') || '';
     const perPage = Number.parseInt(searchParams.get('per_page') || '10', 10);
     const search = searchParams.get('search') || '';
     const orderby = searchParams.get('orderby') || 'date';
@@ -30,6 +31,7 @@ export async function GET(req: Request) {
     if (search) apiParams.append('search', search);
     if (categories) apiParams.append('categories', categories);
     if (tags) apiParams.append('tags', tags);
+    if (slug) apiParams.append('slug', slug);
 
     // Make a single API call with all parameters
     const postsUrl = `/wp-json/wp/v2/posts?${apiParams.toString()}`;

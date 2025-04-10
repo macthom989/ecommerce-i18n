@@ -1,7 +1,14 @@
 import { SortOption, SortSelect } from '@components/common/sort-select';
 import { SearchDebounce } from '@components/common/search-debounce';
+import { SortOptionValue } from '@services/post/get-all-posts';
 
-function BlogFilterBlock({ onSearch, onSort }: { onSearch: (value: string) => void; onSort: (value: string) => void }) {
+function BlogFilterBlock({
+  onSearch,
+  onSort,
+}: {
+  onSearch: (value: string) => void;
+  onSort: (value: SortOptionValue) => void;
+}) {
   // Sort options
   const sortOptions: SortOption[] = [
     { label: 'Newest', value: 'date_desc' },
