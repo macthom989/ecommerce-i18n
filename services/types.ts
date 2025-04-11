@@ -298,7 +298,7 @@ export interface PaymentMethod {
 }
 
 export type TLineItem = {
-  product_id: number;
+  product_id: string | number;
   quantity?: number;
 };
 
