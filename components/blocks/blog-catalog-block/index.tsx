@@ -1,29 +1,41 @@
 'use client';
 
-import type React from 'react';
+import React, { useState } from 'react';
 
 import { usePostsQuery } from '@services/post/get-all-posts';
 import { BlogCard2 } from '@components/blog/blog-card-2';
 import { FiAlertCircle } from 'react-icons/fi';
 import { BlogCategorySkeleton } from '@components/common/loaders/blog-category-loader';
+import { Pagination } from '@components/common/pagination-dynamic';
 
 interface Props {
-  page?: number;
-  perPage?: number;
-  categoryId: number;
+  categoryId?: number;
   className?: string;
   countLoader?: number;
+  hiddenPagination?: boolean;
+  perPage?: number;
+  loading?: boolean;
 }
 
-const BlogCategoryBlock: React.FC<Props> = ({ page = 1, perPage = 4, categoryId, className, countLoader }) => {
+const BlogCategoryBlock: React.FC<Props> = ({
+  categoryId,
+  className,
+  countLoader = 4,
+  hiddenPagination = true,
+  perPage = 4,
+  loading,
+}) => {
+  const [page, setPage] = useState(1);
+
   const { data, isLoading, error } = usePostsQuery({
     page,
     perPage,
     categoryId: categoryId,
+    enabled: !!categoryId,
   });
 
   // Handle loading state
-  if (isLoading) {
+  if (isLoading || loading) {
     return <BlogCategorySkeleton count={countLoader} />;
   }
 
@@ -53,6 +65,9 @@ const BlogCategoryBlock: React.FC<Props> = ({ page = 1, perPage = 4, categoryId,
           <BlogCard2 post={post} />
         </div>
       ))}
+      {!hiddenPagination && data.totalPages > 1 && (
+        <Pagination currentPage={page} onPageChange={setPage} totalPages={data.totalPages} />
+      )}
     </div>
   );
 };
