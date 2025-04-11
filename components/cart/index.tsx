@@ -85,6 +85,7 @@ export default function Cart() {
 
         <Link
           href={!isEmpty ? ROUTES.CHECKOUT : '/'}
+          onClick={() => closeCart()}
           className={cn(
             'w-full px-5 py-3 md:py-4 flex items-center justify-center rounded-md text-sm sm:text-base text-white focus:outline-none transition duration-300 ',
             isEmpty ? 'cursor-not-allowed bg-gray-400 hover:bg-gray-400' : 'bg-heading hover:bg-gray-600',

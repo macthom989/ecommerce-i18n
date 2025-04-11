@@ -2,6 +2,7 @@ export interface Item {
   id: string | number;
   price: number;
   quantity?: number;
+
   [key: string]: any;
 }
 
@@ -13,7 +14,9 @@ export function addItemWithQuantity(items: Item[], item: Item, quantity: number)
 
   if (existingItemIndex > -1) {
     const newItems = [...items];
-    newItems[existingItemIndex].quantity! += quantity;
+    const existingItem = { ...newItems[existingItemIndex] }; // deep clone
+    existingItem.quantity = (existingItem.quantity || 0) + quantity;
+    newItems[existingItemIndex] = existingItem;
     return newItems;
   }
   return [...items, { ...item, quantity }];
@@ -29,6 +32,7 @@ export function removeItemOrQuantity(items: Item[], id: Item['id'], quantity: nu
     return [...acc, item];
   }, []);
 }
+
 // Simple CRUD for Item
 export function addItem(items: Item[], item: Item) {
   return [...items, item];

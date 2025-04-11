@@ -5,6 +5,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import { useState } from 'react';
+import { useSsrCompatible } from '@utils/use-ssr-compatible';
+import { useWindowSize } from '@utils/use-window-size';
 
 interface ProductCarouselProps {
   images: { src: string }[];
@@ -12,7 +14,48 @@ interface ProductCarouselProps {
 
 export default function ProductCarousel({ images }: ProductCarouselProps) {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
+  const { width } = useSsrCompatible(useWindowSize(), { width: 0, height: 0 });
+  const thumbnailSub: { perView: number; height: string; width: string } =
+    width > 1488
+      ? {
+          perView: 5,
+          height: 'h-[850px]',
+          width: 'w-28',
+        }
+      : width > 1284
+        ? {
+            perView: 4,
 
+            height: 'h-[720px]',
+            width: 'w-28',
+          }
+        : {
+            perView: 3,
+
+            height: 'h-[542px]',
+            width: 'w-28',
+          };
+
+  const thumbnailMain: { perView: number; height: string; width: string } =
+    width > 1488
+      ? {
+          perView: 5,
+          height: 'h-[850px]',
+          width: 'w-[600px]',
+        }
+      : width > 1284
+        ? {
+            perView: 4,
+
+            height: 'h-[720px]',
+            width: 'w-[480px]',
+          }
+        : {
+            perView: 3,
+
+            height: 'h-[542px]',
+            width: 'w-[354px]',
+          };
   return (
     <div className="flex gap-2">
       <div>
@@ -20,9 +63,9 @@ export default function ProductCarousel({ images }: ProductCarouselProps) {
           onSwiper={setThumbsSwiper}
           direction="vertical"
           spaceBetween={10}
-          slidesPerView={5}
+          slidesPerView={thumbnailSub.perView}
           watchSlidesProgress
-          className="w-28 h-[850px]"
+          className={`${thumbnailSub.width} ${thumbnailSub.height}`}
         >
           {images.map((img, index) => (
             <SwiperSlide key={index}>
@@ -39,7 +82,7 @@ export default function ProductCarousel({ images }: ProductCarouselProps) {
           spaceBetween={10}
           navigation
           thumbs={{ swiper: thumbsSwiper }}
-          className="w-[600px] h-[850px]"
+          className={`${thumbnailMain.width} ${thumbnailMain.height}`}
         >
           {images.map((img, index) => (
             <SwiperSlide key={index}>
