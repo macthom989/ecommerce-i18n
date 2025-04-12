@@ -15,7 +15,7 @@ export const CheckoutProvider = ({ children }: { children: ReactNode }) => {
   const { items } = useCart();
 
   const lineItems: TLineItem[] = items.map((item) => {
-    return { product_id: Number(item.id), quantity: item?.quantity };
+    return { product_id: item.id, quantity: item?.quantity };
   });
 
   const [checkoutData, setCheckoutData] = useState<CheckoutFormValues>({

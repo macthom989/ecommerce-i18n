@@ -18,6 +18,7 @@ import Carousel from '@components/ui/carousel';
 import { FiCopy } from 'react-icons/fi';
 import RatingComponent from '../common/rating';
 import ProductCarousel from '../common/product-carousel';
+
 const productGalleryCarouselResponsive = {
   '768': {
     slidesPerView: 2,
@@ -114,8 +115,8 @@ const ProductSingleDetails: React.FC<{ product: any }> = ({ product }) => {
 
   return (
     <div>
-      <div className="block w-full lg:grid grid-cols-9 gap-x-10 xl:gap-x-14 pt-7 pb-10 lg:pb-14 2xl:pb-20 items-start">
-        {width < 1025 ? (
+      <div className="block w-full lg:grid grid-cols-12 gap-x-4 xl:gap-x-10 pt-7 pb-10 lg:pb-14 2xl:pb-20 items-start">
+        {width < 1024 ? (
           <Carousel
             pagination={{
               clickable: true,
@@ -126,7 +127,7 @@ const ProductSingleDetails: React.FC<{ product: any }> = ({ product }) => {
           >
             {product?.images?.map((item, index: number) => (
               <SwiperSlide key={`product-gallery-key-${index}`}>
-                <div className="col-span-1 transition duration-150 ease-in hover:opacity-90">
+                <div className="transition duration-150 ease-in hover:opacity-90">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item?.src ?? '/assets/placeholder/products/product-gallery.svg'}
@@ -138,12 +139,12 @@ const ProductSingleDetails: React.FC<{ product: any }> = ({ product }) => {
             ))}
           </Carousel>
         ) : (
-          <div className=" col-span-5 lg:col-span-4 grid grid-cols-2 gap-2 h-full">
+          <div className="col-span-4 lg:col-span-6 h-full">
             <ProductCarousel images={product?.images} />
           </div>
         )}
 
-        <div className="col-span-4 pt-8 lg:pt-0">
+        <div className="col-span-6 pt-8 lg:pt-0">
           <div className="pb-7 mb-7 border-b border-gray-300">
             <h2 className="text-heading text-lg md:text-xl lg:text-2xl 2xl:text-3xl font-bold hover:text-black mb-3.5">
               {product?.name}
