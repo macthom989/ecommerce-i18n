@@ -3,7 +3,6 @@ import React from 'react';
 import { useLocalStorage } from '@utils/use-local-storage';
 import { cartReducer, initialState, State } from '@contexts/cart/cart-reducer';
 import { getItem, Item } from '@contexts/cart/cart-utils';
-import { Metadata } from 'next';
 
 interface CartProviderState extends State {
   addItemToCart: (item: Item, quantity: number) => void;
