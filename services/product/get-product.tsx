@@ -1,10 +1,10 @@
 import { Product } from '@services/types';
-import http from '@services/utils/axiosInstance';
 import { API_ENDPOINTS } from '@services/utils/api-endpoints';
 import { useQuery } from '@tanstack/react-query';
+import { fetchFn } from '@lib/fetcher-local';
 
-export const fetchProduct = async (_slug: string) => {
-  const { data } = await http.get(`${API_ENDPOINTS.PRODUCT}`);
+export const fetchProduct = async (_slug: string): Promise<Product> => {
+  const { data } = await fetchFn('GET', API_ENDPOINTS.PRODUCT, _slug);
   return data;
 };
 export const useProductQuery = (slug: string) => {

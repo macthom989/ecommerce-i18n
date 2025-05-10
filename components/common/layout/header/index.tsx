@@ -2,21 +2,22 @@
 import React, { useRef } from 'react';
 import SearchIcon from '@components/icons/search-icon';
 import { useAddActiveScroll } from '@utils/use-add-active-scroll';
-import { useUI } from '@/contexts/ui.context';
-import { siteSettings } from '@/settings/site-settings';
+import { useUI } from '@contexts/managed-ui-provider';
 import HeaderMenu from './header-menu';
 import Logo from '@/components/ui/logo';
 import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 import { ROUTES } from '@/utils/routes';
 import LanguageSwitcher from '@/components/ui/language-switcher/index';
+import { siteSettings } from '@configs/site-settings';
+
 const AuthMenu = dynamic(() => import('./auth-menu'), { ssr: false });
 const CartButton = dynamic(() => import('@components/cart/cart-button'), {
   ssr: false,
 });
 
-const { site_header } = siteSettings;
 const Header: React.FC = () => {
+  const { siteSettings } = useUI();
   const { openSearch, openModal, setModalView, isAuthorized } = useUI();
   const t = useTranslations('common');
   const siteHeaderRef = useRef<HTMLDivElement>(null);
@@ -34,7 +35,7 @@ const Header: React.FC = () => {
           <Logo />
 
           <HeaderMenu
-            data={site_header.menu}
+            data={siteSettings.menus}
             className="hidden lg:flex ltr:md:ml-6 rtl:md:mr-6 ltr:xl:ml-10 rtl:xl:mr-10"
           />
 

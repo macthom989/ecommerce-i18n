@@ -1,4 +1,4 @@
-import cn from 'classnames';
+import { cn } from '@/lib/utils';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import 'overlayscrollbars/overlayscrollbars.css';
 
@@ -9,7 +9,13 @@ type ScrollbarProps = {
   className?: string;
 };
 
-const Scrollbar: React.FC<ScrollbarProps> = ({ options, children, style, className, ...props }) => {
+const Scrollbar: React.FC<ScrollbarProps> = ({
+                                               options,
+                                               children,
+                                               style,
+                                               className,
+                                               ...props
+                                             }) => {
   return (
     <OverlayScrollbarsComponent
       options={{

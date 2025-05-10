@@ -1,6 +1,14 @@
+import { fetchFn } from '@/lib/fetcher';
 import { NextResponse } from 'next/server';
-import data from '@api/featured_products.json'; // Import JSON
+import { Product } from '@services/types';
 
 export async function GET() {
-  return NextResponse.json(data);
+  const endpoint = `/wp-json/wc/v3/products`;
+
+  try {
+    const { data } = await fetchFn<Product[]>('GET', endpoint);
+    return NextResponse.json(data);
+  } catch (error: any) {
+    return NextResponse.json({ success: false, message: 'Failed to fetch featured products' }, { status: 500 });
+  }
 }

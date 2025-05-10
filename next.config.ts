@@ -16,10 +16,15 @@ const pwaConfig = {
 };
 
 const baseConfig: NextConfig = {
-  /* config options here */
+  reactStrictMode: true,
   images: {
-    domains: [],
-    unoptimized: false,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'moccasin-aardvark-454600.hostingersite.com',
+        pathname: '/wp-content/uploads/**',
+      },
+    ],
   },
   experimental: {
     optimizeCss: true,
@@ -28,7 +33,6 @@ const baseConfig: NextConfig = {
       bodySizeLimit: '2mb',
     },
   },
-  // Optimize for performance
   poweredByHeader: false,
   compress: true,
   devIndicators: {
@@ -44,7 +48,6 @@ const baseConfig: NextConfig = {
   },
 };
 
-// Apply plugins
 const nextConfig = withPWA({
   ...baseConfig,
   pwa: pwaConfig,

@@ -66,6 +66,7 @@
     "text-unit-price": "Unit Price",
     "text-price": "Price",
     "text-shopping-cart": "Shopping cart",
+    "text-remove-all-items": "Remove All Items",
     "text-empty-cart": "Your cart is empty.",
     "text-proceed-to-checkout": "Proceed To Checkout",
     "text-your-order": "Your Order",
@@ -133,7 +134,6 @@
     "text-featured-categories": "Featured Categories",
     "text-browse-categories": "Browse Categories",
     "text-top-brands": "Top Brands",
-
     "text-featured-products": "Featured Products",
     "text-on-selling-products": "On Selling Products",
     "text-top-products": "Top Products",
@@ -142,6 +142,7 @@
     "text-popular-products": "Popular Products",
     "text-best-sellers": "Best Sellers",
     "text-casual-wear": "Casual Wear",
+    "text-most-viewed": "Most Viewed Posts",
     "text-items": "items",
     "text-sorting-options": "Sorting Options",
     "text-newest": "Newest",
@@ -417,5 +418,6 @@
     "terms-five-content": "<p>If you believe your privacy has been breached or you have a complaint about how we have handled your personal information, please contact us in writing.  We will respond within a reasonable period (usually within 30 days).</p>",
     "terms-six-title": "Owner and Data Controller",
     "terms-six-content": "<p>The Commons<br>20-40 demo St,<br>Jon doe NSW 2008<br>Country<br><br>Email: demo@demo.com</p>"
-  }
+  },
+  "review": {}
 }

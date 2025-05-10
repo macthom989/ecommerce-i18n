@@ -19,7 +19,10 @@ import { getDirection } from '@utils/get-direction';
 const inter = Inter({ subsets: ['latin', 'vietnamese'] });
 
 export const metadata: Metadata = {
-  title: 'Hv Core - React Next E-commerce Template',
+  title: {
+    template: '%s | Hv Core',
+    absolute: 'Hv Core - React Next E-commerce Template',
+  },
   description:
     'Fastest E-commerce template built with React, NextJS, TypeScript, @tanstack/react-query and Tailwind CSS.',
   manifest: '/manifest.json',

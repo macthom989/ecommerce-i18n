@@ -1,14 +1,14 @@
-import Link from '@components/ui/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { fadeInOut } from '@utils/motion/fade-in-out';
+import { fadeInOut } from '@/services/utils/motion/fade-in-out';
 import { IoIosCloseCircle } from 'react-icons/io';
-import Counter from '@components/common/counter';
+import { useCart } from '@contexts/cart/cart-context';
+import usePrice from '@/services/product/use-price';
 import { ROUTES } from '@utils/routes';
-import { generateCartItemName } from '@utils/generate-cart-item-name';
-import usePrice from '@/framework/product/use-price';
+import { generateCartItemName } from '@/utils/generate-cart-item-name';
 import { useTranslations } from 'next-intl';
-import { useCart } from '@/contexts/cart/cart.context';
+import Link from 'next/link';
+import Counter from '@components/common/counter';
 
 type CartItemProps = {
   item: any;
@@ -18,7 +18,7 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
   const t = useTranslations('common');
   const { addItemToCart, removeItemFromCart, clearItemFromCart } = useCart();
   const { price } = usePrice({
-    amount: item.price,
+    amount: Number(item.price),
     currencyCode: 'USD',
   });
   const { price: totalPrice } = usePrice({
@@ -26,6 +26,9 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
     currencyCode: 'USD',
   });
 
+  const myLoader = ({ src }: { src: string }) => {
+    return src;
+  };
   return (
     <motion.div
       layout
@@ -37,11 +40,11 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
       title={item?.name}
     >
       <div className="relative flex flex-shrink-0 w-24 h-24 overflow-hidden bg-gray-200 rounded-md cursor-pointer md:w-28 md:h-28 ltr:mr-4 rtl:ml-4">
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={item?.image ?? '/assets/placeholder/cart-item.svg'}
           width={112}
           height={112}
-          loading="eager"
           alt={item.name || 'Product Image'}
           className="object-cover bg-gray-300"
         />
@@ -58,7 +61,6 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
         <Link href={`${ROUTES.PRODUCT}/${item?.slug}`} className="truncate text-sm text-heading mb-1.5 -mt-1">
           {generateCartItemName(item.name, item.attributes)}
         </Link>
-        {/* @ts-ignore */}
         <span className="text-sm text-gray-400 mb-2.5">
           {t('text-unit-price')} : &nbsp; {price}
         </span>

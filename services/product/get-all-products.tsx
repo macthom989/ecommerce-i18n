@@ -1,19 +1,30 @@
 import { Product, QueryOptionsType } from '@services/types';
 import { API_ENDPOINTS } from '@services/utils/api-endpoints';
-import http from '@services/utils/axiosInstance';
-import shuffle from 'lodash/shuffle';
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { fetchFn } from '@/lib/fetcher-local';
 
 type PaginatedProduct = {
   data: Product[];
   paginatorInfo: any;
 };
-const fetchProducts = async () => {
-  const { data } = await http.get(API_ENDPOINTS.PRODUCTS);
+const fetchProducts = async ({
+  queryKey,
+  pageParam = 1,
+}: {
+  queryKey: [string, QueryOptionsType];
+  pageParam?: number;
+}) => {
+  const [, options] = queryKey;
+  const perPage = options.limit ?? 10;
+  const { data } = await fetchFn('GET', `/category/${options.slug}?page=${pageParam}&per_page=${perPage}`);
+  if (!data || data.products.length === 0) {
+    throw new Error('Không có sản phẩm');
+  }
+
   return {
-    data: shuffle(data),
+    data: data.products ?? [],
     paginatorInfo: {
-      nextPageUrl: '',
+      nextPageUrl: data.currentPage < data.totalPages ? pageParam + 1 : null,
     },
   };
 };
@@ -21,9 +32,9 @@ const fetchProducts = async () => {
 const useProductsQuery = (options: QueryOptionsType) => {
   return useInfiniteQuery<PaginatedProduct, Error>({
     queryKey: [API_ENDPOINTS.PRODUCTS, options],
-    queryFn: fetchProducts,
-    initialPageParam: 0,
-    getNextPageParam: ({ paginatorInfo }) => paginatorInfo.nextPageUrl,
+    queryFn: fetchProducts as any,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => lastPage.paginatorInfo.nextPageUrl ?? undefined,
   });
 };
 

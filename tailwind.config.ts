@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 const config = {
   content: [
@@ -17,6 +18,7 @@ const config = {
     },
     extend: {
       colors: {
+        ...defaultTheme.colors,
         body: '#5A5A5A',
         heading: '#212121',
         input: '#1D1E1F',
@@ -46,6 +48,56 @@ const config = {
           700: '#292929',
           800: '#707070',
           900: '#343D48',
+        },
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))',
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))',
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
+        success: {
+          DEFAULT: 'hsl(var(--success))',
+          foreground: 'hsl(var(--success-foreground))',
+        },
+        warning: {
+          DEFAULT: 'hsl(var(--warning))',
+          foreground: 'hsl(var(--warning-foreground))',
+        },
+        danger: {
+          DEFAULT: 'hsl(var(--danger))',
+          foreground: 'hsl(var(--danger-foreground))',
+        },
+        info: {
+          DEFAULT: 'hsl(var(--info))',
+          foreground: 'hsl(var(--info-foreground))',
+        },
+        contrast: {
+          DEFAULT: 'hsl(var(--contrast))',
+          foreground: 'hsl(var(--contrast-foreground))',
         },
       },
       fontSize: {
@@ -79,7 +131,7 @@ const config = {
         },
       },
       backgroundImage: {
-        'app-pattern': 'url(\'/assets/images/app-pattern.png\')',
+        'app-pattern': "url('/assets/images/app-pattern.png')",
       },
     },
     boxShadow: {
@@ -97,9 +149,9 @@ const config = {
       avatar: '0px 15px 30px rgba(0, 0, 0, 0.16)',
     },
     fontFamily: {
-      body: ['\'Open Sans\', sans-serif'],
-      satisfy: ['\'Satisfy\', cursive'],
-      segoe: ['\'Segoe UI\', sans-serif'],
+      body: ["'Open Sans', sans-serif"],
+      satisfy: ["'Satisfy', cursive"],
+      segoe: ["'Segoe UI', sans-serif"],
     },
   },
   plugins: [

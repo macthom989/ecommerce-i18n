@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+'use client';
 
 type EmptyCartProps = {
   width?: number;
@@ -6,13 +6,30 @@ type EmptyCartProps = {
   className?: string;
 };
 
-const EmptyCart: FC<EmptyCartProps> = ({ width = 180, height = 309.722, className }) => {
+const EmptyCart: React.FC<EmptyCartProps> = ({
+                                               width = 180,
+                                               height = 309.722,
+                                               className,
+                                             }) => {
   return (
-    <svg width={width} height={height} className={className} viewBox="0 0 180 309.722">
-      <g id="no_cart_in_bag" data-name="no cart in bag" transform="translate(-988 -7673)">
+    <svg
+      width={width}
+      height={height}
+      className={className}
+      viewBox="0 0 180 309.722"
+    >
+      <g
+        id="no_cart_in_bag"
+        data-name="no cart in bag"
+        transform="translate(-988 -7673)"
+      >
         <g id="no_cart" data-name="no cart" transform="translate(988 7673)">
           <g id="Group_5970" data-name="Group 5970" transform="translate(0 0)">
-            <g id="Group_5967" data-name="Group 5967" transform="translate(17.408 92.119)">
+            <g
+              id="Group_5967"
+              data-name="Group 5967"
+              transform="translate(17.408 92.119)"
+            >
               <path
                 id="Path_17743"
                 data-name="Path 17743"
@@ -70,7 +87,12 @@ const EmptyCart: FC<EmptyCartProps> = ({ width = 180, height = 309.722, classNam
                 transform="translate(-170.233 -287.779)"
                 fill="#67251d"
               />
-              <g id="Group_5965" data-name="Group 5965" transform="translate(31.503 60.166)" opacity="0.2">
+              <g
+                id="Group_5965"
+                data-name="Group 5965"
+                transform="translate(31.503 60.166)"
+                opacity="0.2"
+              >
                 <path
                   id="Path_17751"
                   data-name="Path 17751"
@@ -86,7 +108,11 @@ const EmptyCart: FC<EmptyCartProps> = ({ width = 180, height = 309.722, classNam
                 transform="translate(-111.986 -116.218)"
                 fill="#fcc89d"
               />
-              <g id="Group_5966" data-name="Group 5966" transform="translate(29.24 57.45)">
+              <g
+                id="Group_5966"
+                data-name="Group 5966"
+                transform="translate(29.24 57.45)"
+              >
                 <path
                   id="Path_17753"
                   data-name="Path 17753"
@@ -103,7 +129,11 @@ const EmptyCart: FC<EmptyCartProps> = ({ width = 180, height = 309.722, classNam
                 fill="#995b47"
               />
             </g>
-            <g id="Group_5968" data-name="Group 5968" transform="translate(0 0)">
+            <g
+              id="Group_5968"
+              data-name="Group 5968"
+              transform="translate(0 0)"
+            >
               <path
                 id="Path_17755"
                 data-name="Path 17755"
